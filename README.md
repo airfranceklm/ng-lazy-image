@@ -1,15 +1,15 @@
-[![Build Status](https://travis-ci.org/afklm/ng-directive-lazy-image.svg)](https://travis-ci.org/afklm/ng-directive-lazy-image) 
-[![Coverage Status](https://coveralls.io/repos/afklm/ng-directive-lazy-image/badge.png?branch=master)](https://coveralls.io/r/afklm/ng-directive-lazy-image?branch=master) 
+[![Build Status](https://travis-ci.org/afklm/ng-lazy-image.svg)](https://travis-ci.org/afklm/ng-lazy-image) 
+[![Coverage Status](https://coveralls.io/repos/afklm/ng-lazy-image/badge.png?branch=master)](https://coveralls.io/r/afklm/ng-lazy-image?branch=master) 
 
 # Angular Lazy Image
 > Directive for loading responsive image when container (which is preventing reflow) is in viewport.
 
 ## Demo
-[Demonstration](http://afklm.github.io/ng-directive-lazy-image/)
+[Demonstration](http://afklm.github.io/ng-lazy-image/)
 
 
 ## Installation 
-1. `bower install ng-directive-lazy-image`
+1. `bower install afkl-lazy-image`
 2. Add a dependency on `afkl.lazyImage` in your app module.
 3. See the `style.css` for some classes you can use (will add more aspect ratio's later)
 
