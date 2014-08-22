@@ -6,3 +6,6 @@ install:
 script:
 - grunt production
 - grunt coveralls
+branches:
+  only:
+    - master
