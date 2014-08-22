@@ -10,7 +10,7 @@
 
 ## Installation 
 1. `bower install ng-directive-lazy-image`
-2. Add a dependency on `afkl.ng.lazyImage` in your app module.
+2. Add a dependency on `afkl.lazyImage` in your app module.
 3. See the `style.css` for some classes you can use (will add more aspect ratio's later)
 
 

@@ -1,6 +1,6 @@
 /* global angular */
-angular.module('afkl.ng.lazyImage', [])
-    .service('srcSetService', ['$window', function($window) {
+angular.module('afkl.lazyImage', [])
+    .service('afklSrcSetService', ['$window', function($window) {
         'use strict';
 
         /**
@@ -295,7 +295,7 @@ angular.module('afkl.ng.lazyImage', [])
 
 
     }])
-    .directive('afklLazyImage', ['$window', 'srcSetService', function ($window, srcSetService) {
+    .directive('afklLazyImage', ['$window', 'afklSrcSetService', function ($window, srcSetService) {
         'use strict';
 
         var bestImage = function (images) {

@@ -3,7 +3,7 @@ describe("Lazy image", function() {
 
     var $document, scope;
 
-    beforeEach(module('afkl.ng.lazyImage'));
+    beforeEach(module('afkl.lazyImage'));
 
     beforeEach(inject(function($compile, $rootScope, _$document_) {
 
@@ -52,10 +52,10 @@ describe("srcset Service", function() {
 
     var SrcSetService;
 
-    beforeEach(module('afkl.ng.lazyImage'));
+    beforeEach(module('afkl.lazyImage'));
 
-    beforeEach(inject(function(srcSetService) {
-        SrcSetService = srcSetService;
+    beforeEach(inject(function(afklSrcSetService) {
+        SrcSetService = afklSrcSetService;
     }));
 
 
