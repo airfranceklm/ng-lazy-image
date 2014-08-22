@@ -97,20 +97,22 @@ angular.module('afkl.lazyImage', [])
         * Direct implementation of "processing the image candidates":
         * http://www.whatwg.org/specs/web-apps/current-work/multipage/embedded-content-1.html#processing-the-image-candidates
         *
+        * @param  {array} imageCandidates required
+        * @param  {object} view optional
         * @returns {ImageInfo} The best image of the possible candidates.
         */
-        var getBestImage = function (imageCandidates) {
+        var getBestImage = function (imageCandidates, view) {
 
             if (!imageCandidates) { return; }
+            if (!view) {
+                view = {
+                    'w' : $window.innerWidth,
+                    'h' : $window.innerHeight,
+                    'x' : $window.devicePixelRatio
+                };
+            }
 
             var images = imageCandidates.slice(0);
-
-            // OUR VIEWPORT
-            var view = {
-                'w' : $window.innerWidth || document.documentElement.clientWidth,
-                'h' : $window.innerHeight || document.documentElement.clientHeight,
-                'x' : $window.devicePixelRatio
-            };
 
             /* LARGEST */
             // Width

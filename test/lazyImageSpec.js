@@ -82,55 +82,39 @@ describe("srcset Service", function() {
         expect(s.best.src).toBeDefined();
     });
 
-
     it('Repeated values for image candidates are ignored', function () {
         var s = SrcSetService.get({srcset: 'mobile.png 720w, mobile.png 720w'});
         expect(s.candidates.length).toBe(1);
     });
 
 
+    it('Select correct image according to window size', function () {
+        var imageObject = SrcSetService.get({srcset: 'mobile.png 720w, tablet.png 1280w, desktop.png 1x'});
+        expect(imageObject.candidates.length).toBe(3);
+
+        var view = {
+            'w' : 1024,
+            'h' : Infinity,
+            'x' : 1
+        };
+
+        var imageTablet = SrcSetService.image(imageObject.candidates, view);
+
+        expect(imageTablet).toBeDefined();
+
+        expect(imageTablet.src).toBe('tablet.png');
+
+        view.w = 480;
+
+        var imageMobile = SrcSetService.image(imageObject.candidates, view);
+
+        expect(imageMobile.src).toBe('mobile.png');
+
+    });
+
+
+
 
 });
 
-// TODO: CORRECT IMAGE FROM MOCKED WINDOW VARS
-/*
-describe("Correct image", function() {
-
-    var $window, scope, el;
-
-    beforeEach(module('afkl.ng.lazyImage'));
-
-    beforeEach(function () {
-        angular.mock.module('afkl.ng.lazyImage', function ($provide) {
-            var myMock = {
-                innerHeight: 400,
-                innerWidth: 500
-            };
-            $provide.value('$window', myMock);
-        });
-    });
-
-    beforeEach(inject(function($compile, $rootScope, _$window_) {
-
-        $window = _$window_;
-        scope = $rootScope.$new();
-
-        spyOn($window, 'resize').andCallThrough();
-        spyOn($window, 'on').andCallThrough();
-
-        el = angular.element('<div afkl-lazy-image="foo.png 480w"></div>');
-
-        $compile(el)(scope);
-
-        scope.$digest();
-
-    }));
-
-    it('does it have image attached', function () {
-        $window.triggerHandler('resize');
-        expect($window.on).toHaveBeenCalled();
-    });
-
-});
-*/
 // TODO: TRIGGER RESIZE EVENT
