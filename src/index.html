@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html ng-app="app" id="ng-app" class="js">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Angular directive: lazy image directive, inspired by TIF</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- look inside this css to see how container and ratios work -->
+    <link rel="stylesheet" type="text/css" href="lazy-image-style.css" />
+    <style>
+
+    	/* Project specific css, only for this demo */
+    	body { 
+    		padding: 0; margin: 0; font: 16px "Lucida Sans Unicode","Lucida Grande",verdana,arial,sans-serif;
+    	}
+		.demo-image {
+			margin-bottom: 20px; 
+		}
+		.demo-wrapper {
+			width: 780px;
+			margin: 0 auto;
+		}
+		.demo-sample p { 
+			float: left;
+			width: 50%;
+		}
+		.demo-sample:after,
+		.demo-aspect:after {
+			content: "";
+			display: table;
+			clear: both;
+		}
+		.demo-aspect {
+			list-style: none;
+			margin: 0 0 20px;
+			padding: 0;
+		}
+		.demo-aspect-ratio {
+			width: 180px;
+			float: left;
+			margin-right: 20px;
+		}
+		.demo-aspect-last { margin-right: 0; }
+		.demo-aspect .afkl-lazy-wrapper {
+			display: block;
+			background-color: #eee;
+		}
+
+		@media (max-width:768px){
+			.demo-wrapper {
+				width: 100%;
+			}
+		}
+	</style>
+
+</head>
+<body ng-controller="mainCtrl">
+
+<div class="demo-wrapper">
+
+	<h1>Angular lazy image directive</h1>
+
+	<p>Loading responsive image when container (which is preventing reflow) is in view.</p>
+
+	<p>See <a href="https://github.com/SquadraCorse/ng-lazy-image">Github</a> for source.</p>
+	
+	<h2>Example</h2>
+
+	<p>Resize, reload and scroll to see what gets actually loaded and when.</p>
+
+    <div afkl-lazy-image="//placehold.it/480x320 480w, //placehold.it/768x512 768w, //placehold.it/768x512 480w 2x, //placehold.it/936x624 2x" class="afkl-lazy-wrapper afkl-img-ratio-3-2 demo-image"></div>
+
+    <p>Example showing another aspect ratio. The parent container always sets the max width available for the image to align.</p>
+
+    <div afkl-lazy-image="//placehold.it/480x480 480w, //placehold.it/768x768 768w, //placehold.it/936x936" class="afkl-lazy-wrapper afkl-img-ratio-1-1 demo-image"></div>
+
+    <p>Create your own adaptive image rules</p>
+
+    <div class="demo-sample">
+    	<p><span afkl-lazy-image="//placehold.it/240x120 480w, //placehold.it/440x220 768w" class="afkl-lazy-wrapper afkl-img-ratio-4-2 demo-image"></span></p>
+    	<p><span afkl-lazy-image="//placehold.it/400x200" class="afkl-lazy-wrapper afkl-img-ratio-4-2 demo-image"></span></p>
+    </div>
+
+
+    <h3>Aspect ratio's</h3>
+    <p>Browser reflow is bad, especially when lazy loading images. The container aspect ratio setup sets the correct image container when DOM is presented which doesn't make your site jumping. If you want different aspect ratio's for different srcset setup then introduce your own classnames.</p>
+
+	<ul class="demo-aspect">
+		<li class="demo-aspect-ratio"><div class="afkl-lazy-wrapper afkl-img-ratio-4-2">4-2</div></li>
+		<li class="demo-aspect-ratio"><div class="afkl-lazy-wrapper afkl-img-ratio-16-9">16-9</div></li>
+		<li class="demo-aspect-ratio"><div class="afkl-lazy-wrapper afkl-img-ratio-3-2">3-2</div></li>
+		<li class="demo-aspect-ratio demo-aspect-last"><div class="afkl-lazy-wrapper afkl-img-ratio-1-1">1-1</div></li>
+	</ul>
+
+</div>
+
+<!-- only dependency is Angular -->
+<script src="angular.min.js"></script>
+<!-- our module -->
+<script src="lazy-image.min.js"></script>
+<!-- dummy app kickstarting our module -->
+<script src="app.js"></script>
+
+</body>
+</html>

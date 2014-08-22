@@ -1,0 +1,9 @@
+src/static/js/jquery.js
+src/static/js/jquery-migrate.js
+src/static/js/text.js
+src/static/js/i18n.js
+src/static/js/backbone.js
+src/static/js/lodash.js
+src/static/js/docs/docs-gremlins.js
+src/static/require.js
+src/static/modernizr.js

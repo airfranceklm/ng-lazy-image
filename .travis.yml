@@ -1,0 +1,11 @@
+before_install:
+- npm install -g grunt-cli
+install:
+- npm install -d
+- webdriver-manager update
+script:
+- grunt production
+- grunt coveralls
+env:
+  global:
+    secure: RnSq2mpgyDQCKvGmMejf3tNulVTN+3VqTPnGH9+4LIdgL6dWAg9UwM/pN6ZpFobYnP2M+iJsCWAj1gUnqq3NXo/1lmO25jUnSDFPFaNpVLRS+apXFQQ/vi1UnbhDtfJwzc8C3ixOj9EgxM1z7JhIEcBq7IfvJrENW8IaNVDDhkE=

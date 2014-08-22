@@ -1,0 +1,33 @@
+default:
+  - 'clean'
+  - 'jshint'
+  - 'karma:unit'
+  - 'uglify:app'
+  - 'copy:build'
+
+test:
+  - 'karma:unit'
+testBrowser:
+  - 'karma:browser'
+
+testDev:
+  - 'connect:test'
+  - 'protractor:dev'
+
+testSauce:
+  - 'connect:test'
+  - 'protractor:sauce'
+
+production:
+  - 'clean'
+  - 'jshint'
+  - 'karma:unit'
+  - 'uglify:app'
+  - 'copy:build'
+
+install:
+  - 'shell'
+
+update:
+ - 'install'
+ - 'copy:update'

@@ -1,0 +1,43 @@
+{
+  "name": "ng-directive-lazy-image",
+  "main": "dist/lazy-image.min.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/afklm/ng-directive-lazy-image",
+  "authors": [
+    "KLM Royal Dutch Airlines",
+    "Maarten van Oudenniel <info@maas38.nl>"
+  ],
+  "description": "Loading responsive image when container (which is preventing reflow) is in view.",
+  "keywords": [
+    "angular",
+    "directive",
+    "lazy",
+    "image"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "config/**",
+    "grunt/**",
+    "test/**",
+    "src/**",
+    ".bower.json",
+    ".coveralls.yml",
+    ".gitignore",
+    ".jshintrc",
+    ".jshintignore",
+    ".travis.yml",
+    "start.js",
+    "Procfile",
+    "node_modules",
+    "bower_components",
+    "bower.json",
+    "Gruntfile.js",
+    "package.json",
+    "README.md",
+    "LICENSE.md"
+  ],
+  "devDependencies": {
+    "angular": "~1.2.21",
+    "angular-mocks": "~1.2.22"
+  }
+}
