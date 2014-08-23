@@ -34,7 +34,9 @@
     "Gruntfile.js",
     "package.json",
     "README.md",
-    "LICENSE.md"
+    "LICENSE.md",
+    "angular-mocks",
+    "angular"
   ],
   "devDependencies": {
     "angular": "~1.2.21",
