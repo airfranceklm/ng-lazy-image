@@ -12,7 +12,8 @@
 }
 
 /* available ratio's, make your own if they are different on different devices or simply extend */
-.afkl-img-ratio-4-2 {
+.afkl-img-ratio-4-2,
+.afkl-img-ratio-2-1 {
 	padding-bottom: 50%; /* (2/4)*100 */
 }
 .afkl-img-ratio-16-9 {

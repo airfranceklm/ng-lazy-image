@@ -294,7 +294,7 @@ angular.module('afkl.lazyImage', [])
 
 
     }])
-    .directive('afklLazyImage', ['$window', 'afklSrcSetService', function ($window, srcSetService) {
+    .directive('afklLazyImage', ['$window', '$timeout', 'afklSrcSetService', function ($window, $timeout, srcSetService) {
         'use strict';
 
         // Use srcSetService to find out our best available image
@@ -315,6 +315,7 @@ angular.module('afkl.lazyImage', [])
                 $window = angular.element($window);
 
                 var loaded = false;
+                var timeout;
 
                 var images = attrs.afklLazyImage; // srcset attributes
                 var options = attrs.afklLazyImageOptions ? angular.fromJson(attrs.afklLazyImageOptions) : {}; // options (background, offset)
@@ -369,8 +370,8 @@ angular.module('afkl.lazyImage', [])
 
                 };
 
-                // EVENT: RESIZE. Check on resize if actually a new image is best fit, if so then apply it
-                var _onResize = function () {
+                // Check on resize if actually a new image is best fit, if so then apply it
+                var _checkIfNewImage = function () {
                     if (loaded) {
                         var newImage = bestImage(images);
                         if (newImage !== currentImage) {
@@ -382,16 +383,30 @@ angular.module('afkl.lazyImage', [])
                     }
                 };
 
+                // EVENT: RESIZE. 
+                var _onResize = function () {
+                    $timeout.cancel(timeout);
+                    timeout = $timeout(_checkIfNewImage, 300);
+                };
+
                 // Set events for scrolling and resizing
                 $window.on('scroll', _onScroll);
                 $window.on('resize', _onResize);
 
                 // Remove events for total destroy
                 var _eventsOff = function() {
+
+                    $timeout.cancel(timeout);
+
                     $window.off('scroll', _onScroll);
                     $window.off('resize', _onResize);
 
-                    img = offsetElement = currentImage = null;
+                    // remove image being placed
+                    if (img) {
+                        img.remove();
+                    }
+
+                    img = timeout = offsetElement = currentImage = undefined;
                 };
 
                 // Remove all events when destroy takes place

@@ -39,8 +39,9 @@ The attributes are using the srcset setup. Your window will determine which imag
 - Using bower on corporate network which blocks git protocol run `bash git config --global url."https://".insteadOf git://`
 
 ## Grunt tasks when cloned
-- `grunt sample` to see the demo offline.
-- `grunt test` to see the unit test report in target
+- src file is 'src/lazy-image.js'
+- run `grunt sample` to see the demo offline.
+- run `grunt test` to see the unit test report in target
 
 
 ## License
