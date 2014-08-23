@@ -97,8 +97,8 @@ angular.module('afkl.lazyImage', [])
         * Direct implementation of "processing the image candidates":
         * http://www.whatwg.org/specs/web-apps/current-work/multipage/embedded-content-1.html#processing-the-image-candidates
         *
-        * @param  {array} imageCandidates required
-        * @param  {object} view optional
+        * @param  {array} imageCandidates (required)
+        * @param  {object} view (optional)
         * @returns {ImageInfo} The best image of the possible candidates.
         */
         var getBestImage = function (imageCandidates, view) {
@@ -160,7 +160,6 @@ angular.module('afkl.lazyImage', [])
 
 
 
-        // MODULE
         // options {src: null/string, srcset: string}
         // options.src    normal url or null
         // options.srcset 997-s.jpg 480w, 997-m.jpg 768w, 997-xl.jpg 1x
@@ -264,7 +263,7 @@ angular.module('afkl.lazyImage', [])
             _parse();
 
 
-            // RETURN BEST IMAGE FROM COMPLETE SET
+            // Return best available image for current view based on our list of candidates
             var bestImage = getBestImage(imageCandidates);
 
             /**
@@ -276,7 +275,6 @@ angular.module('afkl.lazyImage', [])
                 'candidates': imageCandidates   // ALL IMAGE CANDIDATES BY GIVEN SRCSET ATTRIBUTES
             };
 
-
             // empty collection
             imageCandidates = null;
 
@@ -286,12 +284,11 @@ angular.module('afkl.lazyImage', [])
         };
 
 
-
         /**
          * PUBLIC API
          */
         return {
-            get: getSrcset,         // RETURNS BEST IMAGE AND IMAGE CANDIDATES
+            get: getSrcset,        // RETURNS BEST IMAGE AND IMAGE CANDIDATES
             image: getBestImage    // RETURNS BEST IMAGE WITH GIVEN CANDIDATES
         };
 
@@ -300,6 +297,7 @@ angular.module('afkl.lazyImage', [])
     .directive('afklLazyImage', ['$window', 'afklSrcSetService', function ($window, srcSetService) {
         'use strict';
 
+        // Use srcSetService to find out our best available image
         var bestImage = function (images) {
             var image = srcSetService.get({srcset: images});
             var sourceUrl;
@@ -319,13 +317,13 @@ angular.module('afkl.lazyImage', [])
                 var loaded = false;
 
                 var images = attrs.afklLazyImage; // srcset attributes
-                var options = attrs.afklLazyImageOptions ? angular.fromJson(attrs.afklLazyImageOptions) : {}; // options
+                var options = attrs.afklLazyImageOptions ? angular.fromJson(attrs.afklLazyImageOptions) : {}; // options (background, offset)
 
                 var img; // Angular element to image which will be placed
                 var currentImage = null; // current image url
-                var offset = options.offset ? options.offset : 50;
+                var offset = options.offset ? options.offset : 50; // default offset
 
-
+                // Update url of our image
                 var _setImage = function () {
                     if (options.background) {
                         element[0].style.backgroundImage = 'url("' + currentImage +'")';
@@ -334,25 +332,25 @@ angular.module('afkl.lazyImage', [])
                     }
                 };
 
-                // What is elements position  
+                // What is position of our container (assumed it is not hidden) 
                 var offsetElement = element[0].getBoundingClientRect().top;
 
-                // ON SCROLL, CHECK IF ELEMENT IS IN VIEWPORT
+                // EVENT: SCROLL. Check if our container is for first time in our view or not
                 var _onScroll = function () {
-                    // LOCAL CONFIG VARS
+                    // Config vars
                     var remaining, shouldLoad, windowBottom;
 
                     windowBottom = $window[0].innerHeight + $window[0].scrollY;
                     remaining = offsetElement - windowBottom;
 
-                    // DO WE ACTUALLY NEED TO SET THE IMAGE TAG AND FORCE LOADING IMAGE
+                    // Is our top of our image container in bottom of our viewport?
                     shouldLoad = remaining <= offset;
 
-                    // DO IT ONCE
+                    // Append image first time when it comes into our view, after that only resizing can have influence
                     if (shouldLoad && !loaded) {
 
                         loaded = true;
-                        // SET NEW IMAGE
+                        // What is my best image available
                         currentImage = bestImage(images);
 
                         if (currentImage) {
@@ -365,35 +363,38 @@ angular.module('afkl.lazyImage', [])
                             _setImage();
                         }
 
-                        // ELEMENT WILL NOT HAVE TO LISTEN TO SCROLL ANYMORE
+                        // Element is added to dom, no need to listen to scroll anymore
                         $window.off('scroll', _onScroll);
                     }
 
                 };
 
+                // EVENT: RESIZE. Check on resize if actually a new image is best fit, if so then apply it
                 var _onResize = function () {
                     if (loaded) {
                         var newImage = bestImage(images);
                         if (newImage !== currentImage) {
+                            // update current url
                             currentImage = newImage;
-
+                            // update image url
                             _setImage();
                         }
                     }
                 };
 
-                // SET HANDLER ON SCROLL
+                // Set events for scrolling and resizing
                 $window.on('scroll', _onScroll);
                 $window.on('resize', _onResize);
 
+                // Remove events for total destroy
                 var _eventsOff = function() {
                     $window.off('scroll', _onScroll);
                     $window.off('resize', _onResize);
 
-                    img = null;
+                    img = offsetElement = currentImage = null;
                 };
 
-                // WHEN SCOPE IS DESTROYED REMOVE HANDLER
+                // Remove all events when destroy takes place
                 scope.$on('$destroy', function () {
                     return _eventsOff();
                 });
