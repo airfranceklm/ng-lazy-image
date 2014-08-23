@@ -33,7 +33,6 @@ The attributes are using the srcset setup. Your window will determine which imag
 
 ## Todo
 - Angular directives don't have any notion of style encapsulation, but Angular is expected to incorporate that functionality eventually. At the moment our optional css is delivered in an own stylesheet.
-- overule default offset
 - e2e testing
 
 ## Help
