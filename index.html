@@ -5,14 +5,17 @@
     <title>Angular directive: lazy image directive, inspired by TIF</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- look inside this css to see how container and ratios work -->
-    <link rel="stylesheet" type="text/css" href="lazy-image-style.css" />
+    <link rel="stylesheet" type="text/css" href="lazy-image-style.min.css" />
     <style>
 
     	/* Project specific css, only for this demo */
     	body { 
     		padding: 0; margin: 0; font: 16px "Lucida Sans Unicode","Lucida Grande",verdana,arial,sans-serif;
     	}
-    	h1 { color: #00a1de; }
+
+    	h1,
+    	a { color: #00a1de; }
+
 		.demo-image {
 			margin-bottom: 20px; 
 		}
@@ -53,6 +56,10 @@
 			color: #fff;
 			padding: 10px;
 		}
+		.demo-link {
+			font-size: 85%;
+		}
+
 		@media (max-width:768px){
 			body { padding: 0 5px; }
 			.demo-wrapper {
@@ -69,13 +76,13 @@
 	</style>
 
 </head>
-<body ng-controller="mainCtrl">
+<body ng-controller="appCtrl" >
 
 <div class="demo-wrapper">
 
 	<h1>Angular lazy image directive</h1>
 
-	<p>Loading responsive image when container (which is preventing reflow) is in view.</p>
+	<p>Directive for loading responsive image when container (which is preventing reflow) is in viewport. Available as a bower component.</p>
 
 	<p>See <a href="https://github.com/afklm/ng-lazy-image">Github</a> for source.</p>
 
@@ -89,18 +96,18 @@
 
     <div afkl-lazy-image="//placehold.it/480x480 480w, //placehold.it/768x768 768w, //placehold.it/936x936" class="afkl-lazy-wrapper afkl-img-ratio-1-1 demo-image"></div>
 
-    <p>Create your own adaptive image rules</p>
 
+    <h3>Option to overrule offset</h3>
     <div class="demo-sample">
     	<p><span afkl-lazy-image="//placehold.it/480x240 480w, //placehold.it/440x220 768w" class="afkl-lazy-wrapper afkl-img-ratio-4-2 demo-image"></span></p>
     	<p><span afkl-lazy-image="//placehold.it/400x200" afkl-lazy-image-options='{"offset": 200}' class="afkl-lazy-wrapper afkl-img-ratio-4-2 demo-image"></span></p>
     </div>
 
-    <h3>Option to use as background image</h3>
+    <h3>Option to set background image</h3>
     <div afkl-lazy-image="//placehold.it/480x200/00a1de/003145 480w, //placehold.it/768x200/00a1de/003145 768w" class="demo-background-image" afkl-lazy-image-options='{"background": true}'>
-    	<p>Module can also set correct background image.</p>
-    	<p>All you have to do is setting the options tag 'background' to true which is false by default.</p>
-    	<p>In the background you now will see the correct image. You can set your own css on the container itself.</p>
+    	<p>This module can also set a background image.</p>
+    	<p>All you have to do is setting the options tag 'background' to true, which is false by default.</p>
+    	<p>In the background you now will see the correct image. You can set your own css on the container itself, only style 'background-image' is being set.</p>
     </div>
 
 
@@ -118,6 +125,18 @@
 		<li class="demo-aspect-ratio"><div class="afkl-lazy-wrapper afkl-img-ratio-1-1">.afkl-img-ratio-1-1</div></li>
 	</ul>
 
+
+    <h3>Check profiling</h3>
+	<!-- example how to use image set using srcset and ratio -->
+	<div ng-repeat="image in images">
+		
+		<div afkl-lazy-image="{{image.srcset}}" class="afkl-lazy-wrapper afkl-img-ratio-{{image.ratio}}"></div>
+
+	</div>
+	<p class="demo-link"><a href="#" ng-click="destroy()">Destroy $scope</a> (no leaks)</p>
+
+
+
 </div>
 
 <!-- only dependency is Angular -->
@@ -125,7 +144,7 @@
 <!-- our module -->
 <script src="lazy-image.min.js"></script>
 <!-- dummy app kickstarting our module -->
-<script src="app.js"></script>
+<script src="lib/app.js"></script>
 
 </body>
 </html>
