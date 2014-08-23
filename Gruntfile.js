@@ -5,6 +5,8 @@ module.exports = function (grunt) {
     // grunt.option('debug', true);
 
     require('time-grunt')(grunt);
-    require('load-grunt-config')(grunt);
+    require('load-grunt-config')(grunt, {
+        configPath: path.join(process.cwd(), 'config/grunt')
+    });
 
 };
