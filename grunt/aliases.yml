@@ -13,7 +13,6 @@ testBrowser:
 testDev:
   - 'connect:test'
   - 'protractor:dev'
-
 testSauce:
   - 'connect:test'
   - 'protractor:sauce'
@@ -24,6 +23,9 @@ production:
   - 'karma:unit'
   - 'uglify:app'
   - 'copy:build'
+
+sample:
+ - 'connect:open'
 
 install:
   - 'shell'

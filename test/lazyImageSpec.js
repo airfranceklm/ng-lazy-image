@@ -12,7 +12,7 @@ describe("Lazy image", function() {
 
         el1 = angular.element('<div afkl-lazy-image="foo.png 480w"></div>');
         el2 = angular.element('<div afkl-lazy-image="foo.png 480h"></div>');
-        el3 = angular.element('<div afkl-lazy-image="foo.png 1x"></div>');
+        el3 = angular.element('<div afkl-lazy-image="foo.png 1x" afkl-lazy-image-options=\'{"background": true}\'></div>');
         el4 = angular.element('<div afkl-lazy-image=""></div>');
         el5 = angular.element('<div afkl-lazy-image="foo.png 480w, foo.png 480w"></div>');
 
@@ -29,7 +29,10 @@ describe("Lazy image", function() {
     it('Does it have image attached', function () {
         expect(el1.html()).toBe('<img alt="" class="afkl-lazy-image" src="foo.png">');
         expect(el2.html()).toBe('<img alt="" class="afkl-lazy-image" src="foo.png">');
-        expect(el3.html()).toBe('<img alt="" class="afkl-lazy-image" src="foo.png">');
+    });
+
+    it('Does it have an image as background set', function () {
+        expect(el3[0].style.backgroundImage).toBeDefined();
     });
 
     it('No image should be attached', function () {

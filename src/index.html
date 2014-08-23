@@ -37,14 +37,19 @@
 		.demo-aspect-ratio {
 			width: 180px;
 			float: left;
-			margin-right: 20px;
+			margin: 0 20px 10px 0;
 		}
 		.demo-aspect-last { margin-right: 0; }
 		.demo-aspect .afkl-lazy-wrapper {
 			display: block;
 			background-color: #eee;
+			font-size: 12px;
 		}
-
+		.demo-background-image {
+			background-repeat: no-repeat;
+			background-position: 100% 50%;
+			background-size: cover;
+		}
 		@media (max-width:768px){
 			.demo-wrapper {
 				width: 100%;
@@ -77,18 +82,30 @@
 
     <div class="demo-sample">
     	<p><span afkl-lazy-image="//placehold.it/240x120 480w, //placehold.it/440x220 768w" class="afkl-lazy-wrapper afkl-img-ratio-4-2 demo-image"></span></p>
-    	<p><span afkl-lazy-image="//placehold.it/400x200" class="afkl-lazy-wrapper afkl-img-ratio-4-2 demo-image"></span></p>
+    	<p><span afkl-lazy-image="//placehold.it/400x200" afkl-lazy-image-options='{"offset": 200}' class="afkl-lazy-wrapper afkl-img-ratio-4-2 demo-image"></span></p>
     </div>
 
 
-    <h3>Aspect ratio's</h3>
-    <p>Browser reflow is bad, especially when lazy loading images. The container aspect ratio setup sets the correct image container when DOM is presented which doesn't make your site jumping. If you want different aspect ratio's for different srcset setup then introduce your own classnames.</p>
+    <h3>Option to use as background image</h3>
+    <div afkl-lazy-image="//placehold.it/480x200 480w, //placehold.it/768x200 768w" class="demo-background-image" afkl-lazy-image-options='{"background": true}'>
+    	<p>Module can also set correct background image.</p>
+    	<p>All you have to do is setting the options tag 'background' to true which is false by default.</p>
+    	<p>In the background you now will see the correct image. You can set your own css on the container itself.</p>
+    </div>
+
+
+    <h3>Option to use aspect ratio's</h3>
+    <p>Browser reflow is bad, especially when lazy loading images. The container aspect ratio setup sets the correct image container height (so no total repainting takes place when image is appended) based on it's css class which uses aspect-ratio. If you want different aspect ratio's for different srcset setup then introduce your own classnames.</p>
 
 	<ul class="demo-aspect">
-		<li class="demo-aspect-ratio"><div class="afkl-lazy-wrapper afkl-img-ratio-4-2">4-2</div></li>
-		<li class="demo-aspect-ratio"><div class="afkl-lazy-wrapper afkl-img-ratio-16-9">16-9</div></li>
-		<li class="demo-aspect-ratio"><div class="afkl-lazy-wrapper afkl-img-ratio-3-2">3-2</div></li>
-		<li class="demo-aspect-ratio demo-aspect-last"><div class="afkl-lazy-wrapper afkl-img-ratio-1-1">1-1</div></li>
+		<li class="demo-aspect-ratio"><div class="afkl-lazy-wrapper afkl-img-ratio-4-2">.afkl-img-ratio-4-2</div></li>
+		<li class="demo-aspect-ratio"><div class="afkl-lazy-wrapper afkl-img-ratio-16-9">.afkl-img-ratio-16-9</div></li>
+		<li class="demo-aspect-ratio"><div class="afkl-lazy-wrapper afkl-img-ratio-3-2">.afkl-img-ratio-3-2</div></li>
+		<li class="demo-aspect-ratio demo-aspect-last"><div class="afkl-lazy-wrapper afkl-img-ratio-4-3">.afkl-img-ratio-4-3</div></li>
+	</ul>
+	<ul class="demo-aspect">
+		<li class="demo-aspect-ratio"><div class="afkl-lazy-wrapper afkl-img-ratio-3-4">.afkl-img-ratio-3-4</div></li>
+		<li class="demo-aspect-ratio"><div class="afkl-lazy-wrapper afkl-img-ratio-1-1">.afkl-img-ratio-1-1</div></li>
 	</ul>
 
 </div>
@@ -96,7 +113,7 @@
 <!-- only dependency is Angular -->
 <script src="lib/angular.min.js"></script>
 <!-- our module -->
-<script src="lazy-image.min.js"></script>
+<script src="lazy-image.js"></script>
 <!-- dummy app kickstarting our module -->
 <script src="app.js"></script>
 

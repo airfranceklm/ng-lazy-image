@@ -318,22 +318,32 @@ angular.module('afkl.lazyImage', [])
 
                 var loaded = false;
 
-                var img; // Angular element to image which will be placed
                 var images = attrs.afklLazyImage; // srcset attributes
+                var options = attrs.afklLazyImageOptions ? angular.fromJson(attrs.afklLazyImageOptions) : {}; // options
+
+                var img; // Angular element to image which will be placed
                 var currentImage = null; // current image url
-                var offset = 50;
+                var offset = options.offset ? options.offset : 50;
+
+
+                var _setImage = function () {
+                    if (options.background) {
+                        element[0].style.backgroundImage = 'url("' + currentImage +'")';
+                    } else {
+                        img[0].src = currentImage;
+                    }
+                };
+
+                // What is elements position  
+                var offsetElement = element[0].getBoundingClientRect().top;
 
                 // ON SCROLL, CHECK IF ELEMENT IS IN VIEWPORT
                 var _onScroll = function () {
                     // LOCAL CONFIG VARS
-                    var elementTop, remaining, shouldLoad, windowBottom;
-
-                    // var offsetElement = element[0].offsetParent ? element[0].offsetParent.offsetTop : 0;
-                    var offsetElement = element[0].getBoundingClientRect().top;
+                    var remaining, shouldLoad, windowBottom;
 
                     windowBottom = $window[0].innerHeight + $window[0].scrollY;
-                    elementTop = offsetElement;
-                    remaining = elementTop - windowBottom;
+                    remaining = offsetElement - windowBottom;
 
                     // DO WE ACTUALLY NEED TO SET THE IMAGE TAG AND FORCE LOADING IMAGE
                     shouldLoad = remaining <= offset;
@@ -346,8 +356,13 @@ angular.module('afkl.lazyImage', [])
                         currentImage = bestImage(images);
 
                         if (currentImage) {
-                            img = angular.element('<img alt="" class="afkl-lazy-image" src="' + currentImage + '" />');
-                            element.append(img);
+                            // we have to make an image if background is false (default)
+                            if (!options.background) {
+                                img = angular.element('<img alt="" class="afkl-lazy-image" src=""/>');
+                                element.append(img);
+                            }
+                            // set correct src/url
+                            _setImage();
                         }
 
                         // ELEMENT WILL NOT HAVE TO LISTEN TO SCROLL ANYMORE
@@ -361,7 +376,8 @@ angular.module('afkl.lazyImage', [])
                         var newImage = bestImage(images);
                         if (newImage !== currentImage) {
                             currentImage = newImage;
-                            img[0].src = newImage;
+
+                            _setImage();
                         }
                     }
                 };
