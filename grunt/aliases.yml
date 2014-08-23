@@ -29,7 +29,3 @@ sample:
 
 install:
   - 'shell'
-
-update:
- - 'install'
- - 'copy:update'

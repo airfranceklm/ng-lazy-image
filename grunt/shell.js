@@ -4,8 +4,5 @@ module.exports = {
     },
     npm_install: {
         command: 'npm install'
-    },
-    bower_install: {
-        command: 'bower install'
     }
 };
