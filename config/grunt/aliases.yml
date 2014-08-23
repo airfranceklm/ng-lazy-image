@@ -1,31 +1,42 @@
 default:
   - 'clean'
+  - 'js'
+  - 'cssmin'
+  - 'copy:build'
+
+js:
   - 'jshint'
   - 'karma:unit'
   - 'uglify:app'
-  - 'copy:build'
-
-test:
-  - 'karma:unit'
-testBrowser:
-  - 'karma:browser'
-
-testDev:
-  - 'connect:test'
-  - 'protractor:dev'
-testSauce:
-  - 'connect:test'
-  - 'protractor:sauce'
-
-production:
-  - 'clean'
-  - 'jshint'
-  - 'karma:unit'
-  - 'uglify:app'
-  - 'copy:build'
 
 sample:
  - 'connect:open'
+ - 'watch'
+
+test:
+  - 'karma:unit'
+
+testBrowser:
+  - 'karma:browser'
+
+production:
+  - 'clean'
+  - 'js'
+  - 'cssmin'
+  - 'copy:build'
 
 install:
   - 'shell'
+
+# update library dependencies (ng and ng-mock)
+update:
+ - 'bower'
+ - 'copy:update'
+
+
+#testDev:
+#  - 'connect:test'
+#  - 'protractor:dev'
+#testSauce:
+#  - 'connect:test'
+#  - 'protractor:sauce'

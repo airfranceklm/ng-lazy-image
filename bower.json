@@ -35,5 +35,9 @@
     "package.json",
     "README.md",
     "LICENSE.md"
-  ]
+  ],
+  "devDependencies": {
+    "angular": "~1.2.23",
+    "angular-mocks": "~1.2.23"
+  }
 }

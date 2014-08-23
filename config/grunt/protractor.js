@@ -1,6 +1,5 @@
 module.exports = {
     options: {
-        configFile: "node_modules/protractor/referenceConf.js",
         keepAlive: false,
         noColor: false,
         args: { }

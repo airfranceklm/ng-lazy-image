@@ -1,7 +1,7 @@
 module.exports = {
     app: {
         files: {
-            'src/lazy-image.min.js': [
+            'dist/lazy-image.min.js': [
                 'src/lazy-image.js'
             ]
         }

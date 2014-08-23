@@ -9,7 +9,7 @@
 
 
 ## Usage 
-1. `bower install afkl-lazy-image`
+1. `bower install afkl-lazy-image -p`
 2. Add a dependency on `afkl.lazyImage` in your app module.
 3. See the `style.css` for some classes you can use (will add more aspect ratio's later)
 

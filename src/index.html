@@ -5,7 +5,7 @@
     <title>Angular directive: lazy image directive, inspired by TIF</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- look inside this css to see how container and ratios work -->
-    <link rel="stylesheet" type="text/css" href="lazy-image-style.css" />
+    <link rel="stylesheet" type="text/css" href="lazy-image-style.min.css" />
     <style>
 
     	/* Project specific css, only for this demo */
@@ -133,7 +133,7 @@
 		<div afkl-lazy-image="{{image.srcset}}" class="afkl-lazy-wrapper afkl-img-ratio-{{image.ratio}}"></div>
 
 	</div>
-	<p class="demo-link"><a href="#" ng-click="destroy()">Destroy $scope</a> (check for leaks)</p>
+	<p class="demo-link"><a href="#" ng-click="destroy()">Destroy $scope</a> (no leaks)</p>
 
 
 
@@ -142,9 +142,9 @@
 <!-- only dependency is Angular -->
 <script src="lib/angular.min.js"></script>
 <!-- our module -->
-<script src="lazy-image.js"></script>
+<script src="lazy-image.min.js"></script>
 <!-- dummy app kickstarting our module -->
-<script src="app.js"></script>
+<script src="lib/app.js"></script>
 
 </body>
 </html>

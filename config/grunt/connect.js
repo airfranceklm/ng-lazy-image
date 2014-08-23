@@ -1,7 +1,7 @@
 module.exports = {
     options: {
         hostname: 'localhost',
-        base: './src/'
+        base: ['./src/', './dist']
     },
     test: {
         options: {
@@ -10,7 +10,8 @@ module.exports = {
     },
     open: {
         options: {
-            keepalive: true,
+            livereload: true,
+            // keepalive: true,
             open: true
         }
     }
