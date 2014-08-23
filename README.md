@@ -26,8 +26,8 @@ The attributes are using the srcset setup. Your window will determine which imag
 ### Options
 - "afkl-lazy-image": srcset string (required)
 - "afkl-lazy-image-options": set for example:
-  '{"background": true}' this will make set correct background image on container
-  '{"offset": 200}' by default offset is 50px, this will influence when to start loading the image
+   * '{"background": true}' this will make set correct background image on container
+   * '{"offset": 200}' by default offset is 50px, this will influence when to start loading the image
 - "class" : `afkl-lazy-wrapper` will use height 0 trick, `afkl-img-ratio-1-1` sets correct aspect ratio (optional, include css)
 
 
