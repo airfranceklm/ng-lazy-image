@@ -10,7 +10,7 @@ exports.config = {
         'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
         'build': process.env.TRAVIS_BUILD_NUMBER,
         'name': 'AFKL-LAZY-IMAGE CHROME OSX ' + process.env.TRAVIS_BUILD_NUMBER
-    }, {
+    }/*, {
         'browserName': 'internet explorer',
         'platform': 'Windows 8',
         'version': '10',
@@ -18,7 +18,7 @@ exports.config = {
         'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
         'build': process.env.TRAVIS_BUILD_NUMBER,
         'name': 'AFKL-LAZY-IMAGE IE10 W8 ' + process.env.TRAVIS_BUILD_NUMBER
-    }],
+    }*/],
 
 
     chromeOnly: false,
