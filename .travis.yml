@@ -1,7 +1,7 @@
 before_install:
 - npm install -g grunt-cli
 install:
-- npm install -d
+- npm install -d -q
 - webdriver-manager update
 script:
 - grunt travis

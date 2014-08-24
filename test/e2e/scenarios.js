@@ -15,12 +15,12 @@ describe('Testing viewports', function () {
 
         it('Do we get desktop image, and does url update on resize', function () {
             expect(element(by.css('img.afkl-lazy-image')).getAttribute('src')).toMatch(/http:\/\/placehold.it\/936x624\/00a1de\/ffffff/);
- 
+ /*
             browser.manage().window().setSize(768, 768);
             waits(1000);
 
             expect(element(by.css('img.afkl-lazy-image')).getAttribute('src')).toMatch(/http:\/\/placehold.it\/768x512\/00a1de\/ffffff/);
-
+*/
         });
 
 
