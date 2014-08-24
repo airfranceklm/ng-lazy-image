@@ -326,7 +326,12 @@ angular.module('afkl.lazyImage', [])
                 var LOADING = 'afkl-lazy-image-loading';
 
                 // What is position of our container (assumed it is not hidden) 
-                var offsetElement = element[0].getBoundingClientRect().top;
+                var offsetElement;
+
+                // Begin with offset and update on resize
+                var _calculateOffset = function () {
+                    offsetElement = element[0].getBoundingClientRect().top;
+                };
 
                 // Update url of our image
                 var _setImage = function () {
@@ -347,8 +352,13 @@ angular.module('afkl.lazyImage', [])
                             // update image url
                             _setImage();
                         }
+                    } else {
+                        _calculateOffset();
                     }
                 };
+
+                // First update our begin offset
+                _checkIfNewImage();
 
                 var _loaded = function () {
                     element.removeClass(LOADING);
