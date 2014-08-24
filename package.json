@@ -39,7 +39,6 @@
         "grunt-karma-coveralls": "~2.5.1",
         "karma-coverage": "~0.2.4",
         "karma-junit-reporter": "~0.2.*",
-        "karma-phantomjs-launcher": "~0.1.2",
         "karma-ng-scenario": "latest",
 
         "protractor": "~1.1.1",
@@ -48,10 +47,16 @@
 
         "karma-chrome-launcher": "~0.1.4",
         "karma-firefox-launcher": "~0.1.3",
-        "karma-phantomjs-launcher": "~0.1.4",
+        "karma-phantomjs-launcher": "~0.1.3",
         "karma-jasmine": "~0.1.5",
 
         "express" : "4.x"
 
-    }
+    },
+    "scripts": {
+        "start": "http-server -p 8000",
+        "test": "karma start config/karma.conf.js",
+        "update-webdriver": "webdriver-manager update",
+        "protractor": "protractor config/protractor-chrome.js"
+   }
 }

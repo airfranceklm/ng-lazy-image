@@ -5,13 +5,14 @@ describe("Lazy image:", function() {
 
     beforeEach(module('afkl.lazyImage'));
 
-    beforeEach(inject(function(_$compile_, $rootScope, _$document_) {
+    beforeEach(inject(['$compile','$rootScope', '$document', 
+        function(_$compile_, $rootScope, _$document_) {
 
         scope = $rootScope.$new();
         $document = _$document_;
         $compile = _$compile_;
 
-    }));
+    }]));
 
     it('Does it have image attached', function () {
 

@@ -9,7 +9,7 @@ module.exports = function (config) {
             'src/lib/angular.min.js',
             'src/lib/angular-mocks.js',
             'src/lazy-image.js',
-            'test/**/*.js',
+            'test/unit/**/*.js',
             {
                 pattern: 'src/img/*.png',
                 watched: false,

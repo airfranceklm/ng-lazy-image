@@ -3,11 +3,14 @@ exports.config = {
     allScriptsTimeout: 11000,
   
     specs: [
-        'e2e/*.js'
+        '../test/e2e/*.js'
     ],
 
     capabilities: {
-        'browserName': 'chrome'
+        'browserName': 'chrome',
+        'chromeOptions': {
+            'args': ['show-fps-counter=true']
+        }
     },
 
     browsers: ['chrome'],

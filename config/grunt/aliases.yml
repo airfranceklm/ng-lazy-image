@@ -16,14 +16,27 @@ sample:
 test:
   - 'karma:unit'
 
+e2eSauce:
+ - 'connect:test'
+ - 'protractor:sauce'
+
+e2eChrome:
+ - 'connect:test'
+ - 'protractor:chrome'
+
 testBrowser:
   - 'karma:browser'
 
 production:
-  - 'clean'
-  - 'js'
-  - 'cssmin'
-  - 'copy:build'
+  - 'default'
+
+travis:
+ - 'production'
+ - 'e2eSauce'
+
+package:
+ - 'production'
+ - 'e2eChrome'
 
 install:
   - 'shell'
@@ -34,9 +47,8 @@ update:
  - 'copy:update'
 
 
-#testDev:
-#  - 'connect:test'
-#  - 'protractor:dev'
+
+
 #testSauce:
 #  - 'connect:test'
 #  - 'protractor:sauce'

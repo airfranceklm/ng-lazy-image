@@ -2,10 +2,19 @@ before_install:
 - npm install -g grunt-cli
 install:
 - npm install -d
-#- webdriver-manager update
+- webdriver-manager update
 script:
-- grunt production
+- grunt travis
 - grunt coveralls
+
 branches:
   only:
-    - master
+  - master
+
+addons:
+  sauce_connect: true
+
+env:
+  global:
+  - secure: U9Zfa7IudvulHeuGlFCdPQ+8cCPZ7+1lA+BS5AiYqsqArl8XsQKYOHLAxe0RzI7MNKXWuxmiT6b3GH8QABB7qe1TzrA0ef+qToosjlQMaL8xRdj1Bqb86xu03YAi5DcLgx1rP3cH4bKOLh6xOJ0c5FpvOC05RSrLFWZ5//9EP2I=
+  - secure: X59L1deDsLf3sK/RWB2q9MKtLjshpWmK2c7p/88KIcwA95MJl/UGHRBtKIi6CuBOzdanVQMhLeNKQi/exE01TZQBK3Mlur4xezJZwamZIx91vMWjoXE6KL/QxRoJ875PwOXG5C9aSwSIekgeVsRmGAqHOGy5H+P0t5bNrMWaTuY=

@@ -5,16 +5,23 @@ module.exports = {
         args: { }
     },
 
-    dev: {
+    chrome: {
         options: {
-            configFile: "config/protractor-grunt.js",
+            configFile: "config/protractor-chrome.js",
+            args: { }
+        }
+    },
+
+    ci: {
+        options: {
+            configFile: "config/protractor-phantom.js",
             args: { }
         }
     },
 
     sauce: {
         options: {
-            configFile: "config/sauce-e2e.conf.js",
+            configFile: "config/protractor-sauce.js",
             args: { }
         }
     }
