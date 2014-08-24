@@ -209,7 +209,7 @@ angular.module('afkl.lazyImage', [])
 
                         url = input.slice(0, position);
 
-                        if (url === '') { break; }
+                        // if (url === '') { break; }
 
                         input = input.slice(position + 1);
 
@@ -323,6 +323,10 @@ angular.module('afkl.lazyImage', [])
                 var img; // Angular element to image which will be placed
                 var currentImage = null; // current image url
                 var offset = options.offset ? options.offset : 50; // default offset
+                var LOADING = 'afkl-lazy-image-loading';
+
+                // What is position of our container (assumed it is not hidden) 
+                var offsetElement = element[0].getBoundingClientRect().top;
 
                 // Update url of our image
                 var _setImage = function () {
@@ -333,8 +337,23 @@ angular.module('afkl.lazyImage', [])
                     }
                 };
 
-                // What is position of our container (assumed it is not hidden) 
-                var offsetElement = element[0].getBoundingClientRect().top;
+                // Check on resize if actually a new image is best fit, if so then apply it
+                var _checkIfNewImage = function () {
+                    if (loaded) {
+                        var newImage = bestImage(images);
+                        if (newImage !== currentImage) {
+                            // update current url
+                            currentImage = newImage;
+                            // update image url
+                            _setImage();
+                        }
+                    }
+                };
+
+                var _loaded = function () {
+                    element.removeClass(LOADING);
+                };
+
 
                 // EVENT: SCROLL. Check if our container is for first time in our view or not
                 var _onScroll = function () {
@@ -357,7 +376,11 @@ angular.module('afkl.lazyImage', [])
                         if (currentImage) {
                             // we have to make an image if background is false (default)
                             if (!options.background) {
+                                element.addClass(LOADING);
                                 img = angular.element('<img alt="" class="afkl-lazy-image" src=""/>');
+                                // remove loading class when image is acually loaded
+                                img.one('load', _loaded);
+
                                 element.append(img);
                             }
                             // set correct src/url
@@ -370,28 +393,12 @@ angular.module('afkl.lazyImage', [])
 
                 };
 
-                // Check on resize if actually a new image is best fit, if so then apply it
-                var _checkIfNewImage = function () {
-                    if (loaded) {
-                        var newImage = bestImage(images);
-                        if (newImage !== currentImage) {
-                            // update current url
-                            currentImage = newImage;
-                            // update image url
-                            _setImage();
-                        }
-                    }
-                };
 
                 // EVENT: RESIZE. 
                 var _onResize = function () {
                     $timeout.cancel(timeout);
                     timeout = $timeout(_checkIfNewImage, 300);
                 };
-
-                // Set events for scrolling and resizing
-                $window.on('scroll', _onScroll);
-                $window.on('resize', _onResize);
 
                 // Remove events for total destroy
                 var _eventsOff = function() {
@@ -408,6 +415,12 @@ angular.module('afkl.lazyImage', [])
 
                     img = timeout = offsetElement = currentImage = undefined;
                 };
+
+
+                // Set events for scrolling and resizing
+                $window.on('scroll', _onScroll);
+                $window.on('resize', _onResize);
+
 
                 // Remove all events when destroy takes place
                 scope.$on('$destroy', function () {

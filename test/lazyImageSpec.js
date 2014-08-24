@@ -1,49 +1,69 @@
 /* globals: beforeEach, describe, it, module, inject, expect */
-describe("Lazy image", function() {
+describe("Lazy image:", function() {
 
-    var $document, scope;
+    var $document, scope, $compile;
 
     beforeEach(module('afkl.lazyImage'));
 
-    beforeEach(inject(function($compile, $rootScope, _$document_) {
+    beforeEach(inject(function(_$compile_, $rootScope, _$document_) {
 
         scope = $rootScope.$new();
         $document = _$document_;
-
-        el1 = angular.element('<div afkl-lazy-image="foo.png 480w"></div>');
-        el2 = angular.element('<div afkl-lazy-image="foo.png 480h"></div>');
-        el3 = angular.element('<div afkl-lazy-image="foo.png 1x" afkl-lazy-image-options=\'{"background": true}\'></div>');
-        el4 = angular.element('<div afkl-lazy-image=""></div>');
-        el5 = angular.element('<div afkl-lazy-image="foo.png 480w, foo.png 480w"></div>');
-
-        $compile(el1)(scope);
-        $compile(el2)(scope);
-        $compile(el3)(scope);
-        $compile(el4)(scope);
-        $compile(el5)(scope);
-
-        scope.$digest();
+        $compile = _$compile_;
 
     }));
 
     it('Does it have image attached', function () {
-        expect(el1.html()).toBe('<img alt="" class="afkl-lazy-image" src="foo.png">');
-        expect(el2.html()).toBe('<img alt="" class="afkl-lazy-image" src="foo.png">');
+
+        var el = angular.element('<div afkl-lazy-image="img/foo.png 480w"></div>');
+        $compile(el)(scope);
+        scope.$digest();
+
+        expect(el.html()).toBe('<img alt="" class="afkl-lazy-image" src="img/foo.png">');
+    });
+
+    it('Do we have loading class correctly set/unset', function () {
+        var el = angular.element('<div afkl-lazy-image="img/foo.png 340h"></div>');
+        $compile(el)(scope);
+        scope.$digest();
+
+        expect(el.hasClass('afkl-lazy-image-loading')).toBeDefined();
+
+        window.setTimeout(function() {
+            expect(el.html()).toBe('<img alt="" class="afkl-lazy-image" src="img/foo.png">');
+            expect(el.hasClass('afkl-lazy-image-loading')).toBe(false);
+        }, 300);
     });
 
     it('Does it have an image as background set', function () {
-        expect(el3[0].style.backgroundImage).toBeDefined();
+        var el = angular.element('<div afkl-lazy-image="img/foo.png 1x" afkl-lazy-image-options=\'{"background": true}\'></div>');
+        $compile(el)(scope);
+        scope.$digest();
+
+        expect(el[0].style.backgroundImage).toBeDefined();
     });
 
     it('No image should be attached', function () {
-        expect(el4.html()).toBe('');
+        var el = angular.element('<div afkl-lazy-image=""></div>');
+        $compile(el)(scope);
+        scope.$digest();
+
+        expect(el.html()).toBe('');
     });
 
     it('We only have one image', function () {
-        expect(el5.html()).toBe('<img alt="" class="afkl-lazy-image" src="foo.png">');
+        var el = angular.element('<div afkl-lazy-image="img/foo.png 480w, img/foo.png 480w"></div>');
+        $compile(el)(scope);
+        scope.$digest();
+
+        expect(el.html()).toBe('<img alt="" class="afkl-lazy-image" src="img/foo.png">');
     });
 
-    it('Should remove images when destroyed', function () {
+    it('Should remove image when scope is destroyed', function () {
+        var el = angular.element('<div afkl-lazy-image="img/foo.png 480w" afkl-lazy-image-options=\'{"offset": 200}\'></div>');
+        $compile(el)(scope);
+        scope.$digest();
+
         scope.$destroy();
         expect($document.find('img').length).toBe(0);
     });
@@ -51,7 +71,7 @@ describe("Lazy image", function() {
 });
 
 
-describe("srcset Service", function() {
+describe("srcset Service:", function() {
 
     var SrcSetService;
 
@@ -115,7 +135,49 @@ describe("srcset Service", function() {
 
     });
 
+    it('Keep best available one if not complient (w)', function () {
+        var imageObject = SrcSetService.get({srcset: 'mobile.png 480w'});
+        var view = {
+            'w' : 1024,
+            'h' : Infinity,
+            'x' : 1
+        };
+        var image = SrcSetService.image(imageObject.candidates, view);
+        expect(image.src).toBe('mobile.png');
+    });
 
+    it('Keep best available one if not complient (h)', function () {
+        var imageObject = SrcSetService.get({srcset: 'mobile.png 240h'});
+        var view = {
+            'w' : 1024,
+            'h' : 600,
+            'x' : 1
+        };
+        var image = SrcSetService.image(imageObject.candidates, view);
+        expect(image.src).toBe('mobile.png');
+    });
+
+    it('Keep best available one if not complient (x)', function () {
+        var imageObject = SrcSetService.get({srcset: 'mobile.png 1x'});
+        var view = {
+            'w' : 1024,
+            'h' : Infinity,
+            'x' : 2
+        };
+        var image = SrcSetService.image(imageObject.candidates, view);
+        expect(image.src).toBe('mobile.png');
+    });
+
+
+    it('Pixeldensity not a number', function () {
+        var imageObject = SrcSetService.get({srcset: 'mobile.png wwx'});
+        expect(imageObject.best.src).toBe('mobile.png');
+    });
+
+    it('No image should be given back', function () {
+        var image = SrcSetService.image();
+        expect(image).toBe(undefined);
+    });
 
 
 });

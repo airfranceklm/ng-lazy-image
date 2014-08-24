@@ -2,7 +2,7 @@ before_install:
 - npm install -g grunt-cli
 install:
 - npm install -d
-- webdriver-manager update
+#- webdriver-manager update
 script:
 - grunt production
 - grunt coveralls

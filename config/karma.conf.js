@@ -9,8 +9,19 @@ module.exports = function (config) {
             'src/lib/angular.min.js',
             'src/lib/angular-mocks.js',
             'src/lazy-image.js',
-            'test/**/*.js'
+            'test/**/*.js',
+            {
+                pattern: 'src/img/*.png',
+                watched: false,
+                included: false,
+                served: true
+            },
         ],
+
+        // prevent image warning in our tests
+        proxies: {
+            '/img/': '/img/'
+        },
 
         exclude: [
             // 'src/app/js/lib/*.js'
