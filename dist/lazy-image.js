@@ -1,6 +1,6 @@
 /* global angular */
 angular.module('afkl.lazyImage', [])
-    .service('afklSrcSetService', ['$window', function($window) {
+    .service('afklSrcSetService', ['$window', '$document', function($window, $document) {
         'use strict';
 
         /**
@@ -106,9 +106,9 @@ angular.module('afkl.lazyImage', [])
             if (!imageCandidates) { return; }
             if (!view) {
                 view = {
-                    'w' : $window.innerWidth,
-                    'h' : $window.innerHeight,
-                    'x' : $window.devicePixelRatio
+                    'w' : $window.innerWidth || $document[0].documentElement.clientWidth,
+                    'h' : $window.innerHeight || $document[0].documentElement.clientHeight,
+                    'x' : $window.devicePixelRatio || 1
                 };
             }
 
@@ -294,7 +294,7 @@ angular.module('afkl.lazyImage', [])
 
 
     }])
-    .directive('afklLazyImage', ['$window', '$timeout', 'afklSrcSetService', function ($window, $timeout, srcSetService) {
+    .directive('afklLazyImage', ['$window', '$document', '$timeout', 'afklSrcSetService', function ($window, $document, $timeout, srcSetService) {
         'use strict';
 
         // Use srcSetService to find out our best available image
@@ -370,7 +370,15 @@ angular.module('afkl.lazyImage', [])
                     // Config vars
                     var remaining, shouldLoad, windowBottom;
 
-                    windowBottom = $window[0].innerHeight + $window[0].scrollY;
+                    var height = "innerHeight" in $window[0] ? 
+                        $window[0].innerHeight 
+                        : $document[0].documentElement.clientHeight;
+
+                    var scroll = "scrollY" in $window[0] ? 
+                        $window[0].scrollY 
+                        : document[0].documentElement.scrollTop;
+
+                    windowBottom = height + scroll;
                     remaining = offsetElement - windowBottom;
 
                     // Is our top of our image container in bottom of our viewport?

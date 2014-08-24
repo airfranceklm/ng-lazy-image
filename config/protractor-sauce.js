@@ -12,7 +12,7 @@ exports.config = {
         'name': 'AFKL-LAZY-IMAGE CHROME OSX ' + process.env.TRAVIS_BUILD_NUMBER
     }/*, {
         'browserName': 'internet explorer',
-        'platform': 'Windows 8',
+        'platform': 'ANY',
         'version': '10',
         'ignoreProtectedModeSettings': true,
         'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
@@ -27,7 +27,7 @@ exports.config = {
         '../test/e2e/*.js'
     ],
 
-    baseUrl: 'http://localhost:8000/',
+    baseUrl: 'http://afklm.github.io/ng-lazy-image/',
 
     framework: 'jasmine',
 

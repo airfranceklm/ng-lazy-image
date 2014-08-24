@@ -17,7 +17,6 @@ test:
   - 'karma:unit'
 
 e2eSauce:
- - 'connect:test'
  - 'protractor:sauce'
 
 e2eChrome:

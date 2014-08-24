@@ -7,7 +7,7 @@
 
 describe('Viewports:', function () {
 
-    browser.get('/');
+    browser.get('index.html');
 
     it('Do we get desktop image, and does url update on resize', function () {
         browser.manage().window().setSize(1024, 768);

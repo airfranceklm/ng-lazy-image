@@ -18,6 +18,7 @@ exports.config = {
     chromeOnly: true,
 
     baseUrl: 'http://localhost:8000/',
+    // baseUrl: 'http://afklm.github.io/ng-lazy-image/',
 
     framework: 'jasmine',
 
