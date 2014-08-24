@@ -9,8 +9,16 @@ exports.config = {
         'version': '',
         'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
         'build': process.env.TRAVIS_BUILD_NUMBER,
-        'name': 'AFKL-LAZY-IMAGE ' + process.env.TRAVIS_BUILD_NUMBER
+        'name': 'AFKL-LAZY-IMAGE CHROME OSX ' + process.env.TRAVIS_BUILD_NUMBER
+    }, {
+        'browserName': 'internet explorer',
+        'platform': 'Windows 8',
+        'version': '10',
+        'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
+        'build': process.env.TRAVIS_BUILD_NUMBER,
+        'name': 'AFKL-LAZY-IMAGE IE10 W8 ' + process.env.TRAVIS_BUILD_NUMBER
     }],
+
 
     chromeOnly: false,
 
@@ -23,7 +31,7 @@ exports.config = {
     framework: 'jasmine',
 
     jasmineNodeOpts: {
-        defaultTimeoutInterval: 30000,
+        defaultTimeoutInterval: 10000,
         // isVerbose: true,
         // showColors: true,
         includeStackTrace: true
