@@ -14,6 +14,7 @@ exports.config = {
         'browserName': 'internet explorer',
         'platform': 'Windows 8',
         'version': '10',
+        'ignoreProtectedModeSettings': true,
         'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
         'build': process.env.TRAVIS_BUILD_NUMBER,
         'name': 'AFKL-LAZY-IMAGE IE10 W8 ' + process.env.TRAVIS_BUILD_NUMBER
