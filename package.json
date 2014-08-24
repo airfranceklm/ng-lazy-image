@@ -1,11 +1,11 @@
 {
     "name": "angular-lazy-image",
     "main": "./dist/lazy-image.js",
-    "version": "0.0.4",
-    "homepage": "http://afklm.github.io/ng-directive-lazy-image/",
+    "version": "0.0.5",
+    "homepage": "http://afklm.github.io/ng-lazy-image/",
     "repository": {
         "type": "git",
-        "url": "http://github.com/afklm/ng-directive-lazy-image.git"
+        "url": "http://github.com/afklm/ng-lazy-image.git"
     },
     "authors": [
         "KLM Royal Dutch Airlines",
@@ -24,7 +24,6 @@
 
         "grunt-bower-task": "~0.4.0",
         "grunt-shell": "~1.0.1",
-        "grunt-text-replace": "0.3.12",
         "grunt-contrib-connect": "~0.8.0",
         "grunt-contrib-copy": "~0.5.0",
         "grunt-contrib-uglify": "~0.5.0",

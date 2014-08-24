@@ -20,29 +20,34 @@
     <div afkl-lazy-image="//placehold.it/480x480 480w, //placehold.it/768x768 768w, //placehold.it/936x936" class="afkl-lazy-wrapper afkl-img-ratio-1-1 demo-image"></div>
 ```
 
-The attributes are using the srcset setup. Your window will determine which image fits best (so the rules are very dynamic). The image will only be set when the parent container is in the viewport (lazy loading).
+The attributes are using the srcset setup. Your window will determine which image fits best (so the rules are very dynamic using w/h/x). The image will only be set when the parent container is in the viewport (lazy loading). During loading a class 'afkl-lazy-image-loading' is set on the container.
 
 
 ### Options
 - "afkl-lazy-image": srcset string (required)
-- "afkl-lazy-image-options": set for example:
-   * '{"background": true}' this will make set correct background image on container
-   * '{"offset": 200}' by default offset is 50px, this will influence when to start loading the image
-- "class" : `afkl-lazy-wrapper` will use height 0 trick, `afkl-img-ratio-1-1` sets correct aspect ratio (optional, include css)
+- "afkl-lazy-image-options": (optional):
+   * '{"background": true}' this will set correct background image on container, false by default
+   * '{"offset": 200}' this will influence when to start loading the image, 50px by default
+- "class" : `afkl-lazy-wrapper` will use height 0 trick, `afkl-img-ratio-1-1` sets correct aspect ratio so container is 100% responsive as well (optional, include css)
 
 
 ## Todo
-- Angular directives don't have any notion of style encapsulation, but Angular is expected to incorporate that functionality eventually. At the moment our optional css is delivered in an own stylesheet.
-- e2e testing
+1. Angular directives don't have any notion of style encapsulation, but Angular is expected to incorporate that functionality eventually. At the moment our optional css is delivered in an own stylesheet.
+2. Add e2e testing for testing resize stuff
 
 ## Help
 - Using bower on corporate network which blocks git protocol run `bash git config --global url."https://".insteadOf git://`
 
 ## Grunt tasks when cloned
 - src file is 'src/lazy-image.js'
-- run `grunt sample` to see the demo offline.
+- run `grunt sample` to see the demo offline
 - run `grunt test` to see the unit test report in target
+- run 'grunt testBrowser' to (debug) unit test using Chrome
+- run `grunt update` to update our Angular lib
 
+## History
+This module was made while working on our Travel Inspiration Finder at KLM. 
+- version 0.0.5 25-08-2014 Added loading feedback to enduser
 
 ## License
 As AngularJS itself, this module is released under the permissive [MIT license](LICENSE.md). Your contributions are always welcome.
