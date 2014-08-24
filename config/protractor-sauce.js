@@ -5,11 +5,11 @@ exports.config = {
 
     multiCapabilities: [{
         'browserName': 'chrome',
-        'platform': 'Windows 8.1',
-        'version': '34',
+        'platform': 'OS X 10.6',
+        'version': '',
         'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
         'build': process.env.TRAVIS_BUILD_NUMBER,
-        'name': 'POC build CHROME ' + process.env.TRAVIS_BUILD_NUMBER
+        'name': 'AFKL-LAZY-IMAGE ' + process.env.TRAVIS_BUILD_NUMBER
     }],
 
     chromeOnly: false,
