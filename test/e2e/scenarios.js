@@ -7,12 +7,10 @@
 
 describe('Viewports:', function () {
 
-    beforeEach(function () {
-        browser.get('/');
-        browser.manage().window().setSize(1024, 768);
-    });
+    browser.get('/');
 
     it('Do we get desktop image, and does url update on resize', function () {
+        browser.manage().window().setSize(1024, 768);
         expect(element(by.css('img.afkl-lazy-image')).getAttribute('src')).toMatch(/http:\/\/placehold.it\/936x624\/00a1de\/ffffff/);
 /*
         browser.manage().window().setSize(768, 768);
