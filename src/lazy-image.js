@@ -1,6 +1,6 @@
 /* global angular */
 angular.module('afkl.lazyImage', [])
-    .service('afklSrcSetService', ['$window', '$document', function($window) {
+    .service('afklSrcSetService', ['$window', function($window) {
         'use strict';
 
         /**
