@@ -40,9 +40,9 @@ The attributes are using the srcset setup. Your window will determine which imag
 
 ## Grunt tasks when cloned
 - src file is 'src/lazy-image.js'
-- run `npm run update-webdriver' to get latest webdriver (e2e)
+- run `npm run update-webdriver' once to get latest webdriver (e2e)
 - run `grunt sample` to see the demo offline
-- run `grunt test` to see the unit test report in target, `grunt testBrowser` to (debug) unit test using Chrome
+- run `grunt test` to see the unit test report, `grunt testBrowser` to (debug) unit test using Chrome
 - run `grunt package` to make complete package
 - run `grunt update` to update our Angular lib
 
