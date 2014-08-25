@@ -16,11 +16,11 @@
 
 ### Directive in html template
 
-``` html
-    <div afkl-lazy-image="//placehold.it/480x480 480w, //placehold.it/768x768 768w, //placehold.it/936x936" class="afkl-lazy-wrapper afkl-img-ratio-1-1 demo-image"></div>
-```
+<pre><code>&lt;div afkl-lazy-image="//placehold.it/480x480 480w, //placehold.it/768x768 768w, //placehold.it/936x936" 
+    class="afkl-lazy-wrapper afkl-img-ratio-1-1 demo-image"&gt;&lt;/div&gt;
+</code></pre>
 
-The attributes are using the srcset setup. Your window will determine which image fits best (so the rules are very dynamic using w/h/x). The image will only be set when the parent container scrolls in the viewport (lazy loading). During loading a class 'afkl-lazy-image-loading' is set on the container so you can give loading state feedback to visitor.
+The attributes are using the [srcset](http://picture.responsiveimages.org/) setup. Your window will determine which image fits best (so the rules are very dynamic using w/h/x). The image will only be set when the parent container scrolls in the viewport (lazy loading). During loading a class 'afkl-lazy-image-loading' is set on the container so you can give loading state feedback to visitor.
 
 
 ### Options
