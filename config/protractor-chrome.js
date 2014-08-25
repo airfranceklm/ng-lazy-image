@@ -1,7 +1,8 @@
 exports.config = {
 
     allScriptsTimeout: 11000,
-  
+    
+
     specs: [
         '../test/e2e/*.js'
     ],
@@ -23,7 +24,7 @@ exports.config = {
     framework: 'jasmine',
 
     jasmineNodeOpts: {
-        defaultTimeoutInterval: 30000,
+        defaultTimeoutInterval: 10000,
         // isVerbose: true,
         // showColors: true,
         includeStackTrace: true

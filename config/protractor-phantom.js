@@ -1,7 +1,9 @@
 exports.config = {
 
     allScriptsTimeout: 11000,
-  
+
+    seleniumAddress: 'http://0.0.0.0:4444/wd/hub',
+
     specs: [
         '../test/e2e/*.js'
     ],
@@ -12,12 +14,18 @@ exports.config = {
         'phantomjs.cli.args':['--logfile=PATH', '--loglevel=DEBUG']
     },
 
+    reporters: ['progress'],
+
+    browsers: ['PhantomJS'],
+
+    chromeOnly: false,
+
     baseUrl: 'http://localhost:8000/',
 
     framework: 'jasmine',
 
     jasmineNodeOpts: {
-        defaultTimeoutInterval: 30000,
+        defaultTimeoutInterval: 10000,
         // isVerbose: true,
         // showColors: true,
         includeStackTrace: true

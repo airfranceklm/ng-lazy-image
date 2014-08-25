@@ -42,7 +42,6 @@
         "karma-ng-scenario": "latest",
 
         "protractor": "~1.1.1",
-        "http-server": "^0.6.1",
         "shelljs": "^0.3.0",
 
         "karma-chrome-launcher": "~0.1.4",
@@ -54,9 +53,8 @@
 
     },
     "scripts": {
-        "start": "http-server -p 8000",
         "test": "karma start config/karma.conf.js",
         "update-webdriver": "webdriver-manager update",
-        "protractor": "protractor config/protractor-chrome.js"
+        "selenium": "node_modules/protractor/bin/webdriver-manager"
    }
 }
