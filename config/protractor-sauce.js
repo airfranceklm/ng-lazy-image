@@ -7,6 +7,9 @@ exports.config = {
         'browserName': 'chrome',
         'platform': 'OS X 10.6',
         'version': '',
+        'chromeOptions': {
+            'args': ['test-type']
+        },
         'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
         'build': process.env.TRAVIS_BUILD_NUMBER,
         'name': 'AFKL-LAZY-IMAGE CHROME OSX ' + process.env.TRAVIS_BUILD_NUMBER
@@ -33,7 +36,7 @@ exports.config = {
     framework: 'jasmine',
 
     jasmineNodeOpts: {
-        defaultTimeoutInterval: 10000,
+        defaultTimeoutInterval: 30000,
         // isVerbose: true,
         // showColors: true,
         includeStackTrace: true

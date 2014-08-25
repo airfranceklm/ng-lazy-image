@@ -28,7 +28,7 @@ unitBrowser:
 e2e:
  - 'connect:test'
  - 'protractor:all'
-e2eSauce:
+sauce:
  - 'connect:test' # SEE IF NOW WORKS
  - 'protractor:sauce'
 
@@ -37,7 +37,7 @@ e2eSauce:
 travis:
  - 'production'
  - 'coveralls'
- #- 'e2eSauce'
+ - 'sauce'
 
 # CREATE A PACKAGE
 package:

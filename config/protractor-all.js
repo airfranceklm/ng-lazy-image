@@ -10,13 +10,13 @@ exports.config = {
     multiCapabilities: [{
         'browserName': 'chrome',
         'chromeOptions': {
-            'args': ['show-fps-counter=true']
+            'args': ['show-fps-counter=true', 'test-type']
         }
-    },{
+    }/*,{
         'browserName': 'firefox'
     },{
         'browserName': 'internet explorer'
-    }],
+    }*/],
 
     // browsers: ['chrome'],
 

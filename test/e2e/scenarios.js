@@ -6,8 +6,16 @@
 describe('Viewports:', function () {
 
     var IMAGE = '.demo-e2e-image .afkl-lazy-image';
+    var runOnce = true;
 
-    browser.get('index.html');
+
+    beforeEach(function() {
+        if (runOnce) {
+            runOnce = false;
+            browser.get('index.html');
+        }
+    });
+    
 
     it('Is image appended', function () {
         // Is our image actually being placed
