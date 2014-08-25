@@ -4,11 +4,16 @@ default:
   - 'cssmin'
   - 'copy:build'
 
+# FOR NOW EXACTLY SAME AS DEFAULT
+production:
+  - 'default'
+
 js:
   - 'jshint'
   - 'karma:unit'
   - 'uglify:app'
 
+# START OUR DEMONSTRATION APP
 sample:
  - 'connect:open'
  - 'watch'
@@ -16,24 +21,22 @@ sample:
 test:
   - 'karma:unit'
 
-e2eSauce:
- - 'protractor:sauce'
+testBrowser:
+  - 'karma:browser'
 
 e2eChrome:
  - 'connect:test'
  - 'protractor:chrome'
 
-testBrowser:
-  - 'karma:browser'
 
-production:
-  - 'default'
 
+# TRAVIS CI BUILD PROCES
 travis:
  - 'production'
  - 'coveralls'
  - 'e2eSauce'
 
+# CREATE A PACKAGE
 package:
  - 'production'
  - 'e2eChrome'
@@ -46,9 +49,12 @@ update:
  - 'bower'
  - 'copy:update'
 
+# PROCES: DEPLOY APP TO CLOUD THEN DO 2E2 TESTS
+# update gh-pages
+ghpages:
+ - 'copy:pages1'
+ - 'copy:pages2'
+ - 'gh-pages'
 
-
-
-#testSauce:
-#  - 'connect:test'
-#  - 'protractor:sauce'
+e2eSauce:
+ - 'protractor:sauce'
