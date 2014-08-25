@@ -37,7 +37,7 @@ e2eSauce:
 travis:
  - 'production'
  - 'coveralls'
- - 'e2eSauce'
+ #- 'e2eSauce'
 
 # CREATE A PACKAGE
 package:
