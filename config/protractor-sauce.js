@@ -27,7 +27,8 @@ exports.config = {
         '../test/e2e/*.js'
     ],
 
-    baseUrl: 'http://afklm.github.io/ng-lazy-image/',
+    baseUrl: 'http://localhost:8000/',
+    // baseUrl: 'http://afklm.github.io/ng-lazy-image/',
 
     framework: 'jasmine',
 
