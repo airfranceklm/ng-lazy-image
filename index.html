@@ -89,12 +89,12 @@
 	<h2>Example</h2>
 
 	<p>Resize, reload and scroll to see what gets actually loaded and when.</p>
-
+	<!-- This container is used for e2e tests, don't change urls -->
     <div afkl-lazy-image="//placehold.it/480x320/00a1de/ffffff 480w, //placehold.it/768x512/00a1de/ffffff 768w, //placehold.it/936x624/00a1de/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-3-2 demo-image demo-e2e-image"></div>
 
     <p>Example showing another aspect ratio. The parent container always sets the max width available for the image to align.</p>
 
-    <div afkl-lazy-image="//placehold.it/480x480 480w, //placehold.it/768x768 768w, //placehold.it/936x936" class="afkl-lazy-wrapper afkl-img-ratio-1-1 demo-image"></div>
+    <div afkl-lazy-image="//placehold.it/480x480 480w, //placehold.it/768x768 768w, //placehold.it/936x936 2x" class="afkl-lazy-wrapper afkl-img-ratio-1-1 demo-image"></div>
 
 
     <h3>Option to overrule offset</h3>
@@ -142,7 +142,7 @@
 <!-- only dependency is Angular -->
 <script src="lib/angular.min.js"></script>
 <!-- our module -->
-<script src="lazy-image.min.js"></script>
+<script src="lazy-image.js"></script>
 <!-- dummy app kickstarting our module -->
 <script src="lib/app.js"></script>
 
