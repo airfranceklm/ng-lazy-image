@@ -33,7 +33,8 @@ The attributes are using the [srcset](http://picture.responsiveimages.org/) setu
 
 ## Todo
 1. Angular directives don't have any notion of style encapsulation, but Angular is expected to incorporate that functionality eventually. At the moment our optional css is delivered in an own stylesheet.
-
+2. Check for native browser support
+3. Look at sizes implementation (100vw)
 
 ## Help
 - Using bower on corporate network which blocks git protocol run `bash git config --global url."https://".insteadOf git://`
