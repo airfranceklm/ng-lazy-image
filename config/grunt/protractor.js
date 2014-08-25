@@ -5,9 +5,9 @@ module.exports = {
         args: { }
     },
 
-    chrome: {
+    all: {
         options: {
-            configFile: "config/protractor-chrome.js",
+            configFile: "config/protractor-all.js",
             args: { }
         }
     },

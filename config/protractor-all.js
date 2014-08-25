@@ -7,16 +7,20 @@ exports.config = {
         '../test/e2e/*.js'
     ],
 
-    capabilities: {
+    multiCapabilities: [{
         'browserName': 'chrome',
         'chromeOptions': {
             'args': ['show-fps-counter=true']
         }
-    },
+    },{
+        'browserName': 'firefox'
+    },{
+        'browserName': 'internet explorer'
+    }],
 
-    browsers: ['chrome'],
+    // browsers: ['chrome'],
 
-    chromeOnly: true,
+    // chromeOnly: true,
 
     baseUrl: 'http://localhost:8000/',
     // baseUrl: 'http://afklm.github.io/ng-lazy-image/',

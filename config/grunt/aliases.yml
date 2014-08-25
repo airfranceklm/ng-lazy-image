@@ -18,16 +18,18 @@ sample:
  - 'connect:open'
  - 'watch'
 
-test:
+# UNIT TESTING
+unit:
   - 'karma:unit'
-
-testBrowser:
+unitBrowser:
   - 'karma:browser'
 
-e2eChrome:
+# e2e TESTING
+e2e:
  - 'connect:test'
- - 'protractor:chrome'
-
+ - 'protractor:all'
+e2eSauce:
+ - 'protractor:sauce'
 
 
 # TRAVIS CI BUILD PROCES
@@ -39,7 +41,7 @@ travis:
 # CREATE A PACKAGE
 package:
  - 'production'
- - 'e2eChrome'
+ - 'e2e'
 
 install:
   - 'shell'
@@ -55,6 +57,3 @@ ghpages:
  - 'copy:pages1'
  - 'copy:pages2'
  - 'gh-pages'
-
-e2eSauce:
- - 'protractor:sauce'
