@@ -1,6 +1,6 @@
 /* global angular */
 angular.module('afkl.lazyImage', [])
-    .service('afklSrcSetService', ['$window', '$document', function($window, $document) {
+    .service('afklSrcSetService', ['$window', '$document', function($window) {
         'use strict';
 
         /**
@@ -106,8 +106,8 @@ angular.module('afkl.lazyImage', [])
             if (!imageCandidates) { return; }
             if (!view) {
                 view = {
-                    'w' : $window.innerWidth || $document[0].documentElement.clientWidth,
-                    'h' : $window.innerHeight || $document[0].documentElement.clientHeight,
+                    'w' : $window.innerWidth || document.documentElement.clientWidth,
+                    'h' : $window.innerHeight || document.documentElement.clientHeight,
                     'x' : $window.devicePixelRatio || 1
                 };
             }
@@ -294,7 +294,7 @@ angular.module('afkl.lazyImage', [])
 
 
     }])
-    .directive('afklLazyImage', ['$window', '$document', '$timeout', 'afklSrcSetService', function ($window, $document, $timeout, srcSetService) {
+    .directive('afklLazyImage', ['$window', '$timeout', 'afklSrcSetService', function ($window, $timeout, srcSetService) {
         'use strict';
 
         // Use srcSetService to find out our best available image
@@ -372,11 +372,11 @@ angular.module('afkl.lazyImage', [])
 
                     var height = "innerHeight" in $window[0] ? 
                         $window[0].innerHeight 
-                        : $document[0].documentElement.clientHeight;
+                        : document.documentElement.clientHeight;
 
                     var scroll = "scrollY" in $window[0] ? 
                         $window[0].scrollY 
-                        : document[0].documentElement.scrollTop;
+                        : document.documentElement.scrollTop;
 
                     windowBottom = height + scroll;
                     remaining = offsetElement - windowBottom;
