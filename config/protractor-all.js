@@ -1,7 +1,6 @@
 exports.config = {
 
     allScriptsTimeout: 11000,
-    
 
     specs: [
         '../test/e2e/*.js'
@@ -12,15 +11,11 @@ exports.config = {
         'chromeOptions': {
             'args': ['show-fps-counter=true', 'test-type']
         }
-    }/*,{
+    }, {
         'browserName': 'firefox'
-    },{
+    }, {
         'browserName': 'internet explorer'
-    }*/],
-
-    // browsers: ['chrome'],
-
-    // chromeOnly: true,
+    }],
 
     baseUrl: 'http://localhost:8000/',
     // baseUrl: 'http://afklm.github.io/ng-lazy-image/',

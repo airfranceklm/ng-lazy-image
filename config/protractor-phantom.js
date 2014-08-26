@@ -2,7 +2,7 @@ exports.config = {
 
     allScriptsTimeout: 11000,
 
-    seleniumAddress: 'http://0.0.0.0:4444/wd/hub',
+    // seleniumAddress: 'http://0.0.0.0:4444/wd/hub',
 
     specs: [
         '../test/e2e/*.js'
