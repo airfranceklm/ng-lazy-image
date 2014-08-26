@@ -36,6 +36,7 @@ The attributes are using the [srcset](http://picture.responsiveimages.org/) setu
 2. Check for native browser support
 3. Look at sizes implementation (100vw)
 4. Rewrite pixeldensity to width (new spec)
+5. Making non lazy load optional (so it sets picture/img element)
 
 ## Help
 - Using bower on corporate network which blocks git protocol run `bash git config --global url."https://".insteadOf git://`
