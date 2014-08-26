@@ -2,7 +2,7 @@
 [![Coverage Status](https://coveralls.io/repos/afklm/ng-lazy-image/badge.png?branch=master)](https://coveralls.io/r/afklm/ng-lazy-image?branch=master) 
 
 # Angular Lazy Image
-> Directive for loading responsive/ adaptive image when parent container (which is preventing reflow) is in viewport. Available as bower component for your project.
+> Directive for loading responsive/ adaptive image when parent container (which is preventing reflow) is in viewport. Available as bower component for your project. JavaScript only component.
 
 ## Demo
 [Demonstration component](http://afklm.github.io/ng-lazy-image/)
@@ -35,7 +35,7 @@ The attributes are using the [srcset](http://picture.responsiveimages.org/) setu
 1. Angular directives don't have any notion of style encapsulation, but Angular is expected to incorporate that functionality eventually. At the moment our optional css is delivered in an own stylesheet.
 2. Check for native browser support
 3. Look at sizes implementation (100vw)
-4. Rewrite pixeldensity to width (new spec)
+4. Rewrite pixeldensity to width (new spec), making it simple [blog](http://dev.opera.com/articles/native-responsive-images/)
 5. Making non lazy load optional (so it sets picture/img element)
 
 ## Help
