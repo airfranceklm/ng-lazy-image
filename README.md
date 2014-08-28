@@ -28,6 +28,7 @@ The attributes are using the [srcset](http://picture.responsiveimages.org/) setu
 - "afkl-lazy-image-options": (optional):
    * '{"background": true}' this will set correct background image on container, false by default
    * '{"offset": 200}' this will influence when to start loading the image, 50px by default
+   * '{"nolazy": true}' this will set the image at once and only change on resize
 - "class" : `afkl-lazy-wrapper` will use height 0 trick, `afkl-img-ratio-1-1` sets correct aspect ratio so container is 100% responsive as well (optional, include css)
 
 

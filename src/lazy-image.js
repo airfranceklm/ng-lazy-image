@@ -342,6 +342,31 @@ angular.module('afkl.lazyImage', [])
                     }
                 };
 
+                // Append image to DOM
+                var _placeImage = function () {
+
+                    loaded = true;
+                    // What is my best image available
+                    currentImage = bestImage(images);
+
+                    if (currentImage) {
+                        // we have to make an image if background is false (default)
+                        if (!options.background) {
+                            element.addClass(LOADING);
+                            img = angular.element('<img alt="" class="afkl-lazy-image" src=""/>');
+                            // remove loading class when image is acually loaded
+                            img.one('load', _loaded);
+                            element.append(img);
+                        }
+                        // set correct src/url
+                        _setImage();
+                    }
+
+                    // Element is added to dom, no need to listen to scroll anymore
+                    $window.off('scroll', _onScroll);
+
+                };
+
                 // Check on resize if actually a new image is best fit, if so then apply it
                 var _checkIfNewImage = function () {
                     if (loaded) {
@@ -389,26 +414,8 @@ angular.module('afkl.lazyImage', [])
                     // Append image first time when it comes into our view, after that only resizing can have influence
                     if (shouldLoad && !loaded) {
 
-                        loaded = true;
-                        // What is my best image available
-                        currentImage = bestImage(images);
+                        _placeImage();
 
-                        if (currentImage) {
-                            // we have to make an image if background is false (default)
-                            if (!options.background) {
-                                element.addClass(LOADING);
-                                img = angular.element('<img alt="" class="afkl-lazy-image" src=""/>');
-                                // remove loading class when image is acually loaded
-                                img.one('load', _loaded);
-
-                                element.append(img);
-                            }
-                            // set correct src/url
-                            _setImage();
-                        }
-
-                        // Element is added to dom, no need to listen to scroll anymore
-                        $window.off('scroll', _onScroll);
                     }
 
                 };
@@ -437,10 +444,15 @@ angular.module('afkl.lazyImage', [])
                 };
 
 
+
                 // Set events for scrolling and resizing
                 $window.on('scroll', _onScroll);
                 $window.on('resize', _onResize);
 
+                // Image should be directly placed
+                if (options.nolazy) {
+                    _placeImage();
+                }
 
                 // Remove all events when destroy takes place
                 scope.$on('$destroy', function () {
