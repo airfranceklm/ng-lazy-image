@@ -374,9 +374,11 @@ angular.module('afkl.lazyImage', [])
                         $window[0].innerHeight 
                         : document.documentElement.clientHeight;
 
-                    var scroll = "scrollY" in $window[0] ? 
+                    /*var scroll = "scrollY" in $window[0] ? 
                         $window[0].scrollY 
-                        : document.documentElement.scrollTop;
+                        : document.documentElement.scrollTop;*/
+                    // https://developer.mozilla.org/en-US/docs/Web/API/window.scrollY
+                    var scroll = ($window[0].pageYOffset !== undefined) ? $window[0].pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
 
                     windowBottom = height + scroll;
                     remaining = offsetElement - windowBottom;
