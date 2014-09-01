@@ -1,6 +1,7 @@
 exports.config = {
 
     allScriptsTimeout: 11000,
+    // seleniumAddress: 'http://0.0.0.0:4444/wd/hub',
 
     specs: [
         '../test/e2e/*.js'
@@ -13,9 +14,9 @@ exports.config = {
         }
     }, {
         'browserName': 'firefox'
-    }, {
+    }/*, {
         'browserName': 'internet explorer'
-    }],
+    }*/],
 
     baseUrl: 'http://localhost:8000/',
     // baseUrl: 'http://afklm.github.io/ng-lazy-image/',
