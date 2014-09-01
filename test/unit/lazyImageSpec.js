@@ -16,7 +16,7 @@ describe("Lazy image:", function() {
 
     it('Does it have image attached', function () {
 
-        var el = angular.element('<div afkl-lazy-image="img/foo.png 480w"></div>');
+        var el = angular.element('<div afkl-lazy-image="img/foo.png 480w" afkl-lazy-image-options=\'{"nolazy": true}\'></div>');
         $compile(el)(scope);
         scope.$digest();
 
