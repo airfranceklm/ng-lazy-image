@@ -294,6 +294,16 @@ angular.module('afkl.lazyImage', [])
 
 
     }])
+    .directive('afklImageContainer', function () {
+        'use strict';
+
+        return {
+            restrict: 'A',
+            link: function (scope, element) {
+                element.data('afklImageContainer', element);
+            }
+        };
+    })
     .directive('afklLazyImage', ['$window', '$timeout', 'afklSrcSetService', function ($window, $timeout, srcSetService) {
         'use strict';
 
@@ -312,7 +322,10 @@ angular.module('afkl.lazyImage', [])
             link: function (scope, element, attrs) {
 
                 // CONFIGURATION VARS
-                $window = angular.element($window);
+                var $container = element.inheritedData('afklImageContainer');
+                if (!$container) {
+                    $container = angular.element(attrs.afklLazyImageContainer || $window);
+                }
 
                 var loaded = false;
                 var timeout;
@@ -330,7 +343,7 @@ angular.module('afkl.lazyImage', [])
 
                 // Begin with offset and update on resize
                 var _calculateOffset = function () {
-                    offsetElement = element[0].getBoundingClientRect().top;
+                    offsetElement = element.offset().top;
                 };
 
                 // Update url of our image
@@ -357,13 +370,15 @@ angular.module('afkl.lazyImage', [])
                             // remove loading class when image is acually loaded
                             img.one('load', _loaded);
                             element.append(img);
+                        } else {
+                            element[0].style.backgroundImage = 'url("' + currentImage +'")';
                         }
                         // set correct src/url
                         _setImage();
                     }
 
                     // Element is added to dom, no need to listen to scroll anymore
-                    $window.off('scroll', _onScroll);
+                    $container.off('scroll', _onScroll);
 
                 };
 
@@ -395,18 +410,16 @@ angular.module('afkl.lazyImage', [])
                     // Config vars
                     var remaining, shouldLoad, windowBottom;
 
-                    var height = "innerHeight" in $window[0] ? 
-                        $window[0].innerHeight 
-                        : document.documentElement.clientHeight;
+                    var height = $container.innerHeight();
 
                     /*var scroll = "scrollY" in $window[0] ? 
                         $window[0].scrollY 
                         : document.documentElement.scrollTop;*/
                     // https://developer.mozilla.org/en-US/docs/Web/API/window.scrollY
-                    var scroll = ($window[0].pageYOffset !== undefined) ? $window[0].pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+                    var scroll = $container.scrollTop();
 
                     windowBottom = height + scroll;
-                    remaining = offsetElement - windowBottom;
+                    remaining = element.offset().top - windowBottom;
 
                     // Is our top of our image container in bottom of our viewport?
                     shouldLoad = remaining <= offset;
@@ -432,8 +445,8 @@ angular.module('afkl.lazyImage', [])
 
                     $timeout.cancel(timeout);
 
-                    $window.off('scroll', _onScroll);
-                    $window.off('resize', _onResize);
+                    $container.off('scroll', _onScroll);
+                    $container.off('resize', _onResize);
 
                     // remove image being placed
                     if (img) {
@@ -446,8 +459,8 @@ angular.module('afkl.lazyImage', [])
 
 
                 // Set events for scrolling and resizing
-                $window.on('scroll', _onScroll);
-                $window.on('resize', _onResize);
+                $container.on('scroll', _onScroll);
+                $container.on('resize', _onResize);
 
                 // Image should be directly placed
                 if (options.nolazy) {
