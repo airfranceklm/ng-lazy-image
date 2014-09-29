@@ -365,11 +365,13 @@ angular.module('afkl.lazyImage', [])
                     if (currentImage) {
                         // we have to make an image if background is false (default)
                         if (!options.background) {
-                            element.addClass(LOADING);
-                            img = angular.element('<img alt="" class="afkl-lazy-image" src=""/>');
-                            // remove loading class when image is acually loaded
-                            img.one('load', _loaded);
-                            element.append(img);
+                            if (!img) {
+                                element.addClass(LOADING);
+                                img = angular.element('<img alt="" class="afkl-lazy-image" src=""/>');
+                                // remove loading class when image is acually loaded
+                                img.one('load', _loaded);
+                                element.append(img);
+                            }
                         } else {
                             element[0].style.backgroundImage = 'url("' + currentImage +'")';
                         }
