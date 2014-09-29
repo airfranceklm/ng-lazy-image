@@ -462,6 +462,14 @@ angular.module('afkl.lazyImage', [])
                 $container.on('scroll', _onScroll);
                 $container.on('resize', _onResize);
 
+                // events for image change
+                attrs.$observe('afklLazyImage', function () {
+                    images = attrs.afklLazyImage;
+                    if (loaded) {
+                        _placeImage();
+                    }
+                });
+
                 // Image should be directly placed
                 if (options.nolazy) {
                     _placeImage();
