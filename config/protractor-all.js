@@ -12,9 +12,9 @@ exports.config = {
         'chromeOptions': {
             'args': ['show-fps-counter=true', 'test-type']
         }
-    }, {
-        'browserName': 'firefox'
     }/*, {
+        'browserName': 'firefox'
+    }, {
         'browserName': 'internet explorer'
     }*/],
 
