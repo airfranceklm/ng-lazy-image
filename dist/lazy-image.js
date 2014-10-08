@@ -338,12 +338,13 @@ angular.module('afkl.lazyImage', [])
                 var offset = options.offset ? options.offset : 50; // default offset
                 var LOADING = 'afkl-lazy-image-loading';
 
-                // What is position of our container (assumed it is not hidden) 
-                var offsetElement;
-
                 // Begin with offset and update on resize
-                var _calculateOffset = function () {
-                    offsetElement = element.offset().top;
+                var _elementOffset = function () {
+                    if (element.offset) {
+                        return element.offset().top;
+                    }
+                    var box = element[0].getBoundingClientRect();
+                    return box.top + window.pageYOffset - document.documentElement.clientTop;
                 };
 
                 // Update url of our image
@@ -372,8 +373,6 @@ angular.module('afkl.lazyImage', [])
                                 img.one('load', _loaded);
                                 element.append(img);
                             }
-                        } else {
-                            element[0].style.backgroundImage = 'url("' + currentImage +'")';
                         }
                         // set correct src/url
                         _setImage();
@@ -394,8 +393,6 @@ angular.module('afkl.lazyImage', [])
                             // update image url
                             _setImage();
                         }
-                    } else {
-                        _calculateOffset();
                     }
                 };
 
@@ -412,16 +409,16 @@ angular.module('afkl.lazyImage', [])
                     // Config vars
                     var remaining, shouldLoad, windowBottom;
 
-                    var height = $container.innerHeight();
+                    var height = $container.innerHeight ? $container.innerHeight() : $container[0].innerHeight; 
 
                     /*var scroll = "scrollY" in $window[0] ? 
                         $window[0].scrollY 
                         : document.documentElement.scrollTop;*/
                     // https://developer.mozilla.org/en-US/docs/Web/API/window.scrollY
-                    var scroll = $container.scrollTop();
+                    var scroll = $container.scrollTop ? $container.scrollTop() : ($container[0].pageYOffset !== undefined ? $container[0].pageYOffset : $container[0].scrollTop);
 
                     windowBottom = height + scroll;
-                    remaining = element.offset().top - windowBottom;
+                    remaining = _elementOffset() - windowBottom;
 
                     // Is our top of our image container in bottom of our viewport?
                     shouldLoad = remaining <= offset;
@@ -455,7 +452,7 @@ angular.module('afkl.lazyImage', [])
                         img.remove();
                     }
 
-                    img = timeout = offsetElement = currentImage = undefined;
+                    img = timeout = currentImage = undefined;
                 };
 
 
