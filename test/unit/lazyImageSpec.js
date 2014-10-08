@@ -227,9 +227,18 @@ describe("Image container and window scroll:", function() {
     var $document, scope, $compile, $window;
 
     function scrollEvent(e) {
-        var ev = document.createEvent('HTMLEvents');
-        ev.initEvent('scroll', true, true);
-        e.dispatchEvent(ev);
+        if (document.createEvent) {
+            var ev = document.createEvent('HTMLEvents');
+            ev.initEvent('scroll', true, true);
+            e.dispatchEvent(ev);
+        } else {
+            var ev = document.createEventObject();
+            if (e === $window) {
+                document.documentElement.fireEvent('onscroll', ev);
+            } else {
+                e.fireEvent('onscroll', ev);
+            }
+        }
     }
 
     beforeEach(module('afkl.lazyImage'));
@@ -267,22 +276,23 @@ describe("Image container and window scroll:", function() {
         el.remove();
     });
 
+    // TODO: this case doesn't work in IE8, due to window scroll event isn't properly fired
     it('Does lazy image work with window', function() {
         var el = angular.element('<div afkl-lazy-image="img/foo.png 480w"></div>');
         var p = angular.element('<p></p>');
         var body = $document[0].body;
+        //dir($window);
 
         angular.element(body).append(p);
         angular.element(body).append(el);
-        var height = $window.innerHeight;
+        var height = $window.innerHeight || $window.document.documentElement.clientHeight;
         p[0].style.height = height + 100 + 'px';
         $compile(el)(scope);
         scope.$digest();
 
         expect(el.html()).toBe('');
 
-        $window.scrollTo(0, height);
-        console.log($window.pageYOffset);
+        $window.scrollTo ? $window.scrollTo(0, height) : document.documentElement.scrollTo(0, height);
         scrollEvent($window);
         scope.$digest();
 
