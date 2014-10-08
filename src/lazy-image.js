@@ -299,8 +299,9 @@ angular.module('afkl.lazyImage', [])
 
         return {
             restrict: 'A',
-            link: function (scope, element) {
-                element.data('afklImageContainer', element);
+            // We have to use controller instead of link here so that it will always run earlier than nested afklLazyImage directives
+            controller: function ($scope, $element) {
+                $element.data('afklImageContainer', $element);
             }
         };
     })
@@ -347,6 +348,13 @@ angular.module('afkl.lazyImage', [])
                     return box.top + _containerScrollTop() - document.documentElement.clientTop;
                 };
 
+                var _elementPosition = function () {
+                    if (element.position) {
+                        return element.position().top;
+                    }
+                    return element[0].offsetTop;
+                };
+
                 var _containerScrollTop = function () {
                     if ($container.scrollTop) {
                         return $container.scrollTop();
@@ -361,20 +369,22 @@ angular.module('afkl.lazyImage', [])
                     }
 
                     return document.documentElement.scrollTop || 0;
-                }
+                };
 
                 var _containerInnerHeight = function () {
                     if ($container.innerHeight) {
-                        return $conatiner.innerHeight();
+                        return $container.innerHeight();
                     }
 
                     var c = $container[0];
                     if (c.innerHeight !== undefined) {
                         return c.innerHeight;
+                    } else if (c.clientHeight !== undefined) {
+                        return c.clientHeight;
                     }
 
                     return document.documentElement.clientHeight || 0;
-                }
+                };
 
                 // Update url of our image
                 var _setImage = function () {
@@ -445,9 +455,10 @@ angular.module('afkl.lazyImage', [])
                         : document.documentElement.scrollTop;*/
                     // https://developer.mozilla.org/en-US/docs/Web/API/window.scrollY
                     var scroll = _containerScrollTop();
+                    var elOffset = $container[0] === $window ? _elementOffset() : _elementPosition();
 
                     windowBottom = height + scroll;
-                    remaining = _elementOffset() - windowBottom;
+                    remaining = elOffset - windowBottom;
 
                     // Is our top of our image container in bottom of our viewport?
                     shouldLoad = remaining <= offset;
@@ -474,7 +485,10 @@ angular.module('afkl.lazyImage', [])
                     $timeout.cancel(timeout);
 
                     $container.off('scroll', _onScroll);
-                    $container.off('resize', _onResize);
+                    angular.element($window).off('resize', _onResize);
+                    if ($container[0] !== $window) {
+                        $container.off('resize', _onResize);
+                    }
 
                     // remove image being placed
                     if (img) {
@@ -488,7 +502,10 @@ angular.module('afkl.lazyImage', [])
 
                 // Set events for scrolling and resizing
                 $container.on('scroll', _onScroll);
-                $container.on('resize', _onResize);
+                angular.element($window).on('resize', _onResize);
+                if ($container[0] !== $window) {
+                    $container.on('resize', _onResize);
+                }
 
                 // events for image change
                 attrs.$observe('afklLazyImage', function () {

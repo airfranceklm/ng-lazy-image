@@ -15,6 +15,12 @@
             $scope.$destroy();
         };
 
+        $scope.changeImage = function () {
+            var color = Math.floor(Math.random()*16777215).toString(16);
+            $scope.runtimeImageSrc = '//placehold.it/768x599/' + color + '/ffffff';
+        }
+
+        $scope.changeImage();
     }]);
 
 })(angular);
