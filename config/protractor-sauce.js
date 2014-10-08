@@ -5,7 +5,7 @@ exports.config = {
 
     multiCapabilities: [{
         'browserName': 'chrome',
-        'platform': 'OS X 10.6',
+        'platform': 'Windows 7',
         'version': '',
         'chromeOptions': {
             'args': ['test-type']

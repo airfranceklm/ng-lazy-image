@@ -64,14 +64,15 @@ module.exports = function (config) {
         },
 
         customLaunchers: {
-          IE9: {
-            base: 'IE',
-            'x-ua-compatible': 'IE=EmulateIE9'
-          },
-          IE8: {
-            base: 'IE',
-            'x-ua-compatible': 'IE=EmulateIE8'
-          }
+            IE9: {
+                base: 'IE',
+                'x-ua-compatible': 'IE=EmulateIE9'
+            },
+            IE8: {
+                base: 'IE',
+                'x-ua-compatible': 'IE=EmulateIE8'
+            }
         }
+
     });
 };
