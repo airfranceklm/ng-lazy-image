@@ -73,6 +73,11 @@
 			text-align: center;
 		}
 
+		.demo-no-use-of-aspect-ratio img {
+			width: auto;
+			max-width: 100%;
+		}
+
 		@media (max-width:768px){
 			body { padding: 0 5px; }
 			.demo-wrapper {
@@ -157,7 +162,7 @@
 	</div>
 
 	<h3>Runtime image change after loaded</h3>
-	<div afkl-lazy-image="{{runtimeImageSrc}}" class=""></div>
+	<div afkl-lazy-image="{{runtimeImageSrc}}" class="demo-no-use-of-aspect-ratio"></div>
 	<button ng-click='changeImage()'>Change Now</button>
 
 	<p class="demo-link"><a href="#" ng-click="destroy()">Destroy $scope</a> (no leaks)</p>
