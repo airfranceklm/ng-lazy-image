@@ -5,7 +5,7 @@
     <title>Angular directive: lazy image directive, inspired by TIF</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- look inside this css to see how container and ratios work -->
-    <link rel="stylesheet" type="text/css" href="lazy-image-style.min.css" />
+    <link rel="stylesheet" type="text/css" href="lazy-image-style.css" />
     <style>
 
     	/* Project specific css, only for this demo */
@@ -58,6 +58,19 @@
 		}
 		.demo-link {
 			font-size: 85%;
+		}
+		.demo-container {
+			overflow-y: scroll;
+			width: 100%;
+			height: 400px;
+			border: 1px solid #ddd;
+		}
+		.demo-container-content {
+			width: 100%;
+		}
+		.big-padding {
+			padding: 250px 0;
+			text-align: center;
 		}
 
 		@media (max-width:768px){
@@ -133,9 +146,21 @@
 		<div afkl-lazy-image="{{image.srcset}}" class="afkl-lazy-wrapper afkl-img-ratio-{{image.ratio}}"></div>
 
 	</div>
+
+	<h3>Scrollable Container</h3>
+	<p>The image inside will not load until the container is scrolled into position.</p>
+	<div class='demo-container' afkl-image-container>
+		<div class='demo-container-content'>
+			<div class='big-padding'>Scroll down to see the image</div>
+			<div afkl-lazy-image="//placehold.it/480x377/00a1de/ffffff 480w, //placehold.it/768x577/00a1de/ffffff 768w, //placehold.it/936x677/00a1de/ffffff" class='afkl-lazy-wrapper afkl-img-ratio-3-2'></div>
+		</div>
+	</div>
+
+	<h3>Runtime image change after loaded</h3>
+	<div afkl-lazy-image="{{runtimeImageSrc}}" class=""></div>
+	<button ng-click='changeImage()'>Change Now</button>
+
 	<p class="demo-link"><a href="#" ng-click="destroy()">Destroy $scope</a> (no leaks)</p>
-
-
 
 </div>
 
