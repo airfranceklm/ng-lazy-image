@@ -344,8 +344,37 @@ angular.module('afkl.lazyImage', [])
                         return element.offset().top;
                     }
                     var box = element[0].getBoundingClientRect();
-                    return box.top + window.pageYOffset - document.documentElement.clientTop;
+                    return box.top + _containerScrollTop() - document.documentElement.clientTop;
                 };
+
+                var _containerScrollTop = function () {
+                    if ($container.scrollTop) {
+                        return $container.scrollTop();
+                    }
+
+                    var c = $container[0];
+                    if (c.pageYOffset !== undefined) {
+                        return c.pageYOffset;
+                    }
+                    else if (c.scrollTop !== undefined) {
+                        return c.scrollTop;
+                    }
+
+                    return document.documentElement.scrollTop || 0;
+                }
+
+                var _containerInnerHeight = function () {
+                    if ($container.innerHeight) {
+                        return $conatiner.innerHeight();
+                    }
+
+                    var c = $container[0];
+                    if (c.innerHeight !== undefined) {
+                        return c.innerHeight;
+                    }
+
+                    return document.documentElement.clientHeight || 0;
+                }
 
                 // Update url of our image
                 var _setImage = function () {
@@ -409,13 +438,13 @@ angular.module('afkl.lazyImage', [])
                     // Config vars
                     var remaining, shouldLoad, windowBottom;
 
-                    var height = $container.innerHeight ? $container.innerHeight() : $container[0].innerHeight; 
+                    var height = _containerInnerHeight();
 
                     /*var scroll = "scrollY" in $window[0] ? 
                         $window[0].scrollY 
                         : document.documentElement.scrollTop;*/
                     // https://developer.mozilla.org/en-US/docs/Web/API/window.scrollY
-                    var scroll = $container.scrollTop ? $container.scrollTop() : ($container[0].pageYOffset !== undefined ? $container[0].pageYOffset : $container[0].scrollTop);
+                    var scroll = _containerScrollTop();
 
                     windowBottom = height + scroll;
                     remaining = _elementOffset() - windowBottom;

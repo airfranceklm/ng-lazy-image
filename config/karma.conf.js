@@ -39,6 +39,7 @@ module.exports = function (config) {
         plugins : [
             'karma-phantomjs-launcher',
             'karma-chrome-launcher',
+            'karma-ie-launcher',
             'karma-firefox-launcher',
             'karma-jasmine',
             'karma-coverage',
@@ -60,7 +61,17 @@ module.exports = function (config) {
         junitReporter : {
             outputFile: 'target/TESTS-unit.xml',
             suite: 'unit'
-        }
+        },
 
+        customLaunchers: {
+          IE9: {
+            base: 'IE',
+            'x-ua-compatible': 'IE=EmulateIE9'
+          },
+          IE8: {
+            base: 'IE',
+            'x-ua-compatible': 'IE=EmulateIE8'
+          }
+        }
     });
 };

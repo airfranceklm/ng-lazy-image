@@ -11,6 +11,16 @@ module.exports = {
         singleRun: true,
         browsers: ['PhantomJS']
     },
+    unitIE8: {
+        configFile: 'config/karma.conf.js',
+        singleRun: true,
+        browsers: ['IE8']
+    },
+    unitIE9: {
+        configFile: 'config/karma.conf.js',
+        singleRun: true,
+        browsers: ['IE9']
+    },
     browser: {
         singleRun: false,
         browsers: ['Chrome']
