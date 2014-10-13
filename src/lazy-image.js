@@ -44,7 +44,7 @@ angular.module('afkl.lazyImage', [])
                         out[lastChar] = intVal;
                     } else if (!isNaN(floatVal) && lastChar === 'x') {
                         out[lastChar] = floatVal;
-                    }
+                    } 
 
                 }
             }
@@ -92,7 +92,7 @@ angular.module('afkl.lazyImage', [])
             return images;
 
         };
-
+      
         /**
         * Direct implementation of "processing the image candidates":
         * http://www.whatwg.org/specs/web-apps/current-work/multipage/embedded-content-1.html#processing-the-image-candidates
@@ -352,7 +352,7 @@ angular.module('afkl.lazyImage', [])
                     if (element.offset) {
                         return element.offset().top - $container.offset().top;
                     }
-                    return element[0].getBoundingClientRect().top - $container[0].getBoundingClientRect().top
+                    return element[0].getBoundingClientRect().top - $container[0].getBoundingClientRect().top;
                 }
 
                 var _containerScrollTop = function () {
@@ -451,7 +451,7 @@ angular.module('afkl.lazyImage', [])
                     var height = _containerInnerHeight();
 
                     /*var scroll = "scrollY" in $window[0] ? 
-                        $window[0].scrollY
+                        $window[0].scrollY 
                         : document.documentElement.scrollTop;*/
                     // https://developer.mozilla.org/en-US/docs/Web/API/window.scrollY
                     var scroll = _containerScrollTop();
