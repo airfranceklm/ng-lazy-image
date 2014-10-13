@@ -276,6 +276,32 @@ describe("Image container and window scroll:", function() {
         el.remove();
     });
 
+    it('Does lazy image work with custom image container with positioned images', function() {
+        var el = angular.element('<div afkl-image-container class="dd">' +
+        '<p></p>' +
+        '<div style="position: relative; height: 400px;"><div afkl-lazy-image="img/foo.png 480w" style="position: absolute; height: 400px;"></div></div>' +
+        '<div style="position: relative; height: 400px;"><div afkl-lazy-image="img/foo.png 480w" style="position: absolute; height: 400px;"></div></div>' +
+        '</div>');
+        var div = el.find('div'),
+            p = el.find('p');
+
+        angular.element($document[0].body).append(el);
+        el[0].style.height = '200px';
+        el[0].style.overflowY = 'scroll';
+        p[0].style.height = '400px';
+        $compile(el)(scope);
+        scope.$digest();
+        debugger;
+        expect(div.html()).toBe('<div afkl-lazy-image="img/foo.png 480w" style="position: absolute; height: 400px;"></div>');
+
+        el[0].scrollTop = 400;
+        scrollEvent(el[0]);
+        scope.$digest();
+
+        expect(el.html()).toBe('<p style="height: 400px; "></p><div style="position: relative; height: 400px;"><div afkl-lazy-image="img/foo.png 480w" style="position: absolute; height: 400px;" class="afkl-lazy-image-loading"><img alt="" class="afkl-lazy-image" src="img/foo.png"></div></div><div style="position: relative; height: 400px;"><div afkl-lazy-image="img/foo.png 480w" style="position: absolute; height: 400px;" class="afkl-lazy-image-loading"><img alt="" class="afkl-lazy-image" src="img/foo.png"></div></div>');
+        el.remove();
+    });
+
     // TODO: this case doesn't work in IE8, due to window scroll event isn't properly fired
     it('Does lazy image work with window', function() {
         var el = angular.element('<div afkl-lazy-image="img/foo.png 480w"></div>');
