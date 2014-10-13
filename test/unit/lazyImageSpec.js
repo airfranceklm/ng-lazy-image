@@ -291,7 +291,7 @@ describe("Image container and window scroll:", function() {
         p[0].style.height = '400px';
         $compile(el)(scope);
         scope.$digest();
-        debugger;
+
         expect(div.html()).toBe('<div afkl-lazy-image="img/foo.png 480w" style="position: absolute; height: 400px;"></div>');
 
         el[0].scrollTop = 400;
