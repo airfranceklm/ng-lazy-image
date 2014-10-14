@@ -353,7 +353,7 @@ angular.module('afkl.lazyImage', [])
                         return element.offset().top - $container.offset().top;
                     }
                     return element[0].getBoundingClientRect().top - $container[0].getBoundingClientRect().top;
-                }
+                };
 
                 var _containerScrollTop = function () {
                     if ($container.scrollTop) {
