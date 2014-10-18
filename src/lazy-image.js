@@ -458,12 +458,14 @@ angular.module('afkl.lazyImage', [])
                     var scroll = _containerScrollTop();
                     var elOffset = $container[0] === $window ? _elementOffset() : _elementOffsetContainer();
 
-                    windowBottom = height + scroll;
+                    windowBottom = $container[0] === $window ? height + scroll : height;
                     remaining = elOffset - windowBottom;
+
 
                     // Is our top of our image container in bottom of our viewport?
                     //console.log($container[0].className, _elementOffset(), _elementPosition(), height, scroll, remaining, elOffset);
                     shouldLoad = remaining <= offset;
+
 
                     // Append image first time when it comes into our view, after that only resizing can have influence
                     if (shouldLoad && !loaded) {

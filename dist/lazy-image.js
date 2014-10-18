@@ -339,21 +339,6 @@ angular.module('afkl.lazyImage', [])
                 var offset = options.offset ? options.offset : 50; // default offset
                 var LOADING = 'afkl-lazy-image-loading';
 
-                // Begin with offset and update on resize
-                var _elementOffset = function () {
-                    if (element.offset) {
-                        return element.offset().top;
-                    }
-                    var box = element[0].getBoundingClientRect();
-                    return box.top + _containerScrollTop() - document.documentElement.clientTop;
-                };
-
-                var _elementOffsetContainer = function () {
-                    if (element.offset) {
-                        return element.offset().top - $container.offset().top;
-                    }
-                    return element[0].getBoundingClientRect().top - $container[0].getBoundingClientRect().top;
-                };
 
                 var _containerScrollTop = function () {
                     if ($container.scrollTop) {
@@ -384,6 +369,22 @@ angular.module('afkl.lazyImage', [])
                     }
 
                     return document.documentElement.clientHeight || 0;
+                };
+
+                // Begin with offset and update on resize
+                var _elementOffset = function () {
+                    if (element.offset) {
+                        return element.offset().top;
+                    }
+                    var box = element[0].getBoundingClientRect();
+                    return box.top + _containerScrollTop() - document.documentElement.clientTop;
+                };
+
+                var _elementOffsetContainer = function () {
+                    if (element.offset) {
+                        return element.offset().top - $container.offset().top;
+                    }
+                    return element[0].getBoundingClientRect().top - $container[0].getBoundingClientRect().top;
                 };
 
                 // Update url of our image
@@ -457,12 +458,14 @@ angular.module('afkl.lazyImage', [])
                     var scroll = _containerScrollTop();
                     var elOffset = $container[0] === $window ? _elementOffset() : _elementOffsetContainer();
 
-                    windowBottom = height + scroll;
+                    windowBottom = $container[0] === $window ? height + scroll : height;
                     remaining = elOffset - windowBottom;
+
 
                     // Is our top of our image container in bottom of our viewport?
                     //console.log($container[0].className, _elementOffset(), _elementPosition(), height, scroll, remaining, elOffset);
                     shouldLoad = remaining <= offset;
+
 
                     // Append image first time when it comes into our view, after that only resizing can have influence
                     if (shouldLoad && !loaded) {
