@@ -37,7 +37,10 @@
     "LICENSE.md"
   ],
   "devDependencies": {
-    "angular": "~1.2.23",
+    "angular": "~1.3.0",
     "angular-mocks": "~1.2.23"
+  },
+  "resolutions": {
+    "angular": "~1.3.0"
   }
 }
