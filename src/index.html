@@ -68,6 +68,16 @@
 		.demo-container-content {
 			width: 100%;
 		}
+	        .demo-container-content-positioned {
+	            position: relative;
+	        }
+	        .demo-container-content-positioned-parent {
+	            position: relative;
+	        }
+	        .demo-container-content-positioned-child {
+	            position: absolute;
+	            width: 100%;
+	        }
 		.big-padding {
 			padding: 250px 0;
 			text-align: center;
@@ -147,7 +157,7 @@
     <h3>Check profiling</h3>
 	<!-- example how to use image set using srcset and ratio -->
 	<div ng-repeat="image in images">
-		
+
 		<div afkl-lazy-image="{{image.srcset}}" class="afkl-lazy-wrapper afkl-img-ratio-{{image.ratio}}"></div>
 
 	</div>
@@ -157,9 +167,34 @@
 	<div class='demo-container' afkl-image-container>
 		<div class='demo-container-content'>
 			<div class='big-padding'>Scroll down to see the image</div>
-			<div afkl-lazy-image="//placehold.it/480x377/00a1de/ffffff 480w, //placehold.it/768x577/00a1de/ffffff 768w, //placehold.it/936x677/00a1de/ffffff" class='afkl-lazy-wrapper afkl-img-ratio-3-2'></div>
+			<div afkl-lazy-image="//placehold.it/936x677/8bb6b9/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-3-2"></div>
+			<div afkl-lazy-image="//placehold.it/936x468/41ba94/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-2-1"></div>
+			<div afkl-lazy-image="//placehold.it/936x677/d7c199/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-3-2"></div>
 		</div>
 	</div>
+
+    <h3>Scrollable Container with positioned images</h3>
+    <p>The positioned images inside will not load until the container is scrolled into position.</p>
+    <div class='demo-container' afkl-image-container>
+        <div class='demo-container-content-positioned'>
+            <div class='big-padding'>Scroll down to see the positioned images</div>
+            <div class='demo-container-content-positioned-parent'>
+                <div afkl-lazy-image="//placehold.it/936x677/00a1de/ffffff" class='afkl-lazy-wrapper afkl-img-ratio-3-2 demo-container-content-positioned-child'></div>
+            </div>
+            <div class='demo-container-content-positioned-parent'>
+                <div afkl-lazy-image="//placehold.it/936x468/fc425b/ffffff" class='afkl-lazy-wrapper afkl-img-ratio-2-1 demo-container-content-positioned-child'></div>
+            </div>
+            <div class='demo-container-content-positioned-parent'>
+                <div afkl-lazy-image="//placehold.it/936x677/2df3d/ffffff" class='afkl-lazy-wrapper afkl-img-ratio-3-2 demo-container-content-positioned-child'></div>
+            </div>
+            <div class='demo-container-content-positioned-parent'>
+                <div afkl-lazy-image="//placehold.it/480x377/00a1de/ffffff 480w, //placehold.it/768x577/00a1de/ffffff 768w, //placehold.it/936x677/00a1de/ffffff" class='afkl-lazy-wrapper afkl-img-ratio-3-2 demo-container-content-positioned-child'></div>
+            </div>
+            <div class='demo-container-content-positioned-parent'>
+                <div afkl-lazy-image="//placehold.it/480x377/00a1de/ffffff 480w, //placehold.it/768x577/00a1de/ffffff 768w, //placehold.it/936x677/00a1de/ffffff" class='afkl-lazy-wrapper afkl-img-ratio-3-2 demo-container-content-positioned-child'></div>
+            </div>
+        </div>
+    </div>
 
 	<h3>Runtime image change after loaded</h3>
 	<div afkl-lazy-image="{{runtimeImageSrc}}" class="demo-no-use-of-aspect-ratio"></div>
