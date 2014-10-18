@@ -30,7 +30,7 @@ The attributes are using the [srcset](http://picture.responsiveimages.org/) setu
    * '{"offset": 200}' this will influence when to start loading the image, 50px by default
    * '{"nolazy": true}' this will set the image at once and only change on resize
 - "class" : `afkl-lazy-wrapper` will use height 0 trick, `afkl-img-ratio-1-1` sets correct aspect ratio so container is 100% responsive as well (optional, include css)
-
+- Using directive "afkl-image-container" to have a scrollable container
 
 ## Todo
 1. Angular directives don't have any notion of style encapsulation, but Angular is expected to incorporate that functionality eventually. At the moment our optional css is delivered in an own stylesheet.
