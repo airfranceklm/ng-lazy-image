@@ -348,12 +348,11 @@ angular.module('afkl.lazyImage', [])
                     return box.top + _containerScrollTop() - document.documentElement.clientTop;
                 };
 
-                var _elementPosition = function (el) {
-                    var e = el || element;
-                    if (e.position) {
-                        return e.position().top;
+                var _elementOffsetContainer = function () {
+                    if (element.offset) {
+                        return element.offset().top - $container.offset().top;
                     }
-                    return (el || !e.parent()[0]) ? e[0].offsetTop : e[0].offsetTop - _elementPosition(e.parent());
+                    return element[0].getBoundingClientRect().top - $container[0].getBoundingClientRect().top;
                 };
 
                 var _containerScrollTop = function () {
@@ -456,7 +455,7 @@ angular.module('afkl.lazyImage', [])
                         : document.documentElement.scrollTop;*/
                     // https://developer.mozilla.org/en-US/docs/Web/API/window.scrollY
                     var scroll = _containerScrollTop();
-                    var elOffset = $container[0] === $window ? _elementOffset() : _elementPosition();
+                    var elOffset = $container[0] === $window ? _elementOffset() : _elementOffsetContainer();
 
                     windowBottom = height + scroll;
                     remaining = elOffset - windowBottom;
