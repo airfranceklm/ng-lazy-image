@@ -9,18 +9,18 @@
 
 
 ## Usage 
-1. `bower install afkl-lazy-image -p`
+1. `bower install afkl-lazy-image -p` and set this script as a dependency
 2. Add a dependency on `afkl.lazyImage` in your app module.
-3. See the `style.css` for some classes you can use (optional)
+3. See the `style.css` for some classes you can use (they prevent reflow and are optional)
 
 
 ### Directive in html template
 
 <pre><code>&lt;div afkl-lazy-image="//placehold.it/480x480 480w, //placehold.it/768x768 768w, //placehold.it/936x936" 
-    class="afkl-lazy-wrapper afkl-img-ratio-1-1 demo-image"&gt;&lt;/div&gt;
+    class="afkl-lazy-wrapper afkl-img-ratio-1-1 own-classname"&gt;&lt;/div&gt;
 </code></pre>
 
-The attributes are using the [srcset](http://picture.responsiveimages.org/) setup. Your window will determine which image fits best (so the rules are very dynamic using w/h/x). The image will only be set when the parent container scrolls in the viewport (lazy loading). During loading a class 'afkl-lazy-image-loading' is set on the container so you can give loading state feedback to visitor.
+The attributes are using the [srcset](http://picture.responsiveimages.org/) setup. Your window will determine which image fits best (so the rules are very dynamic using w/h/x). The image will only be set when the parent container scrolls in the viewport (lazy loading) or scrollable directive. During loading a class 'afkl-lazy-image-loading' is set on the container so you can give loading state feedback to your visitor.
 
 
 ### Options
@@ -30,21 +30,20 @@ The attributes are using the [srcset](http://picture.responsiveimages.org/) setu
    * '{"offset": 200}' this will influence when to start loading the image, 50px by default
    * '{"nolazy": true}' this will set the image at once and only change on resize
 - "class" : `afkl-lazy-wrapper` will use height 0 trick, `afkl-img-ratio-1-1` sets correct aspect ratio so container is 100% responsive as well (optional, include css)
-- Using directive "afkl-image-container" to have a scrollable container
+- Using directive `afkl-image-container` to have a scrollable container
 
 ## Todo
 1. Angular directives don't have any notion of style encapsulation, but Angular is expected to incorporate that functionality eventually. At the moment our optional css is delivered in an own stylesheet.
 2. Check for native browser support
 3. Look at sizes implementation (100vw)
 4. Rewrite pixeldensity to width (new spec), making it simple [blog](http://dev.opera.com/articles/native-responsive-images/)
-5. Making non lazy load optional (so it sets picture/img element)
 
 ## Help
 - Using bower on corporate network which blocks git protocol run `bash git config --global url."https://".insteadOf git://`
 
 
 ## Grunt tasks
-Source file of this bower module is placed at '**src/lazy-image.js**'. Our bower content is also available '**dist/**'
+Source file of this bower module is placed at '**src/lazy-image.js**'. Our bower content is also available at '**dist/**'
 
 Prerequisites
 
@@ -56,11 +55,13 @@ Now we can simply run:
 - `grunt unit` to start unit test (report in target folder), `grunt unitBrowser` for debugging purpose
 - `grunt e2e` to start our end to end test, which uses local chrome, firefox and internet explorer
 - `grunt package` to make a complete package which validates everything (used when making new package)
-- `grunt update` to update our Angular lib and verify if module works with some versions backwards as well
+- `grunt update` to update our Angular lib (defined in package json) and verify if module works with some versions backwards as well
+- `grunt ghages` to update our documentation page
 
 
 ## History
 This module was made while working on our Travel Inspiration Finder at KLM.
+- version 0.0.9 18-10-2014 Scrollable container as option, tested for AngularJS 1.28 and 1.3
 - version 0.0.6 25-08-2014 Tested on Chrome, Firefox, Safari, IE8+
 - version 0.0.5 25-08-2014 Added loading feedback to enduser
 
@@ -68,3 +69,4 @@ This module was made while working on our Travel Inspiration Finder at KLM.
 As AngularJS itself, this module is released under the permissive [MIT license](LICENSE.md).
 
 Your contributions are always welcome. Feel free to ask for new features.
+Contributions by: SquadraCorse, ledzep2, TimonVS 
