@@ -2,21 +2,21 @@ module.exports = {
     'build': {
         cwd: './src',
         src: ['lazy-image-style.css'],
-        dest: './dist/',
+        dest: './release/',
         expand: true,
         flatten: true,
         filter: 'isFile'
     },
     'pages1': {
-        cwd: './src',
-        src: ['img/*', 'lib/*', '*.html', '*.css'],
+        cwd: './sample',
+        src: ['**/*'],
         dest: './target/gh-pages',
         expand: true,
         filter: 'isFile'
     },
     'pages2': {
-        cwd: './dist',
-        src: ['*min*'],
+        cwd: './release',
+        src: ['*min*', 'lazy-image-style.css'],
         dest: './target/gh-pages',
         expand: true,
         flatten: true,

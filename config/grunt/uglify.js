@@ -6,8 +6,8 @@ module.exports = {
 	},
     app: {
         files: {
-            'dist/lazy-image.min.js': [
-                'dist/lazy-image.js'
+            'release/lazy-image.min.js': [
+                'release/lazy-image.js'
             ]
         }
     }

@@ -3,7 +3,7 @@ module.exports = {
 		expand: true,
 		cwd: 'src/',
 		src: ['*.css', '!*.min.css'],
-		dest: 'dist',
+		dest: 'release',
 		ext: '.min.css'
 	}
 };

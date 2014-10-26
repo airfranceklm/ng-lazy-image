@@ -1,5 +1,5 @@
 module.exports = {
-    files : ['src/lazy-image.js'],
+    files : ['src/*.js'],
     options : {
         jshintrc : '.jshintrc',
         jshintignore : '.jshintignore',

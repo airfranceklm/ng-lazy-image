@@ -1,3 +1,4 @@
+/* global angular */
 angular.module('afkl.lazyImage', []);
 /* global angular */
 angular.module('afkl.lazyImage')

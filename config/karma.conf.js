@@ -6,9 +6,9 @@ module.exports = function (config) {
         files : [
             //'bower_components/angular/angular.js',
             //'bower_components/angular-mocks/angular-mocks.js',
-            'src/lib/angular.min.js',
-            'src/lib/angular-mocks.js',
-            'dist/lazy-image.js',
+            'sample/vendor/angular.min.js',
+            'sample/vendor/angular-mocks.js',
+            'release/lazy-image.js',
             'test/unit/**/*.js',
             {
                 pattern: 'src/img/*.png',
@@ -49,7 +49,7 @@ module.exports = function (config) {
         reporters: ['dots', 'coverage', 'junit'],
 
         preprocessors : {
-            'dist/lazy-image.js': ['coverage']
+            'release/lazy-image.js': ['coverage']
         },
 
         coverageReporter : {

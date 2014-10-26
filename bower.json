@@ -1,6 +1,6 @@
 {
   "name": "ng-directive-lazy-image",
-  "main": "dist/lazy-image.min.js",
+  "main": "release/lazy-image.js",
   "version": "0.0.10",
   "homepage": "https://github.com/afklm/ng-lazy-image",
   "authors": [
@@ -19,6 +19,7 @@
     "config/**",
     "grunt/**",
     "test/**",
+    "sample/**",
     "src/**",
     "bower.json",
     ".coveralls.yml",
@@ -39,8 +40,5 @@
   "devDependencies": {
     "angular": "~1.3.0",
     "angular-mocks": "~1.3.0"
-  },
-  "resolutions": {
-    "angular": "~1.3.0"
   }
 }

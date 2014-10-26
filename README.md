@@ -51,7 +51,7 @@ Prerequisites
  2. Install [InternetExplorerDriver](http://docs.seleniumhq.org/download)
 
 Now we can simply run:
-- `grunt sample` to see the demo offline
+- `grunt sample` to see the demo offline (live reload from src)
 - `grunt unit` to start unit test (report in target folder), `grunt unitBrowser` for debugging purpose
 - `grunt e2e` to start our end to end test, which uses local chrome, firefox and internet explorer
 - `grunt package` to make a complete package which validates everything (used when making new package)

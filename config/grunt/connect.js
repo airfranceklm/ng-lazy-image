@@ -1,7 +1,7 @@
 module.exports = {
     options: {
         hostname: 'localhost',
-        base: ['./src/', './dist']
+        base: ['./sample', './release']
     },
     test: {
         options: {
