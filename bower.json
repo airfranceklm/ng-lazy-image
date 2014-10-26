@@ -20,7 +20,7 @@
     "grunt/**",
     "test/**",
     "src/**",
-    ".bower.json",
+    "bower.json",
     ".coveralls.yml",
     ".gitignore",
     ".jshintrc",
@@ -38,7 +38,7 @@
   ],
   "devDependencies": {
     "angular": "~1.3.0",
-    "angular-mocks": "~1.2.23"
+    "angular-mocks": "~1.3.0"
   },
   "resolutions": {
     "angular": "~1.3.0"

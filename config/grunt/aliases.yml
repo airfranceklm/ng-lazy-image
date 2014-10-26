@@ -10,8 +10,9 @@ production:
 
 js:
   - 'jshint'
-  - 'karma:unit'
+  - 'ngAnnotate'
   - 'uglify:app'
+  - 'karma:unit'
 
 # START OUR DEMONSTRATION APP
 sample:

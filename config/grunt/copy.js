@@ -1,7 +1,7 @@
 module.exports = {
     'build': {
         cwd: './src',
-        src: ['lazy-image.js', 'lazy-image-style.css'],
+        src: ['lazy-image-style.css'],
         dest: './dist/',
         expand: true,
         flatten: true,
@@ -9,7 +9,7 @@ module.exports = {
     },
     'pages1': {
         cwd: './src',
-        src: ['**/*'],
+        src: ['img/*', 'lib/*', '*.html', '*.css'],
         dest: './target/gh-pages',
         expand: true,
         filter: 'isFile'
@@ -24,7 +24,11 @@ module.exports = {
     },
     'update': {
         cwd: './bower_components',
-        src: ['angular/angular.min.js', 'angular-mocks/angular-mocks.js'],
+        src: [
+            'angular/angular.min.js',
+            'angular/angular.min.js.map',
+            'angular-mocks/angular-mocks.js'
+        ],
         dest: './src/lib',
         expand: true,
         flatten: true,

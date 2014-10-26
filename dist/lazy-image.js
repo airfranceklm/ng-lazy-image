@@ -1,5 +1,6 @@
+angular.module('afkl.lazyImage', []);
 /* global angular */
-angular.module('afkl.lazyImage', [])
+angular.module('afkl.lazyImage')
     .service('afklSrcSetService', ['$window', function($window) {
         'use strict';
 
@@ -293,16 +294,19 @@ angular.module('afkl.lazyImage', [])
         };
 
 
-    }])
+    }]);
+
+/* global angular */
+angular.module('afkl.lazyImage')
     .directive('afklImageContainer', function () {
         'use strict';
 
         return {
             restrict: 'A',
             // We have to use controller instead of link here so that it will always run earlier than nested afklLazyImage directives
-            controller: function ($scope, $element) {
+            controller: ['$scope', '$element', function ($scope, $element) {
                 $element.data('afklImageContainer', $element);
-            }
+            }]
         };
     })
     .directive('afklLazyImage', ['$window', '$timeout', 'afklSrcSetService', function ($window, $timeout, srcSetService) {

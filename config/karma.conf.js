@@ -8,7 +8,7 @@ module.exports = function (config) {
             //'bower_components/angular-mocks/angular-mocks.js',
             'src/lib/angular.min.js',
             'src/lib/angular-mocks.js',
-            'src/lazy-image.js',
+            'dist/lazy-image.js',
             'test/unit/**/*.js',
             {
                 pattern: 'src/img/*.png',

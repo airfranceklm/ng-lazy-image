@@ -32,6 +32,7 @@
     "grunt-contrib-cssmin": "~0.10.0",
     "jshint-junit-reporter": "~0.0.6",
     "grunt-protractor-runner": "~1.1.4",
+    "grunt-ng-annotate": "~0.4.0",
     "karma": "~0.12.23",
     "grunt-karma": "~0.8.3",
     "grunt-karma-coveralls": "~2.5.1",

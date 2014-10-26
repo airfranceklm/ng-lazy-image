@@ -1,0 +1,243 @@
+/* global angular */
+angular.module('afkl.lazyImage')
+    .directive('afklImageContainer', function () {
+        'use strict';
+
+        return {
+            restrict: 'A',
+            // We have to use controller instead of link here so that it will always run earlier than nested afklLazyImage directives
+            controller: ['$scope', '$element', function ($scope, $element) {
+                $element.data('afklImageContainer', $element);
+            }]
+        };
+    })
+    .directive('afklLazyImage', ['$window', '$timeout', 'afklSrcSetService', function ($window, $timeout, srcSetService) {
+        'use strict';
+
+        // Use srcSetService to find out our best available image
+        var bestImage = function (images) {
+            var image = srcSetService.get({srcset: images});
+            var sourceUrl;
+            if (image) {
+                sourceUrl = image.best.src;
+            }
+            return sourceUrl;
+        };
+
+        return {
+            restrict: 'A',
+            link: function (scope, element, attrs) {
+
+                // CONFIGURATION VARS
+                var $container = element.inheritedData('afklImageContainer');
+                if (!$container) {
+                    $container = angular.element(attrs.afklLazyImageContainer || $window);
+                }
+
+                var loaded = false;
+                var timeout;
+
+                var images = attrs.afklLazyImage; // srcset attributes
+                var options = attrs.afklLazyImageOptions ? angular.fromJson(attrs.afklLazyImageOptions) : {}; // options (background, offset)
+
+                var img; // Angular element to image which will be placed
+                var currentImage = null; // current image url
+                var offset = options.offset ? options.offset : 50; // default offset
+                var LOADING = 'afkl-lazy-image-loading';
+
+
+                var _containerScrollTop = function () {
+                    if ($container.scrollTop) {
+                        return $container.scrollTop();
+                    }
+
+                    var c = $container[0];
+                    if (c.pageYOffset !== undefined) {
+                        return c.pageYOffset;
+                    }
+                    else if (c.scrollTop !== undefined) {
+                        return c.scrollTop;
+                    }
+
+                    return document.documentElement.scrollTop || 0;
+                };
+
+                var _containerInnerHeight = function () {
+                    if ($container.innerHeight) {
+                        return $container.innerHeight();
+                    }
+
+                    var c = $container[0];
+                    if (c.innerHeight !== undefined) {
+                        return c.innerHeight;
+                    } else if (c.clientHeight !== undefined) {
+                        return c.clientHeight;
+                    }
+
+                    return document.documentElement.clientHeight || 0;
+                };
+
+                // Begin with offset and update on resize
+                var _elementOffset = function () {
+                    if (element.offset) {
+                        return element.offset().top;
+                    }
+                    var box = element[0].getBoundingClientRect();
+                    return box.top + _containerScrollTop() - document.documentElement.clientTop;
+                };
+
+                var _elementOffsetContainer = function () {
+                    if (element.offset) {
+                        return element.offset().top - $container.offset().top;
+                    }
+                    return element[0].getBoundingClientRect().top - $container[0].getBoundingClientRect().top;
+                };
+
+                // Update url of our image
+                var _setImage = function () {
+                    if (options.background) {
+                        element[0].style.backgroundImage = 'url("' + currentImage +'")';
+                    } else {
+                        img[0].src = currentImage;
+                    }
+                };
+
+                // Append image to DOM
+                var _placeImage = function () {
+
+                    loaded = true;
+                    // What is my best image available
+                    currentImage = bestImage(images);
+
+                    if (currentImage) {
+                        // we have to make an image if background is false (default)
+                        if (!options.background) {
+                            if (!img) {
+                                element.addClass(LOADING);
+                                img = angular.element('<img alt="" class="afkl-lazy-image" src=""/>');
+                                // remove loading class when image is acually loaded
+                                img.one('load', _loaded);
+                                element.append(img);
+                            }
+                        }
+                        // set correct src/url
+                        _setImage();
+                    }
+
+                    // Element is added to dom, no need to listen to scroll anymore
+                    $container.off('scroll', _onScroll);
+
+                };
+
+                // Check on resize if actually a new image is best fit, if so then apply it
+                var _checkIfNewImage = function () {
+                    if (loaded) {
+                        var newImage = bestImage(images);
+                        if (newImage !== currentImage) {
+                            // update current url
+                            currentImage = newImage;
+                            // update image url
+                            _setImage();
+                        }
+                    }
+                };
+
+                // First update our begin offset
+                _checkIfNewImage();
+
+                var _loaded = function () {
+                    element.removeClass(LOADING);
+                };
+
+
+                // EVENT: SCROLL. Check if our container is for first time in our view or not
+                var _onScroll = function () {
+                    // Config vars
+                    var remaining, shouldLoad, windowBottom;
+
+                    var height = _containerInnerHeight();
+
+                    /*var scroll = "scrollY" in $window[0] ? 
+                        $window[0].scrollY 
+                        : document.documentElement.scrollTop;*/
+                    // https://developer.mozilla.org/en-US/docs/Web/API/window.scrollY
+                    var scroll = _containerScrollTop();
+                    var elOffset = $container[0] === $window ? _elementOffset() : _elementOffsetContainer();
+
+                    windowBottom = $container[0] === $window ? height + scroll : height;
+                    remaining = elOffset - windowBottom;
+
+
+                    // Is our top of our image container in bottom of our viewport?
+                    //console.log($container[0].className, _elementOffset(), _elementPosition(), height, scroll, remaining, elOffset);
+                    shouldLoad = remaining <= offset;
+
+
+                    // Append image first time when it comes into our view, after that only resizing can have influence
+                    if (shouldLoad && !loaded) {
+
+                        _placeImage();
+
+                    }
+
+                };
+
+
+                // EVENT: RESIZE. 
+                var _onResize = function () {
+                    $timeout.cancel(timeout);
+                    timeout = $timeout(_checkIfNewImage, 300);
+                };
+
+                // Remove events for total destroy
+                var _eventsOff = function() {
+
+                    $timeout.cancel(timeout);
+
+                    $container.off('scroll', _onScroll);
+                    angular.element($window).off('resize', _onResize);
+                    if ($container[0] !== $window) {
+                        $container.off('resize', _onResize);
+                    }
+
+                    // remove image being placed
+                    if (img) {
+                        img.remove();
+                    }
+
+                    img = timeout = currentImage = undefined;
+                };
+
+
+
+                // Set events for scrolling and resizing
+                $container.on('scroll', _onScroll);
+                angular.element($window).on('resize', _onResize);
+                if ($container[0] !== $window) {
+                    $container.on('resize', _onResize);
+                }
+
+                // events for image change
+                attrs.$observe('afklLazyImage', function () {
+                    images = attrs.afklLazyImage;
+                    if (loaded) {
+                        _placeImage();
+                    }
+                });
+
+                // Image should be directly placed
+                if (options.nolazy) {
+                    _placeImage();
+                }
+
+                // Remove all events when destroy takes place
+                scope.$on('$destroy', function () {
+                    return _eventsOff();
+                });
+
+                return _onScroll();
+
+            }
+        };
+
+}]);

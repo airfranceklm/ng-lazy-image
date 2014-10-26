@@ -1,8 +1,13 @@
 module.exports = {
+	options: {
+		compress: {
+			drop_console: true
+		}
+	},
     app: {
         files: {
             'dist/lazy-image.min.js': [
-                'src/lazy-image.js'
+                'dist/lazy-image.js'
             ]
         }
     }
