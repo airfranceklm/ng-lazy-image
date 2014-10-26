@@ -49,7 +49,7 @@ module.exports = function (config) {
         reporters: ['dots', 'coverage', 'junit'],
 
         preprocessors : {
-            'src/lazy-image.js': ['coverage']
+            'dist/lazy-image.js': ['coverage']
         },
 
         coverageReporter : {
