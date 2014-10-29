@@ -130,7 +130,8 @@ angular.module('afkl.lazyImage')
                     }
 
                     // Element is added to dom, no need to listen to scroll anymore
-                    $container.off('scroll', _onScroll);
+                    $container.off('scroll', _onViewChange);
+                    $container.off('resize', _onViewChange);
 
                 };
 
@@ -154,17 +155,16 @@ angular.module('afkl.lazyImage')
                     element.removeClass(LOADING);
                 };
 
-
-                // EVENT: SCROLL. Check if our container is for first time in our view or not
-                var _onScroll = function () {
+                // Check if the container is in view for the first time. Utilized by the scroll and resize events.
+                var _onViewChange = function () {
                     // Config vars
                     var remaining, shouldLoad, windowBottom;
 
                     var height = _containerInnerHeight();
 
-                    /*var scroll = "scrollY" in $window[0] ? 
-                        $window[0].scrollY 
-                        : document.documentElement.scrollTop;*/
+                    /*var scroll = "scrollY" in $window[0] ?
+                     $window[0].scrollY
+                     : document.documentElement.scrollTop;*/
                     // https://developer.mozilla.org/en-US/docs/Web/API/window.scrollY
                     var scroll = _containerScrollTop();
                     var elOffset = $container[0] === $window ? _elementOffset() : _elementOffsetContainer();
@@ -184,14 +184,6 @@ angular.module('afkl.lazyImage')
                         _placeImage();
 
                     }
-
-                };
-
-
-                // EVENT: RESIZE. 
-                var _onResize = function () {
-                    $timeout.cancel(timeout);
-                    timeout = $timeout(_checkIfNewImage, 300);
                 };
 
                 // Remove events for total destroy
@@ -199,10 +191,10 @@ angular.module('afkl.lazyImage')
 
                     $timeout.cancel(timeout);
 
-                    $container.off('scroll', _onScroll);
-                    angular.element($window).off('resize', _onResize);
+                    $container.off('scroll', _onViewChange);
+                    angular.element($window).off('resize', _onViewChange);
                     if ($container[0] !== $window) {
-                        $container.off('resize', _onResize);
+                        $container.off('resize', _onViewChange);
                     }
 
                     // remove image being placed
@@ -216,10 +208,10 @@ angular.module('afkl.lazyImage')
 
 
                 // Set events for scrolling and resizing
-                $container.on('scroll', _onScroll);
-                angular.element($window).on('resize', _onResize);
+                $container.on('scroll', _onViewChange);
+                angular.element($window).on('resize', _onViewChange);
                 if ($container[0] !== $window) {
-                    $container.on('resize', _onResize);
+                    $container.on('resize', _onViewChange);
                 }
 
                 // events for image change
@@ -240,7 +232,7 @@ angular.module('afkl.lazyImage')
                     return _eventsOff();
                 });
 
-                return _onScroll();
+                return _onViewChange();
 
             }
         };
