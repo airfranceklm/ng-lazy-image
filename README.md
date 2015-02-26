@@ -56,7 +56,7 @@ Now we can simply run:
 - `grunt e2e` to start our end to end test, which uses local chrome, firefox and internet explorer
 - `grunt package` to make a complete package which validates everything (used when making new package)
 - `grunt update` to update our Angular lib (defined in package json) and verify if module works with some versions backwards as well
-- `grunt ghages` to update our documentation page
+- `grunt ghpages` to update our documentation page
 
 
 ## History

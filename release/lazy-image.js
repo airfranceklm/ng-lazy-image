@@ -342,6 +342,8 @@ angular.module('afkl.lazyImage')
                 var img; // Angular element to image which will be placed
                 var currentImage = null; // current image url
                 var offset = options.offset ? options.offset : 50; // default offset
+                var alt = options.alt ? 'alt="' + options.alt + '"' : 'alt=""';
+
                 var LOADING = 'afkl-lazy-image-loading';
 
 
@@ -418,7 +420,7 @@ angular.module('afkl.lazyImage')
                         if (!options.background) {
                             if (!img) {
                                 element.addClass(LOADING);
-                                img = angular.element('<img alt="" class="afkl-lazy-image" src=""/>');
+                                img = angular.element('<img ' + alt + ' class="afkl-lazy-image" src=""/>');
                                 // remove loading class when image is acually loaded
                                 img.one('load', _loaded);
                                 element.append(img);
