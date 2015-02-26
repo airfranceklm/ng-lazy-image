@@ -1,6 +1,6 @@
-(function (ng) {
+(function (angular) {
     'use strict';
-    ng.module('app', ['afkl.lazyImage'])
+    angular.module('sample-app', ['afkl.lazyImage'])
     .controller('appCtrl', ['$scope', function mainCtrl($scope) {
 
         $scope.images = [
