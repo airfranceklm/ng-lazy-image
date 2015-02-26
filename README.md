@@ -25,10 +25,11 @@ The attributes are using the [srcset](http://picture.responsiveimages.org/) setu
 
 ### Options
 - "afkl-lazy-image": srcset string (required)
-- "afkl-lazy-image-options": (optional):
+- "afkl-lazy-image-options": (optional object):
    * '{"background": true}' this will set correct background image on container, false by default
    * '{"offset": 200}' this will influence when to start loading the image, 50px by default
    * '{"nolazy": true}' this will set the image at once and only change on resize
+   * '{"alt": "caption for image"}' this will set alt attribute on image, empty by default
 - "class" : `afkl-lazy-wrapper` will use height 0 trick, `afkl-img-ratio-1-1` sets correct aspect ratio so container is 100% responsive as well (optional, include css)
 - Using directive `afkl-image-container` to have a scrollable container
 
@@ -61,6 +62,7 @@ Now we can simply run:
 
 ## History
 This module was made while working on our Travel Inspiration Finder at KLM.
+- version 0.0.11 26-02-2015 Show alt attribute
 - version 0.0.9 18-10-2014 Scrollable container as option, tested for AngularJS 1.28 and 1.3
 - version 0.0.6 25-08-2014 Tested on Chrome, Firefox, Safari, IE8+
 - version 0.0.5 25-08-2014 Added loading feedback to enduser
