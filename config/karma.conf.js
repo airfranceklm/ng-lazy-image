@@ -56,9 +56,14 @@ module.exports = function (config) {
         },
 
         coverageReporter : {
-            type : 'lcov',
             dir : 'target/karma-coverage',
-            file : 'coverage.html'
+            reporters: [{
+                type : 'lcov',
+                file : 'coverage.html'
+            }, {
+                type: 'text-summary',
+                subdir: '.'
+            }]
         },
 
         junitReporter : {
