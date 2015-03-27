@@ -7,8 +7,8 @@ script:
 - grunt travis
 
 branches:
-  only:
-  - master
+  except:
+  - gh-pages
 
 addons:
   sauce_connect: true
