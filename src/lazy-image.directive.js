@@ -49,7 +49,7 @@ angular.module('afkl.lazyImage')
 
 
                 var _containerScrollTop = function () {
-                    // See if we can use jQuery, then extra check since directives like angular-scroll fuck this up as well
+                    // See if we can use jQuery, with extra check
                     // TODO: check if number is returned
                     if ($container.scrollTop) {
                         var scrollTopPosition = $container.scrollTop();
