@@ -310,7 +310,7 @@ angular.module('afkl.lazyImage')
             }]
         };
     })
-    .directive('afklLazyImage', ['$window', '$timeout', 'afklSrcSetService', function ($window, $timeout, srcSetService) {
+    .directive('afklLazyImage', ['$window', '$timeout', 'afklSrcSetService', '$parse', function ($window, $timeout, srcSetService, $parse) {
         'use strict';
 
         // Use srcSetService to find out our best available image
@@ -337,7 +337,7 @@ angular.module('afkl.lazyImage')
                 var timeout;
 
                 var images = attrs.afklLazyImage; // srcset attributes
-                var options = attrs.afklLazyImageOptions ? angular.fromJson(attrs.afklLazyImageOptions) : {}; // options (background, offset)
+                var options = attrs.afklLazyImageOptions ? $parse(attrs.afklLazyImageOptions)(scope) : {}; // options (background, offset)
 
                 var img; // Angular element to image which will be placed
                 var currentImage = null; // current image url
@@ -348,7 +348,7 @@ angular.module('afkl.lazyImage')
 
 
                 var _containerScrollTop = function () {
-                    // See if we can use jQuery, then extra check since directives like angular-scroll fuck this up as well
+                    // See if we can use jQuery, with extra check
                     // TODO: check if number is returned
                     if ($container.scrollTop) {
                         var scrollTopPosition = $container.scrollTop();
@@ -413,21 +413,24 @@ angular.module('afkl.lazyImage')
 
                     loaded = true;
                     // What is my best image available
-                    currentImage = bestImage(images);
+                    var hasImage = bestImage(images);
 
-                    if (currentImage) {
+                    if (hasImage) {
                         // we have to make an image if background is false (default)
                         if (!options.background) {
+                            
                             if (!img) {
-                                element.addClass(LOADING);
+                                // element.addClass(LOADING);
                                 img = angular.element('<img ' + alt + ' class="afkl-lazy-image" src=""/>');
+                                // img.one('load', _loaded);
                                 // remove loading class when image is acually loaded
-                                img.one('load', _loaded);
                                 element.append(img);
                             }
+
                         }
+
                         // set correct src/url
-                        _setImage();
+                        _checkIfNewImage();
                     }
 
                     // Element is added to dom, no need to listen to scroll anymore
@@ -442,6 +445,12 @@ angular.module('afkl.lazyImage')
                         if (newImage !== currentImage) {
                             // update current url
                             currentImage = newImage;
+
+                            if (!options.background) {
+                                element.addClass(LOADING);
+                                img.one('load', _loaded);
+                            }
+                            
                             // update image url
                             _setImage();
                         }
