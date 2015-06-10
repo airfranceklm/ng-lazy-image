@@ -3,6 +3,8 @@
     angular.module('sample-app', ['afkl.lazyImage'])
     .controller('appCtrl', ['$scope', function mainCtrl($scope) {
 
+        $scope.count = 0;
+
         $scope.images = [
             {
                 srcset: '//placehold.it/480x240/00a1de/ffffff 480w, //placehold.it/768x384/00a1de/ffffff 768w',
@@ -22,21 +24,20 @@
 
         $scope.changeImage();
 
+
     }])
-    .directive('sample', function () {
+    .directive('sampleCount', function () {
         'use strict';
+        var count = 0;
 
         return {
             restrict: 'A',
-            link: function ($scope, $element, $attrs) {
-
-                $attrs.$observe('afklLazyImageLoaded', function (newValue) { 
-                    if (window.console && newValue) {
-                        window.console.log('IMAGE HAS BEEN LOADED');
+            link: function (scope, element, attrs) {
+                return attrs.$observe("afklLazyImageLoaded", function (value) {
+                    if (window.console) {
+                        window.console.log('IMAGE LOADED:', value);
                     }
                 });
-
-
             }
         };
 

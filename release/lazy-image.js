@@ -352,6 +352,8 @@ angular.module('afkl.lazyImage')
                     IMAGECLASSNAME = IMAGECLASSNAME + ' ' + options.className;
                 }
 
+                attrs.afklLazyImageLoaded = false;
+
                 var _containerScrollTop = function () {
                     // See if we can use jQuery, with extra check
                     // TODO: check if number is returned
@@ -466,7 +468,11 @@ angular.module('afkl.lazyImage')
                 _checkIfNewImage();
 
                 var _loaded = function () {
+
+                    attrs.$set('afklLazyImageLoaded', true);
+
                     element.removeClass(LOADING);
+                    
                 };
 
 
