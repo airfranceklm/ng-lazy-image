@@ -456,6 +456,7 @@ angular.module('afkl.lazyImage')
                             if (!options.background) {
                                 element.addClass(LOADING);
                                 img.one('load', _loaded);
+                                img.one('error', _error);
                             }
                             
                             // update image url
@@ -469,12 +470,17 @@ angular.module('afkl.lazyImage')
 
                 var _loaded = function () {
 
-                    attrs.$set('afklLazyImageLoaded', true);
+                    attrs.$set('afklLazyImageLoaded', 'succes');
 
                     element.removeClass(LOADING);
-                    
+
                 };
 
+                var _error = function () {
+
+                    attrs.$set('afklLazyImageLoaded', 'error');
+
+                };
 
                 // Check if the container is in view for the first time. Utilized by the scroll and resize events.
                 var _onViewChange = function () {
