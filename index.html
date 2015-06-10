@@ -155,11 +155,11 @@
 	</ul>
 
 
-    <h3>Using image alt</h3>
+    <h3>Using image alt and className</h3>
 	<!-- example how to use image set using srcset and ratio -->
 	<div ng-repeat="image in images">
 
-		<div afkl-lazy-image="//placehold.it/768x384/00a1de/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-2-1" afkl-lazy-image-options='{"alt": "blue bird"}'></div>
+		<div sample-count afkl-lazy-image="//placehold.it/768x384/00a1de/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-2-1" afkl-lazy-image-options='{"alt": "blue bird", "className": "optional-image-class"}'></div>
 
 	</div>
 
@@ -208,6 +208,12 @@
 	<div afkl-lazy-image="{{runtimeImageSrc}}" class="demo-no-use-of-aspect-ratio"></div>
 	<button ng-click="changeImage()">Change Now</button>
 
+
+	<h3>Check if image has been loaded (attribute 'afklLazyImageLoaded' will be set to true)</h3>
+	<div sample-count afkl-lazy-image="//placehold.it/300x300/00a1de/ffffff" class="demo-no-use-of-aspect-ratio"></div>
+
+
+
 	<p class="demo-link"><a href="#" ng-click="destroy()">Destroy $scope</a> (no leaks)</p>
 
 </div>
@@ -215,7 +221,7 @@
 <!-- only dependency is Angular -->
 <script src="vendor/angular.min.js"></script>
 <!-- our ng lazy image module -->
-<script src="lazy-image.min.js"></script>
+<script src="lazy-image.js"></script>
 
 <!-- dummy app kickstarting our module -->
 <script src="js/app.js"></script>
