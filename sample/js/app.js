@@ -21,6 +21,26 @@
         }
 
         $scope.changeImage();
-    }]);
+
+    }])
+    .directive('sample', function () {
+        'use strict';
+
+        return {
+            restrict: 'A',
+            link: function ($scope, $element, $attrs) {
+
+                $attrs.$observe('afklLazyImageLoaded', function (newValue) { 
+                    if (window.console && newValue) {
+                        window.console.log('IMAGE HAS BEEN LOADED');
+                    }
+                });
+
+
+            }
+        };
+
+    });
+
 
 })(angular);

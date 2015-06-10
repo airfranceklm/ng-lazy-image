@@ -47,6 +47,11 @@ angular.module('afkl.lazyImage')
 
                 var LOADING = 'afkl-lazy-image-loading';
 
+                var IMAGECLASSNAME = 'afkl-lazy-image';
+                
+                if (options.className) {
+                    IMAGECLASSNAME = IMAGECLASSNAME + ' ' + options.className;
+                }
 
                 var _containerScrollTop = function () {
                     // See if we can use jQuery, with extra check
@@ -122,7 +127,7 @@ angular.module('afkl.lazyImage')
                             
                             if (!img) {
                                 // element.addClass(LOADING);
-                                img = angular.element('<img ' + alt + ' class="afkl-lazy-image" src=""/>');
+                                img = angular.element('<img ' + alt + ' class="' + IMAGECLASSNAME + '" src=""/>');
                                 // img.one('load', _loaded);
                                 // remove loading class when image is acually loaded
                                 element.append(img);
@@ -164,6 +169,7 @@ angular.module('afkl.lazyImage')
                 var _loaded = function () {
                     element.removeClass(LOADING);
                 };
+
 
                 // Check if the container is in view for the first time. Utilized by the scroll and resize events.
                 var _onViewChange = function () {

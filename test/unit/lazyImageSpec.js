@@ -57,6 +57,14 @@ describe("Lazy image:", function() {
         expect(el.html()).toBe('<img alt="blue bird" class="afkl-lazy-image" src="img/foo.png">');
     });
 
+    it('Do we have alternative className on our image', function() {
+        var el = angular.element('<div afkl-lazy-image="img/foo.png" afkl-lazy-image-options=\'{"className": "foo"}\'></div>');
+        $compile(el)(scope);
+        scope.$digest();
+
+        expect(el.html()).toBe('<img alt="" class="afkl-lazy-image foo" src="img/foo.png">');
+    });
+
     it('No image should be attached', function() {
         var el = angular.element('<div afkl-lazy-image=""></div>');
         $compile(el)(scope);
