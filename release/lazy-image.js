@@ -470,7 +470,7 @@ angular.module('afkl.lazyImage')
 
                 var _loaded = function () {
 
-                    attrs.$set('afklLazyImageLoaded', 'succes');
+                    attrs.$set('afklLazyImageLoaded', 'done');
 
                     element.removeClass(LOADING);
 
@@ -478,7 +478,7 @@ angular.module('afkl.lazyImage')
 
                 var _error = function () {
 
-                    attrs.$set('afklLazyImageLoaded', 'error');
+                    attrs.$set('afklLazyImageLoaded', 'fail');
 
                 };
 

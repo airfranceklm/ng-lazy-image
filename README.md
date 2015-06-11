@@ -33,7 +33,7 @@ The attributes are using the [srcset](http://picture.responsiveimages.org/) setu
    * '{"className": "own-classname-image"}' className will be apended to the image
 - "class" : `afkl-lazy-wrapper` will use height 0 trick, `afkl-img-ratio-1-1` sets correct aspect ratio so container is 100% responsive as well (optional, include css)
 - Using directive `afkl-image-container` to have a scrollable container
-- Attribute `afklLazyImageLoaded` will be set ('succes'/'error') when image for the directive is really loaded. This can be used if you want to preload every image before showing your app.
+- Attribute `afklLazyImageLoaded` will be set ('done'/'fail') when image for the directive is really loaded. This can be used if you want to preload every image before showing your app.
 
 
 ## Todo
