@@ -495,11 +495,6 @@ angular.module('afkl.lazyImage')
 
                     remaining = elOffset - windowBottom;
 
-                    // During page load the remaining value is coming negative. Hence workaround for it.
-                    if (remaining < -1) {
-                        remaining = offset + 1;
-                    }
-
                     // Is our top of our image container in bottom of our viewport?
                     //console.log($container[0].className, _elementOffset(), _elementPosition(), height, scroll, remaining, elOffset);
                     shouldLoad = remaining <= offset;

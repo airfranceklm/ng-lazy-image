@@ -196,6 +196,16 @@ angular.module('afkl.lazyImage')
 
                     remaining = elOffset - windowBottom;
 
+                    /*
+                     * During page load, the value of "remaining" coming to be nagative for the images which are
+                     * not visible currently i.e. below the fold so setting its value to a positive number to avoid
+                     * loading of below the fold images. (The value of "remaining" gets fixed as we scroll the cursor
+                     * a bit.
+                     */
+                    if (remaining < -1) {
+                        remaining = offset * 2;
+                    }
+
                     // Is our top of our image container in bottom of our viewport?
                     //console.log($container[0].className, _elementOffset(), _elementPosition(), height, scroll, remaining, elOffset);
                     shouldLoad = remaining <= offset;
