@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/afklm/ng-lazy-image.svg)](https://travis-ci.org/afklm/ng-lazy-image) 
-[![Coverage Status](https://coveralls.io/repos/afklm/ng-lazy-image/badge.png?branch=master)](https://coveralls.io/r/afklm/ng-lazy-image?branch=master) 
+[![Coverage Status](https://coveralls.io/repos/afklm/ng-lazy-image/badge.png?branch=master)](https://coveralls.io/r/afklm/ng-lazy-image?branch=master)
+[![Sauce Test Status](https://saucelabs.com/buildstatus/afklm)](https://saucelabs.com/u/afklm)
 
 # Angular Lazy Image
 > Directive for loading responsive/ adaptive image when parent container (which is preventing reflow) is in viewport. Available as bower component for your project. JavaScript only component.
