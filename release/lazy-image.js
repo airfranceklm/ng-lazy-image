@@ -428,7 +428,7 @@ angular.module('afkl.lazyImage')
                             
                             if (!img) {
                                 // element.addClass(LOADING);
-                                img = angular.element('<img ' + alt + ' class="' + IMAGECLASSNAME + '" src=""/>');
+                                img = angular.element('<img ' + alt + ' class="' + IMAGECLASSNAME + '"/>');
                                 // img.one('load', _loaded);
                                 // remove loading class when image is acually loaded
                                 element.append(img);

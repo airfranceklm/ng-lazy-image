@@ -49,6 +49,9 @@
     "grunt-gh-pages": "~0.10.0",
     "karma-ie-launcher": "~0.1.5"
   },
+  "peerDependencies": {
+    "angular": "^1.3.0"
+  },
   "scripts": {
     "test": "karma start config/karma.conf.js",
     "update-webdriver": "webdriver-manager update",
