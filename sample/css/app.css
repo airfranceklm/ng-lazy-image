@@ -1,5 +1,5 @@
 /* Project specific css, only for this demo */
-body { 
+body, select { 
 	padding: 0; margin: 0; font: 16px "Lucida Sans Unicode","Lucida Grande",verdana,arial,sans-serif;
 }
 
@@ -80,7 +80,7 @@ a { color: #00a1de; }
 	max-width: 100%;
 }
 
-.demo-repeat {
+.demo-repeat-list {
 	width: 200px;
 	border: 1px solid #eee;
 }
