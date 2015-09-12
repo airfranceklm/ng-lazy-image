@@ -3,7 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Angular directive: lazy image directive, inspired by TIF - repeat sample</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, , initial-scale=1, maximum-scale=1, user-scalable=0" />
     <!-- look inside this css to see how container and ratios work -->
     <link rel="stylesheet" type="text/css" href="lazy-image-style.css" />
     <!-- only for our sample demo app -->
@@ -14,9 +14,10 @@
 
 <div class="demo-wrapper">
 
-
-    <h3>Test: filtering inside repeat loop</h3>
-    <p>Bug has been reported, but unable to reproduce it. Using a random collection where we apply a filter on.</p>
+	<h1>Angular lazy image directive</h1>
+    <h2>Test: filtering inside repeat loop</h2>
+    
+    <p>Bug has been reported, but unable to reproduce it. Using a random collection ($scope.collection) where we apply a filter on.</p>
 
 	<p>
 		<select ng-model="searchText">
@@ -24,18 +25,18 @@
 			<option value="2">filter 2</option>
 			<option value="3">none</option>
 		</select>
+		<span ng-bind="filtered.length">0</span> item(s)
 	</p>
+	
 
-	<div ng-repeat="image in collection | filter:{'type': searchText}" class="demo-repeat-list">
-
-		{{image.number}} <span afkl-lazy-image="{{image.srcset}}" class="afkl-lazy-wrapper afkl-img-ratio-3-2"></span>
-
-	</div>
-
-	{{collection}}
+	<ul class="demo-repeat-list">
+		<li class="demo-repeat-list--items" ng-repeat="image in filtered =(collection | filter:{'type': searchText})">
+			<span afkl-lazy-image="{{image.srcset}}" class="afkl-lazy-wrapper afkl-img-ratio-3-2"></span>
+		</li>
+	</ul>
 
     <p><a href="index.html">back</a></p>
-    
+
 </div>
 
 <!-- only dependency is Angular -->
