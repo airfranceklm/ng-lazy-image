@@ -5,7 +5,6 @@
 	overflow: hidden;
 	display: block;
 }
-
 /* auto size our image */
 .afkl-lazy-wrapper .afkl-lazy-image {
 	width: 100%;

@@ -3,20 +3,21 @@
     angular.module('sample-app', ['afkl.lazyImage'])
     .controller('appCtrl', ['$scope', function mainCtrl($scope) {
 
+        var changeImageUrl = function() {
+            var color = Math.floor(Math.random()*16777215).toString(16);
+            return '//placehold.it/768x599/' + color + '/ffffff';
+        }
+
         $scope.count = 0;
-        $scope.searchText = 'a';
-        
+        $scope.collection = [];
+        $scope.searchText = 1;
+
         $scope.images = [
             {
                 srcset: '//placehold.it/480x240/00a1de/ffffff 480w, //placehold.it/768x384/00a1de/ffffff 768w',
                 ratio: '2-1'
             }
         ];
-
-        var changeImageUrl = function() {
-            var color = Math.floor(Math.random()*16777215).toString(16);
-            return '//placehold.it/768x599/' + color + '/ffffff';
-        }
 
         $scope.destroy = function() {
             $scope.images = null;
@@ -27,25 +28,14 @@
             $scope.runtimeImageSrc = changeImageUrl();
         }
 
-        $scope.collection = [{
-                srcset: changeImageUrl(),
-                type: 'a'
-            },{
-                srcset: changeImageUrl(),
-                type: 'a'
-            },{
-                srcset: changeImageUrl(),
-                type: 'a'
-            },{
-                srcset: changeImageUrl(),
-                type: 'b'
-            },{
-                srcset: changeImageUrl(),
-                type: 'a'
-            },{
-                srcset: changeImageUrl(),
-                type: 'b'
-        }];
+        /* build random item list */
+        for (var i = 0; i < 8; i++) {
+            $scope.collection.push({
+                type: Math.floor(Math.random() * 2) + 1,
+                number: i + 1,
+                srcset: changeImageUrl()
+            })
+        }
 
         $scope.changeImage();
 

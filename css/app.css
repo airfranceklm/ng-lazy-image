@@ -1,10 +1,20 @@
 /* Project specific css, only for this demo */
-body { 
-	padding: 0; margin: 0; font: 16px "Lucida Sans Unicode","Lucida Grande",verdana,arial,sans-serif;
+body, select, h1, h2, h3 { 
+	font: 16px "Lucida Sans Unicode","Lucida Grande",verdana,arial,sans-serif;
+	line-height: 1.5;
 }
+body, select, ul, h1, h2, h3, p {
+	padding: 0;
+	margin: 0;
+}
+h1 { font-size: 32px; margin-bottom: 20px; }
+h2, h3 { font-size: 26px; margin-bottom: 16px;}
+p { margin-bottom: 16px; }
 
 h1,
 a { color: #00a1de; }
+
+ul { margin: 0 0 20px 20px; }
 
 .demo-image {
 	margin-bottom: 20px; 
@@ -80,9 +90,13 @@ a { color: #00a1de; }
 	max-width: 100%;
 }
 
-.demo-repeat {
+.demo-repeat-list {
 	width: 200px;
-	border: 1px solid #eee;
+	margin-left: 0;
+}
+.demo-repeat-list--items {
+	list-style: none;
+	margin-top: 10px;
 }
 
 @media (max-width:768px){
@@ -97,4 +111,8 @@ a { color: #00a1de; }
 		float: none;
 		margin-bottom: 10px;
 	}
+	.demo-repeat-list {
+		width: 100%;
+	}
+
 }
