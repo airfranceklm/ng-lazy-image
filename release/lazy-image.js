@@ -499,7 +499,6 @@ angular.module('afkl.lazyImage')
                     //console.log($container[0].className, _elementOffset(), _elementPosition(), height, scroll, remaining, elOffset);
                     shouldLoad = remaining <= offset;
 
-
                     // Append image first time when it comes into our view, after that only resizing can have influence
                     if (shouldLoad && !loaded) {
 
