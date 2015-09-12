@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="sample-app" id="ng-app" class="js">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Angular directive: lazy image directive, inspired by TIF - Scrollable Container</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- look inside this css to see how container and ratios work -->
+    <link rel="stylesheet" type="text/css" href="lazy-image-style.css" />
+    <!-- only for our sample demo app -->
+    <link rel="stylesheet" type="text/css" href="css/app.css" />
+
+</head>
+<body ng-controller="appCtrl" >
+
+<div class="demo-wrapper">
+
+    <h3>Scrollable Container</h3>
+    <p>The image inside will not load until the container is scrolled into position. It uses the provided directive 'afkl-image-container'</p>
+    <div class="demo-container" afkl-image-container>
+        <div class="demo-container-content">
+            <div class="demo-container-intro">Scroll down to see the image</div>
+            <div afkl-lazy-image="//placehold.it/936x677/8bb6b9/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-3-2"></div>
+            <div afkl-lazy-image="//placehold.it/936x468/41ba94/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-2-1"></div>
+            <div afkl-lazy-image="//placehold.it/936x677/d7c199/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-3-2"></div>
+        </div>
+    </div>
+
+    <h3>Scrollable Container with positioned images</h3>
+    <p>The positioned images inside will not load until the container is scrolled into position.</p>
+    <div class="demo-container" afkl-image-container>
+        <div class="demo-container-content-positioned">
+            <div class="demo-container-intro">Scroll down to see the positioned images</div>
+            <div class="demo-container-content-positioned-parent">
+                <div afkl-lazy-image="//placehold.it/936x677/00a1de/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-3-2 demo-container-content-positioned-child"></div>
+            </div>
+            <div class="demo-container-content-positioned-parent">
+                <div afkl-lazy-image="//placehold.it/936x468/fc425b/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-2-1 demo-container-content-positioned-child"></div>
+            </div>
+            <div class="demo-container-content-positioned-parent">
+                <div afkl-lazy-image="//placehold.it/936x677/2df3d/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-3-2 demo-container-content-positioned-child"></div>
+            </div>
+            <div class="demo-container-content-positioned-parent">
+                <div afkl-lazy-image="//placehold.it/480x240/00a1de/ffffff 480w, //placehold.it/936x468/4d681/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-2-1 demo-container-content-positioned-child"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- only dependency is Angular -->
+<script src="vendor/angular.min.js"></script>
+<!-- our ng lazy image module -->
+<script src="lazy-image.min.js"></script>
+
+<!-- dummy app kickstarting our module -->
+<script src="js/app.js"></script>
+
+</body>
+</html>
