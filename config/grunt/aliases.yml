@@ -58,4 +58,4 @@ update:
 ghpages:
  - 'copy:pages1'
  - 'copy:pages2'
- - 'gh-pages'
+# - 'gh-pages'

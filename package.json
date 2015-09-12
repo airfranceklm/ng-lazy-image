@@ -30,6 +30,7 @@
     "grunt-contrib-clean": "~0.6.0",
     "grunt-contrib-jshint": "~0.11.0",
     "grunt-contrib-cssmin": "~0.12.2",
+    "grunt-replace": "~0.11.0",
     "jshint-junit-reporter": "~0.1.0",
     "grunt-protractor-runner": "~1.2.1",
     "grunt-ng-annotate": "~0.10.0",
