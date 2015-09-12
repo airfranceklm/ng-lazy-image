@@ -21,7 +21,8 @@
     class="afkl-lazy-wrapper afkl-img-ratio-1-1 own-classname"&gt;&lt;/div&gt;
 </code></pre>
 
-The attributes are using the [srcset](http://picture.responsiveimages.org/) setup. Your window will determine which image fits best (so the rules are very dynamic using w/h/x). The image will only be set when the parent container scrolls in the viewport (lazy loading) or scrollable directive. During loading a class 'afkl-lazy-image-loading' is set on the container so you can give loading state feedback to your visitor.
+The attributes are using the [srcset](http://picture.responsiveimages.org/) setup. Your window will determine which image fits best (so the rules are very dynamic using w/h/x). The image will only be set when the parent container scrolls in the viewport (lazy loading) or scrollable directive. It is also possible to set one image url only then you will not use the fully responsive option but always lazy load just one image.
+During loading a class 'afkl-lazy-image-loading' is set on the container so you can give loading state feedback to your visitor.
 
 
 ### Options

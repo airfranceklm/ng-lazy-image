@@ -45,6 +45,7 @@ a { color: #00a1de; }
 	background-size: cover;
 	color: #fff;
 	padding: 10px;
+	height: 40px;
 }
 .demo-link {
 	font-size: 85%;

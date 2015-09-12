@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="sample-app" id="ng-app" class="js">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Angular directive: lazy image directive, inspired by TIF - loaded sample</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- look inside this css to see how container and ratios work -->
+    <link rel="stylesheet" type="text/css" href="lazy-image-style.css" />
+    <!-- only for our sample demo app -->
+    <link rel="stylesheet" type="text/css" href="css/app.css" />
+
+</head>
+<body ng-controller="appCtrl" >
+
+<div class="demo-wrapper">
+
+	<h3>Check if image has been loaded</h3>
+	
+	<p>Attribute 'afklLazyImageLoaded' will be set to true if your image has been loaded. In your application you can now tell if your images are: 'done' or 'fail'.</p>
+
+	<span sample-count afkl-lazy-image="//placehold.it/300x300/00a1de/ffffff" class="demo-no-use-of-aspect-ratio"></span>
+
+
+
+</div>
+
+<!-- only dependency is Angular -->
+<script src="vendor/angular.min.js"></script>
+<!-- our ng lazy image module -->
+<script src="lazy-image.js"></script>
+
+<!-- dummy app kickstarting our module -->
+<script src="js/app.js"></script>
+
+</body>
+</html>

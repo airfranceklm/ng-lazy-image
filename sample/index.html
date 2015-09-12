@@ -31,20 +31,6 @@
     <div afkl-lazy-image="//placehold.it/480x480 480w, //placehold.it/768x768 768w, //placehold.it/936x936 2x" class="afkl-lazy-wrapper afkl-img-ratio-1-1 demo-image"></div>
 
 
-    <h3>Option to overrule offset and non lazy</h3>
-    <div class="demo-sample">
-    	<p><span afkl-lazy-image="//placehold.it/480x240 480w, //placehold.it/440x220 768w" class="afkl-lazy-wrapper afkl-img-ratio-4-2 demo-image" afkl-lazy-image-options='{"nolazy": true}'></span></p>
-    	<p><span afkl-lazy-image="//placehold.it/400x200" afkl-lazy-image-options='{"offset": 200}' class="afkl-lazy-wrapper afkl-img-ratio-4-2 demo-image"></span></p>
-    </div>
-
-    <h3>Option to set background image</h3>
-    <div afkl-lazy-image="//placehold.it/480x200/00a1de/003145 480w, //placehold.it/768x200/00a1de/003145 768w" class="demo-background-image" afkl-lazy-image-options='{"background": true}'>
-    	<p>This module can also set a background image.</p>
-    	<p>All you have to do is setting the options tag 'background' to true, which is false by default.</p>
-    	<p>In the background you now will see the correct image. You can set your own css on the container itself, only style 'background-image' is being set.</p>
-    </div>
-
-
     <h3>Option to use aspect ratio's</h3>
     <p>Browser reflow is bad, especially when lazy loading images. The container aspect ratio setup sets the correct image container height (so no total repainting takes place when image is appended) based on it's css class which uses aspect-ratio. If you want different aspect ratio's for different srcset setup then introduce your own classnames.</p>
 
@@ -60,15 +46,6 @@
 	</ul>
 
 
-    <h3>Using image alt and className</h3>
-	<!-- example how to use image set using srcset and ratio -->
-	<div ng-repeat="image in images">
-
-		<div sample-count afkl-lazy-image="//placehold.it/768x384/00a1de/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-2-1" afkl-lazy-image-options='{"alt": "blue bird", "className": "optional-image-class"}'></div>
-
-	</div>
-
-
     <h3>Check profiling</h3>
 	<!-- example how to use image set using srcset and ratio -->
 	<div ng-repeat="image in images">
@@ -77,55 +54,27 @@
 
 	</div>
 
-	<h3>Scrollable Container</h3>
-	<p>The image inside will not load until the container is scrolled into position.</p>
-	<div class="demo-container" afkl-image-container>
-		<div class="demo-container-content">
-			<div class="demo-container-intro">Scroll down to see the image</div>
-			<div afkl-lazy-image="//placehold.it/936x677/8bb6b9/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-3-2"></div>
-			<div afkl-lazy-image="//placehold.it/936x468/41ba94/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-2-1"></div>
-			<div afkl-lazy-image="//placehold.it/936x677/d7c199/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-3-2"></div>
-		</div>
-	</div>
-
-    <h3>Scrollable Container with positioned images</h3>
-    <p>The positioned images inside will not load until the container is scrolled into position.</p>
-    <div class="demo-container" afkl-image-container>
-        <div class="demo-container-content-positioned">
-            <div class="demo-container-intro">Scroll down to see the positioned images</div>
-            <div class="demo-container-content-positioned-parent">
-                <div afkl-lazy-image="//placehold.it/936x677/00a1de/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-3-2 demo-container-content-positioned-child"></div>
-            </div>
-            <div class="demo-container-content-positioned-parent">
-                <div afkl-lazy-image="//placehold.it/936x468/fc425b/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-2-1 demo-container-content-positioned-child"></div>
-            </div>
-            <div class="demo-container-content-positioned-parent">
-                <div afkl-lazy-image="//placehold.it/936x677/2df3d/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-3-2 demo-container-content-positioned-child"></div>
-            </div>
-            <div class="demo-container-content-positioned-parent">
-                <div afkl-lazy-image="//placehold.it/480x240/00a1de/ffffff 480w, //placehold.it/936x468/4d681/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-2-1 demo-container-content-positioned-child"></div>
-            </div>
-        </div>
-    </div>
-
-
-	<h3>Runtime image change after loaded</h3>
-	<div afkl-lazy-image="{{runtimeImageSrc}}" class="demo-no-use-of-aspect-ratio"></div>
-	<button ng-click="changeImage()">Change Now</button>
-
-
-	<h3>Check if image has been loaded (attribute 'afklLazyImageLoaded' will be set to true)</h3>
-	<span sample-count afkl-lazy-image="//placehold.it/300x300/00a1de/ffffff" class="demo-no-use-of-aspect-ratio"></span>
-
 
 
 	<p class="demo-link"><a href="#" ng-click="destroy()">Destroy $scope</a> (no leaks)</p>
 
-	<p>
-		todo: split sample up in specific usecases
-	</p>
+
+	<h3>Examples using the provided options</h3>
+
 	<ul>
+		<li><a href="sample-alt-className.html">option: alt, className</a></li>
+		<li><a href="sample-no-lazy.html">option: not lazy, own offset</a></li>
+		<li><a href="sample-background.html">option: background image</a></li>
+		<li><a href="sample-single.html">option: single image for all viewports</a></li>
+		<li><a href="sample-scrollable.html">Inside scrollable directive, afkl-image-container</a></li>
+	</ul>
+
+	<h3>Specific usecases</h3>
+
+	<ul>
+		<li><a href="sample-loaded.html">Done or Fail event for every image directive</a></li>
 		<li><a href="sample-repeat.html">Directive inside repeat with filtering</a></li>
+		<li><a href="sample-change.html">Change at runtime</a></li>
 	</ul>
 
 
