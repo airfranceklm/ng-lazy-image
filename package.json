@@ -1,8 +1,14 @@
 {
   "name": "angular-lazy-image",
   "main": "./release/lazy-image.js",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "homepage": "http://afklm.github.io/ng-lazy-image/",
+  "keywords": [
+    "angular",
+    "directive",
+    "lazy",
+    "image"
+  ],
   "repository": {
     "type": "git",
     "url": "http://github.com/afklm/ng-lazy-image.git"

@@ -1,7 +1,7 @@
 {
   "name": "ng-directive-lazy-image",
   "main": "release/lazy-image.js",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "homepage": "https://github.com/afklm/ng-lazy-image",
   "authors": [
     "KLM Royal Dutch Airlines",
