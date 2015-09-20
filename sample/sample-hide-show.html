@@ -2,7 +2,7 @@
 <html ng-app="sample-app" id="ng-app" class="js">
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Angular directive: lazy image directive, inspired by TIF - change at runtime</title>
+    <title>Angular directive: lazy image directive, inspired by TIF - toggle parent view</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- look inside this css to see how container and ratios work -->
     <link rel="stylesheet" type="text/css" href="lazy-image-style.css" />
@@ -16,10 +16,15 @@
 <div class="demo-wrapper" >
 
     <h1>Angular lazy image directive</h1>
-    <h2>Runtime image change after loaded</h2>
+    <h2>Toggle a view</h2>
+    
+    <input type="checkbox" value="true" ng-model="checked" checked="checked"/>
+    
+    Hide view: {{!checked}}
 
-    <div afkl-lazy-image="{{runtimeImageSrc}}" class="demo-no-use-of-aspect-ratio"></div>
-    <button ng-click="changeImage()">Change Now</button>
+    <div ng-if="checked">
+        <div afkl-lazy-image="//placehold.it/300x300/00a1de/ffffff" class="demo-no-use-of-aspect-ratio"></div>
+    </div>
 
     <p><a href="index.html">back</a></p>
 

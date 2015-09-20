@@ -54,7 +54,9 @@ describe("Lazy image:", function() {
         $compile(el)(scope);
         scope.$digest();
 
-        expect(el.html()).toBe('<img alt="blue bird" class="afkl-lazy-image" src="img/foo.png">');
+        window.setTimeout(function() {
+            expect(el.html()).toBe('<img alt="blue bird" class="afkl-lazy-image" src="img/foo.png">');
+        }, 300);
     });
 
     it('Do we have alternative className on our image', function() {
@@ -62,7 +64,9 @@ describe("Lazy image:", function() {
         $compile(el)(scope);
         scope.$digest();
 
-        expect(el.html()).toBe('<img alt="" class="afkl-lazy-image foo" src="img/foo.png">');
+        window.setTimeout(function() {
+            expect(el.html()).toBe('<img alt="" class="afkl-lazy-image foo" src="img/foo.png">');
+        }, 300);
     });
 
     it('No image should be attached', function() {
@@ -78,7 +82,9 @@ describe("Lazy image:", function() {
         $compile(el)(scope);
         scope.$digest();
 
-        expect(el.html()).toBe('<img alt="" class="afkl-lazy-image" src="img/foo.png">');
+        window.setTimeout(function() {
+            expect(el.html()).toBe('<img alt="" class="afkl-lazy-image" src="img/foo.png">');
+        }, 300);
     });
 
 

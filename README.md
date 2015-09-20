@@ -22,7 +22,7 @@
 </code></pre>
 
 The attributes are using the [srcset](http://picture.responsiveimages.org/) setup. Your window will determine which image fits best (so the rules are very dynamic using w/h/x). The image will only be set when the parent container scrolls in the viewport (lazy loading) or scrollable directive. It is also possible to set one image url only then you will not use the fully responsive option but always lazy load just one image.
-During loading a class 'afkl-lazy-image-loading' is set on the container so you can give loading state feedback to your visitor.
+During loading a class 'afkl-lazy-image-loading' is set on the container so you can give loading state feedback to your visitor. Be sure to use block level for this directive since it checks for visibility as well (inline elements have no width on start, and we check for width to determine if element is visible).
 
 
 ### Options
@@ -35,7 +35,7 @@ During loading a class 'afkl-lazy-image-loading' is set on the container so you 
    * '{"className": "own-classname-image"}' className will be apended to the image
 - "class" : `afkl-lazy-wrapper` will use height 0 trick, `afkl-img-ratio-1-1` sets correct aspect ratio so container is 100% responsive as well (optional, include css)
 - Using directive `afkl-image-container` to have a scrollable container
-- Attribute `afklLazyImageLoaded` will be set ('done'/'fail') when image for the directive is really loaded. This can be used if you want to preload every image before showing your app.
+- Attribute `afklLazyImageLoaded` will be set ('done'/'fail') when image for the directive is really loaded. This can be used if you want to preload every image before showing your app, make sure to set nolazy to true.
 
 
 ## Todo
@@ -67,6 +67,11 @@ Now we can simply run:
 
 ## History
 This module was made while working on our Travel Inspiration Finder at KLM.
+- version 0.2.0 xx-xx-2015 Beta, not released yet. Breaking change, checking if parent is vissible so only possible if used in block level elements. Too many users where using transitions or toggles of the parent view
+- version 0.1.5 21-08-2015 Image 'src' is not always known yet, prevent having src in our html and only set when url is given
+- version 0.1.4 10-06-2015 Image loaded succes and error state, so it is possible to know when images are really loaded
+- version 0.1.1 10-06-2015 Make it possible to add a className to our image
+- version 0.1.0 27-03-2015 Parse attributes (config), introduce loading class on element while loading
 - version 0.0.11 26-02-2015 Show alt attribute
 - version 0.0.9 18-10-2014 Scrollable container as option, tested for AngularJS 1.28 and 1.3
 - version 0.0.6 25-08-2014 Tested on Chrome, Firefox, Safari, IE8+

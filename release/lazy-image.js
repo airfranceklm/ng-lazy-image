@@ -399,6 +399,15 @@ angular.module('afkl.lazyImage')
                     return box.top + _containerScrollTop() - document.documentElement.clientTop;
                 };
 
+
+                var _elementOffsetWidth = function () {
+                    if (element.offset) {
+                        return element.offset().width;
+                    }
+                    return element[0].getBoundingClientRect().width;
+                };
+
+
                 var _elementOffsetContainer = function () {
                     if (element.offset) {
                         return element.offset().top - $container.offset().top;
@@ -484,28 +493,35 @@ angular.module('afkl.lazyImage')
 
                 // Check if the container is in view for the first time. Utilized by the scroll and resize events.
                 var _onViewChange = function () {
-                    // Config vars
-                    var remaining, shouldLoad, windowBottom;
+                    // only do stuff when not set already
+                    if (!loaded) {
 
-                    var height = _containerInnerHeight();
-                    var scroll = _containerScrollTop();
+                        // Config vars
+                        var remaining, shouldLoad, windowBottom;
 
-                    var elOffset = $container[0] === $window ? _elementOffset() : _elementOffsetContainer();
-                    windowBottom = $container[0] === $window ? height + scroll : height;
+                        var height = _containerInnerHeight();
+                        var scroll = _containerScrollTop();
+                        var visible = _elementOffsetWidth() === 0 ? false : true; // element must be block level, check for visiblity is then possible
 
-                    remaining = elOffset - windowBottom;
+                        var elOffset = $container[0] === $window ? _elementOffset() : _elementOffsetContainer();
+                        windowBottom = $container[0] === $window ? height + scroll : height;
 
-                    // Is our top of our image container in bottom of our viewport?
-                    //console.log($container[0].className, _elementOffset(), _elementPosition(), height, scroll, remaining, elOffset);
-                    shouldLoad = remaining <= offset;
+                        remaining = elOffset - windowBottom;
+
+                        // Is our top of our image container in bottom of our viewport?
+                        //console.log($container[0].className, _elementOffset(), _elementPosition(), height, scroll, remaining, elOffset);
+                        shouldLoad = remaining <= offset;
 
 
-                    // Append image first time when it comes into our view, after that only resizing can have influence
-                    if (shouldLoad && !loaded) {
+                        // Append image first time when it comes into our view, after that only resizing can have influence
+                        if (shouldLoad && visible) {
 
-                        _placeImage();
+                            _placeImage();
+
+                        }
 
                     }
+
                 };
 
                 // EVENT: RESIZE THROTTLED
