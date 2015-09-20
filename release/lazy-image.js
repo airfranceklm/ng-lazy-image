@@ -400,14 +400,6 @@ angular.module('afkl.lazyImage')
                 };
 
 
-                var _elementOffsetWidth = function () {
-                    if (element.offset) {
-                        return element.offset().width;
-                    }
-                    return element[0].getBoundingClientRect().width;
-                };
-
-
                 var _elementOffsetContainer = function () {
                     if (element.offset) {
                         return element.offset().top - $container.offset().top;
@@ -501,7 +493,6 @@ angular.module('afkl.lazyImage')
 
                         var height = _containerInnerHeight();
                         var scroll = _containerScrollTop();
-                        var visible = _elementOffsetWidth() === 0 ? false : true; // element must be block level, check for visiblity is then possible
 
                         var elOffset = $container[0] === $window ? _elementOffset() : _elementOffsetContainer();
                         windowBottom = $container[0] === $window ? height + scroll : height;
@@ -510,11 +501,11 @@ angular.module('afkl.lazyImage')
 
                         // Is our top of our image container in bottom of our viewport?
                         //console.log($container[0].className, _elementOffset(), _elementPosition(), height, scroll, remaining, elOffset);
-                        shouldLoad = remaining <= offset;
+                        shouldLoad = (remaining <= offset && (remaining + height) !== 0);
 
 
                         // Append image first time when it comes into our view, after that only resizing can have influence
-                        if (shouldLoad && visible) {
+                        if (shouldLoad) {
 
                             _placeImage();
 
@@ -575,6 +566,7 @@ angular.module('afkl.lazyImage')
                 if (options.nolazy) {
                     _placeImage();
                 }
+
 
                 // Remove all events when destroy takes place
                 scope.$on('$destroy', function () {

@@ -8,6 +8,13 @@
     <link rel="stylesheet" type="text/css" href="lazy-image-style.css" />
     <!-- only for our sample demo app -->
     <link rel="stylesheet" type="text/css" href="css/app.css" />
+    
+    <style>
+        .hide-me { display: none; }
+        .show-me {
+            display: block;
+        }
+    </style>
 
 </head>
 <body ng-controller="appCtrl" >
@@ -16,15 +23,45 @@
 <div class="demo-wrapper" >
 
     <h1>Angular lazy image directive</h1>
-    <h2>Toggle a view</h2>
+    <h2>Test: hide /show element</h2>
     
-    <input type="checkbox" value="true" ng-model="checked" checked="checked"/>
-    
-    Hide view: {{!checked}}
+
+    <p>Directive works with ng-if, ng-include, $scope change and ui-views</p>
 
     <div ng-if="checked">
         <div afkl-lazy-image="//placehold.it/300x300/00a1de/ffffff" class="demo-no-use-of-aspect-ratio"></div>
     </div>
+
+    <p>Directive is not working if we apply hidden class on parent container and toggle it. It will then only do recalculation when triggered (scrolling/resize event).</p>
+
+    <div class="hide-me" ng-class="checked ? 'show-me' : 'hide-me'">
+        <div afkl-lazy-image="//placehold.it/200x200/00a1de/ffffff" class="demo-no-use-of-aspect-ratio"></div>
+
+        <ul class="demo-repeat-list">
+            <li class="demo-repeat-list--items" ng-repeat="image in filtered =(collection | filter:{'type': searchText})">
+                <span afkl-lazy-image="{{image.srcset}}" class="afkl-lazy-wrapper afkl-img-ratio-3-2"></span>
+            </li>
+        </ul>
+
+    </div>
+
+
+    <p>Directive is not working if we apply hidden class on parent container and toggle it. It will then only do recalculation when triggered (scrolling/resize event).</p>
+
+    <div ng-show="checked" class="ng-hide">
+        <div afkl-lazy-image="//placehold.it/100x100/00a1de/ffffff" class="demo-no-use-of-aspect-ratio"></div>
+
+        <ul class="demo-repeat-list">
+            <li class="demo-repeat-list--items" ng-repeat="image in filtered =(collection | filter:{'type': searchText})">
+                <span afkl-lazy-image="{{image.srcset}}" class="afkl-lazy-wrapper afkl-img-ratio-3-2"></span>
+            </li>
+        </ul>
+
+    </div>
+
+    <input type="checkbox" value="true" ng-model="checked" checked="checked"/>
+    
+    Hide view: {{!checked}}
 
     <p><a href="index.html">back</a></p>
 
