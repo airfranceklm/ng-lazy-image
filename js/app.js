@@ -12,6 +12,8 @@
         $scope.collection = [];
         $scope.searchText = 1;
 
+        $scope.checked = false;
+        
         $scope.images = [
             {
                 srcset: '//placehold.it/480x240/00a1de/ffffff 480w, //placehold.it/768x384/00a1de/ffffff 768w',
