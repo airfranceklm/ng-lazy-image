@@ -34,8 +34,9 @@ During loading a class 'afkl-lazy-image-loading' is set on the container so you 
    * '{"alt": "caption for image"}' this will set alt attribute on image, empty by default
    * '{"className": "own-classname-image"}' className will be apended to the image
 - "class" : `afkl-lazy-wrapper` will use height 0 trick, `afkl-img-ratio-1-1` sets correct aspect ratio so container is 100% responsive as well (optional, include css)
-- Using directive `afkl-image-container` to have a scrollable container
+- Using directive `afkl-image-container` when you have a scrollable container, with afkl-lazy-image inside (see [example](http://afklm.github.io/ng-lazy-image/sample-scrollable.html))
 - Attribute `afklLazyImageLoaded` will be set ('done'/'fail') when image for the directive is really loaded. This can be used if you want to preload every image before showing your app, make sure to set nolazy to true.
+
 
 
 ## Todo
