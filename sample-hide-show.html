@@ -28,11 +28,18 @@
 
     <p>Directive works with ng-if, ng-include, $scope change and ui-views</p>
 
-    <div ng-if="checked">
+    <div ng-if="checked" style="display: inline-block; width: 30%;">
         <div afkl-lazy-image="//placehold.it/300x300/00a1de/ffffff" class="demo-no-use-of-aspect-ratio"></div>
     </div>
 
-    <p>Directive is not working if we apply hidden class on parent container and toggle it. It will then only do recalculation when triggered (scrolling/resize event).</p>
+    <h2>TODO: the directive should also check if it is visible or not</h2>
+    <p>When parent dom elements are simply set to hidden by css only the container itself will be there and then only triggered when triggering window scroll or resize.</p>
+
+    <p>So the directive is not working if we apply hidden class on parent container and toggle it. So ng-show will not work as well since this sets styling simply to ng-hide</p>
+
+    <div ng-show="checked" style="display: inline-block; width: 30%;">
+        <div afkl-lazy-image="//placehold.it/320x320/00a1de/ffffff" class="demo-no-use-of-aspect-ratio"></div>
+    </div>
 
     <div class="hide-me" ng-class="checked ? 'show-me' : 'hide-me'">
         <div afkl-lazy-image="//placehold.it/200x200/00a1de/ffffff" class="demo-no-use-of-aspect-ratio"></div>
