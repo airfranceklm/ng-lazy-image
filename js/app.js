@@ -1,12 +1,13 @@
 (function (angular) {
     'use strict';
+
     angular.module('sample-app', ['afkl.lazyImage'])
     .controller('appCtrl', ['$scope', function mainCtrl($scope) {
 
         var changeImageUrl = function() {
             var color = Math.floor(Math.random()*16777215).toString(16);
             return '//placehold.it/768x599/' + color + '/ffffff';
-        }
+        };
 
         $scope.count = 0;
         $scope.collection = [];
@@ -28,7 +29,7 @@
 
         $scope.changeImage = function () {
             $scope.runtimeImageSrc = changeImageUrl();
-        }
+        };
 
         /* build random item list */
         for (var i = 0; i < 8; i++) {
@@ -36,15 +37,15 @@
                 type: Math.floor(Math.random() * 2) + 1,
                 number: i + 1,
                 srcset: changeImageUrl()
-            })
+            });
         }
 
         $scope.changeImage();
 
     }])
     .directive('sampleCount', function () {
-        'use strict';
-        var count = 0;
+
+        // var count = 0;
 
         return {
             restrict: 'A',
@@ -58,6 +59,15 @@
         };
 
     });
+
+
+
+
+
+
+
+
+
 
 
 })(angular);
