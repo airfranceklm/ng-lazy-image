@@ -11,7 +11,7 @@ angular.module('afkl.lazyImage')
             }]
         };
     })
-    .directive('afklLazyImage', ['$window', '$timeout', 'afklSrcSetService', '$parse', function ($window, $timeout, srcSetService, $parse) {
+    .directive('afklLazyImage', ['$rootScope', '$window', '$timeout', 'afklSrcSetService', '$parse', function ($rootScope, $window, $timeout, srcSetService, $parse) {
         'use strict';
 
         // Use srcSetService to find out our best available image
@@ -216,6 +216,7 @@ angular.module('afkl.lazyImage')
 
                 };
 
+
                 // EVENT: RESIZE THROTTLED
                 var _onResize = function () {
                     $timeout.cancel(timeout);
@@ -269,8 +270,13 @@ angular.module('afkl.lazyImage')
                 }
 
 
+                scope.$on('afkl.lazyImage.destroyed', _onResize);
+
                 // Remove all events when destroy takes place
                 scope.$on('$destroy', function () {
+                    // tell our other kids, i got removed
+                    $rootScope.$broadcast('afkl.lazyImage.destroyed');
+                    // remove our events and image
                     return _eventsOff();
                 });
 

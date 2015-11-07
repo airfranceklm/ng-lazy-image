@@ -32,7 +32,7 @@
         };
 
         /* build random item list */
-        for (var i = 0; i < 8; i++) {
+        for (var i = 0; i < 20; i++) {
             $scope.collection.push({
                 type: Math.floor(Math.random() * 2) + 1,
                 number: i + 1,
