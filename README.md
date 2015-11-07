@@ -68,7 +68,7 @@ Now we can simply run:
 
 ## History
 This module was made while working on our Travel Inspiration Finder at KLM.
-- version 0.2.0 xx-xx-2015 Beta, not released yet. Breaking change, checking if parent is vissible so only possible if used in block level elements. Too many users where using transitions or toggles of the parent view
+- version 0.2.0 xx-xx-2015 Beta, not released yet. Breaking change, checking if parent is visible so only possible if used in block level elements. Too many users where using transitions or toggles of the parent view
 - version 0.1.5 21-08-2015 Image 'src' is not always known yet, prevent having src in our html and only set when url is given
 - version 0.1.4 10-06-2015 Image loaded succes and error state, so it is possible to know when images are really loaded
 - version 0.1.1 10-06-2015 Make it possible to add a className to our image
