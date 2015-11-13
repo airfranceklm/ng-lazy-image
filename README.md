@@ -5,7 +5,7 @@
 [![NPM](https://nodei.co/npm/angular-lazy-image.png?stars=true)](https://nodei.co/npm/angular-lazy-image/)
 
 # Angular Lazy Image directive
-> Directive for loading responsive/ adaptive image when parent container (which is preventing reflow) is in viewport. Available as bower component for your project. JavaScript only component.
+> Directive for loading responsive/ adaptive image when parent container (which is preventing reflow) is in viewport. Available as bower and npm component for your project. JavaScript only component.
 
 ## Demo
 [Demonstration component](http://afklm.github.io/ng-lazy-image/)
