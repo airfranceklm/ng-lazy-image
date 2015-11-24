@@ -327,6 +327,20 @@ angular.module('afkl.lazyImage')
             restrict: 'A',
             link: function (scope, element, attrs) {
 
+                var _concatImgAttrs = function (imgAttrs) {
+                    var result = [];
+                    if (!!options.imgAttrs) {
+                        result = Array.prototype.map.call(imgAttrs, function(item) {
+                            for (var key in item) {
+                                if (item.hasOwnProperty(key)) {
+                                    return String.prototype.concat.call(key, '="', item[key], '"');
+                                }
+                            }
+                        });
+                    }
+                    return result.join(' ');
+                };
+
                 // CONFIGURATION VARS
                 var $container = element.inheritedData('afklImageContainer');
                 if (!$container) {
@@ -343,11 +357,12 @@ angular.module('afkl.lazyImage')
                 var currentImage = null; // current image url
                 var offset = options.offset ? options.offset : 50; // default offset
                 var alt = options.alt ? 'alt="' + options.alt + '"' : 'alt=""';
+                var imgAttrs = _concatImgAttrs(options.imgAttrs);
 
                 var LOADING = 'afkl-lazy-image-loading';
 
                 var IMAGECLASSNAME = 'afkl-lazy-image';
-                
+
                 if (options.className) {
                     IMAGECLASSNAME = IMAGECLASSNAME + ' ' + options.className;
                 }
@@ -426,10 +441,10 @@ angular.module('afkl.lazyImage')
                     if (hasImage) {
                         // we have to make an image if background is false (default)
                         if (!options.background) {
-                            
+
                             if (!img) {
                                 // element.addClass(LOADING);
-                                img = angular.element('<img ' + alt + ' class="' + IMAGECLASSNAME + '"/>');
+                                img = angular.element('<img ' + alt + ' ' + imgAttrs + ' class="' + IMAGECLASSNAME + '"/>');
                                 // img.one('load', _loaded);
                                 // remove loading class when image is acually loaded
                                 element.append(img);
@@ -459,7 +474,7 @@ angular.module('afkl.lazyImage')
                                 img.one('load', _loaded);
                                 img.one('error', _error);
                             }
-                            
+
                             // update image url
                             _setImage();
                         }

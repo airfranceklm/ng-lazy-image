@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/afklm/ng-lazy-image.svg)](https://travis-ci.org/afklm/ng-lazy-image) 
+[![Build Status](https://travis-ci.org/afklm/ng-lazy-image.svg)](https://travis-ci.org/afklm/ng-lazy-image)
 [![Coverage Status](https://coveralls.io/repos/afklm/ng-lazy-image/badge.png?branch=master)](https://coveralls.io/r/afklm/ng-lazy-image?branch=master)
 [![Sauce Test Status](https://saucelabs.com/buildstatus/afklm)](https://saucelabs.com/u/afklm)
 
@@ -11,7 +11,7 @@
 [Demonstration component](http://afklm.github.io/ng-lazy-image/)
 
 
-## Usage 
+## Usage
 1. `npm install angular-lazy-image` or `bower install afkl-lazy-image -p` and set this script as a dependency
 2. Add a dependency on `afkl.lazyImage` in your app module.
 3. See the `style.css` for some classes you can use (they prevent reflow and are optional)
@@ -19,7 +19,7 @@
 
 ### Directive in html template
 
-<pre><code>&lt;div afkl-lazy-image="//placehold.it/480x480 480w, //placehold.it/768x768 768w, //placehold.it/936x936" 
+<pre><code>&lt;div afkl-lazy-image="//placehold.it/480x480 480w, //placehold.it/768x768 768w, //placehold.it/936x936"
     class="afkl-lazy-wrapper afkl-img-ratio-1-1 own-classname"&gt;&lt;/div&gt;
 </code></pre>
 
@@ -34,6 +34,7 @@ During loading a class 'afkl-lazy-image-loading' is set on the container so you 
    * '{"offset": 200}' this will influence when to start loading the image, 50px by default
    * '{"nolazy": true}' this will set the image at once and only change on resize
    * '{"alt": "caption for image"}' this will set alt attribute on image, empty by default
+   * '{"imgAttrs": [{"title": "your-title", "other": "add-anything"}]]}' this will allow you to add other image attributes and custom angular directives
    * '{"className": "own-classname-image"}' className will be apended to the image
 - "class" : `afkl-lazy-wrapper` will use height 0 trick, `afkl-img-ratio-1-1` sets correct aspect ratio so container is 100% responsive as well (optional, include css)
 - Using directive `afkl-image-container` when you have a scrollable container, with afkl-lazy-image inside (see [example](http://afklm.github.io/ng-lazy-image/sample-scrollable.html))
