@@ -127,7 +127,7 @@ angular.module('afkl.lazyImage')
                 var _setImage = function () {
                     if (options.background) {
                         element[0].style.backgroundImage = 'url("' + currentImage +'")';
-                    } else {
+                    } else if (!!img) {
                         img[0].src = currentImage;
                     }
                 };
@@ -170,7 +170,7 @@ angular.module('afkl.lazyImage')
                             // update current url
                             currentImage = newImage;
 
-                            if (!options.background) {
+                            if (!options.background && !!img) {
                                 element.addClass(LOADING);
                                 img.one('load', _loaded);
                                 img.one('error', _error);
