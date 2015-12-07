@@ -43,7 +43,7 @@ angular.module('afkl.lazyImage')
                 var img; // Angular element to image which will be placed
                 var currentImage = null; // current image url
                 var offset = options.offset ? options.offset : 50; // default offset
-                var alt = options.alt ? 'alt="' + options.alt + '"' : 'alt=""';
+                var alt = options.alt ? 'alt="' + options.alt + '" title="' + options.alt + '"' : 'alt=""';
 
                 var LOADING = 'afkl-lazy-image-loading';
 
