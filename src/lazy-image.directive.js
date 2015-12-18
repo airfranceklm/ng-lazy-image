@@ -151,6 +151,9 @@ angular.module('afkl.lazyImage')
                                 element.append(img);
                             }
 
+                        } else {
+                            // to have information about loaded state also for background
+                            element.addClass(IMAGECLASSNAME);
                         }
 
                         // set correct src/url
