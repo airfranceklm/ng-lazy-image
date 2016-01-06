@@ -2,7 +2,7 @@
 angular.module('afkl.lazyImage', []);
 /* global angular */
 angular.module('afkl.lazyImage')
-    .service('afklSrcSetService', ['$window', function($window) {
+    .service('afklSrcSetService', ['$window', '$timeout', function($window, $timeout) {
         'use strict';
 
         /**
@@ -46,7 +46,7 @@ angular.module('afkl.lazyImage')
                         out[lastChar] = intVal;
                     } else if (!isNaN(floatVal) && lastChar === 'x') {
                         out[lastChar] = floatVal;
-                    } 
+                    }
 
                 }
             }
@@ -94,7 +94,7 @@ angular.module('afkl.lazyImage')
             return images;
 
         };
-      
+
         /**
         * Direct implementation of "processing the image candidates":
         * http://www.whatwg.org/specs/web-apps/current-work/multipage/embedded-content-1.html#processing-the-image-candidates
@@ -285,13 +285,31 @@ angular.module('afkl.lazyImage')
 
         };
 
+        // debouncer function to be used in directive
+        function debounce(call, delay) {
+          var preventCalls = false;
+
+          return function() {
+            if (!preventCalls) {
+              call();
+
+              preventCalls = true;
+
+              $timeout(function() {
+                preventCalls = false;
+              }, delay);
+            }
+          };
+        }
+
 
         /**
          * PUBLIC API
          */
         return {
             get: getSrcset,        // RETURNS BEST IMAGE AND IMAGE CANDIDATES
-            image: getBestImage    // RETURNS BEST IMAGE WITH GIVEN CANDIDATES
+            image: getBestImage,   // RETURNS BEST IMAGE WITH GIVEN CANDIDATES
+            debounce: debounce     // RETURNS A DEBOUNCER FUNCTION
         };
 
 
@@ -530,6 +548,7 @@ angular.module('afkl.lazyImage')
 
                 };
 
+                var _onViewChangeDebounced = srcSetService.debounce(_onViewChange, 300);
 
                 // EVENT: RESIZE THROTTLED
                 var _onResize = function () {
@@ -547,11 +566,11 @@ angular.module('afkl.lazyImage')
                     $timeout.cancel(timeout);
 
                     angular.element($window).off('resize', _onResize);
-                    angular.element($window).off('scroll', _onViewChange);
+                    angular.element($window).off('scroll', _onViewChangeDebounced);
 
                     if ($container[0] !== $window) {
                         $container.off('resize', _onResize);
-                        $container.off('scroll', _onViewChange);
+                        $container.off('scroll', _onViewChangeDebounced);
                     }
 
                     // remove image being placed
@@ -568,12 +587,12 @@ angular.module('afkl.lazyImage')
                 //  - when container size is bigger than window's size
                 //  - when container's side is out of initial window border
                 angular.element($window).on('resize', _onResize);
-                angular.element($window).on('scroll', _onViewChange);
+                angular.element($window).on('scroll', _onViewChangeDebounced);
 
                 // if container is not window, set events for container as well
                 if ($container[0] !== $window) {
                     $container.on('resize', _onResize);
-                    $container.on('scroll', _onViewChange);
+                    $container.on('scroll', _onViewChangeDebounced);
                 }
 
                 // events for image change
