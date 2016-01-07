@@ -71,6 +71,7 @@ Now we can simply run:
 
 ## History
 This module was made while working on our Travel Inspiration Finder at KLM.
+- version 0.2.4 07-01-2015 Fix for scrolling inside container bigger then window by Simon
 - version 0.2.3 07-11-2015 Fix by Awalker to be able to use the plugin inside a repeat where we 'misuse' rootScope
 - version 0.1.5 21-08-2015 Image 'src' is not always known yet, prevent having src in our html and only set when url is given
 - version 0.1.4 10-06-2015 Image loaded succes and error state, so it is possible to know when images are really loaded
