@@ -85,4 +85,4 @@ This module was made while working on our Travel Inspiration Finder at KLM.
 As AngularJS itself, this module is released under the permissive [MIT license](LICENSE.md).
 
 Your contributions are always welcome. Feel free to ask for new features.
-Contributions by: SquadraCorse, ledzep2, TimonVS, manifestinteractive, awalker, MichaelTSS
+Contributions by: SquadraCorse, ledzep2, TimonVS, manifestinteractive, awalker, MichaelTSS, smnbbrv.
