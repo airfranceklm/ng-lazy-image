@@ -116,12 +116,13 @@ describe("Lazy image:", function() {
 
 describe("srcset Service:", function() {
 
-    var SrcSetService;
+    var SrcSetService, $timeout;
 
     beforeEach(module('afkl.lazyImage'));
 
-    beforeEach(inject(function(afklSrcSetService) {
+    beforeEach(inject(function(afklSrcSetService, _$timeout_) {
         SrcSetService = afklSrcSetService;
+        $timeout = _$timeout_;
     }));
 
 
@@ -241,7 +242,31 @@ describe("srcset Service:", function() {
         expect(image).toBe(undefined);
     });
 
+    it('Debouncer should be called once in 3 seconds', function() {
+        var stub = jasmine.createSpy('debounced');
+        var debounced = SrcSetService.debounce(stub, 3000);
 
+        expect(stub).not.toHaveBeenCalled();
+
+        debounced();
+        debounced();
+        debounced();
+
+        expect(stub).toHaveBeenCalled();
+        expect(stub.calls.count()).toBe(1);
+
+        $timeout.flush(1500);
+
+        debounced();
+
+        expect(stub.calls.count()).toBe(1);
+
+        $timeout.flush(3500);
+
+        debounced();
+
+        expect(stub.calls.count()).toBe(2);
+    });
 });
 
 describe("Image container and window scroll:", function() {

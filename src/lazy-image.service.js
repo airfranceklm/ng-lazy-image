@@ -1,6 +1,6 @@
 /* global angular */
 angular.module('afkl.lazyImage')
-    .service('afklSrcSetService', ['$window', function($window) {
+    .service('afklSrcSetService', ['$window', '$timeout', function($window, $timeout) {
         'use strict';
 
         /**
@@ -44,7 +44,7 @@ angular.module('afkl.lazyImage')
                         out[lastChar] = intVal;
                     } else if (!isNaN(floatVal) && lastChar === 'x') {
                         out[lastChar] = floatVal;
-                    } 
+                    }
 
                 }
             }
@@ -92,7 +92,7 @@ angular.module('afkl.lazyImage')
             return images;
 
         };
-      
+
         /**
         * Direct implementation of "processing the image candidates":
         * http://www.whatwg.org/specs/web-apps/current-work/multipage/embedded-content-1.html#processing-the-image-candidates
@@ -283,13 +283,31 @@ angular.module('afkl.lazyImage')
 
         };
 
+        // debouncer function to be used in directive
+        function debounce(call, delay) {
+          var preventCalls = false;
+
+          return function() {
+            if (!preventCalls) {
+              call();
+
+              preventCalls = true;
+
+              $timeout(function() {
+                preventCalls = false;
+              }, delay);
+            }
+          };
+        }
+
 
         /**
          * PUBLIC API
          */
         return {
             get: getSrcset,        // RETURNS BEST IMAGE AND IMAGE CANDIDATES
-            image: getBestImage    // RETURNS BEST IMAGE WITH GIVEN CANDIDATES
+            image: getBestImage,   // RETURNS BEST IMAGE WITH GIVEN CANDIDATES
+            debounce: debounce     // RETURNS A DEBOUNCER FUNCTION
         };
 
 
