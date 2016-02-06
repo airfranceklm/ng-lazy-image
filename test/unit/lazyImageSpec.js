@@ -25,7 +25,7 @@ describe("Lazy image:", function() {
         $compile(el)(scope);
         scope.$digest();
 
-        expect(el.html()).toBe('<img alt="" class="afkl-lazy-image" src="img/foo.png">');
+        expect(el.html()).toBe('<img src="img/foo.png">');
     });
 
     it('Do we have loading class correctly set/unset', function() {
@@ -36,7 +36,7 @@ describe("Lazy image:", function() {
         expect(el.hasClass('afkl-lazy-image-loading')).toBeDefined();
 
         window.setTimeout(function() {
-            expect(el.html()).toBe('<img alt="" class="afkl-lazy-image" src="img/foo.png">');
+            expect(el.html()).toBe('<img src="img/foo.png">');
             expect(el.hasClass('afkl-lazy-image-loading')).toBe(false);
         }, 300);
     });
@@ -50,7 +50,7 @@ describe("Lazy image:", function() {
     });
 
     it('Do we have alt set on our image', function() {
-        var el = angular.element('<div afkl-lazy-image="img/foo.png" afkl-lazy-image-options=\'{"alt": "blue bird"}\'></div>');
+        var el = angular.element('<div afkl-lazy-image="img/foo.png" afkl-lazy-image-options=\'{"imgAttrs": [{"alt": "blue bird"}]}\'></div>');
         $compile(el)(scope);
         scope.$digest();
 
@@ -60,12 +60,12 @@ describe("Lazy image:", function() {
     });
 
     it('Do we have alternative className on our image', function() {
-        var el = angular.element('<div afkl-lazy-image="img/foo.png" afkl-lazy-image-options=\'{"className": "foo"}\'></div>');
+        var el = angular.element('<div afkl-lazy-image="img/foo.png" afkl-lazy-image-options=\'{"imgAttrs": [{"class": "foo"}]}\'></div>');
         $compile(el)(scope);
         scope.$digest();
 
         window.setTimeout(function() {
-            expect(el.html()).toBe('<img alt="" class="afkl-lazy-image foo" src="img/foo.png">');
+            expect(el.html()).toBe('<img class="foo" src="img/foo.png">');
         }, 300);
     });
 
@@ -83,7 +83,7 @@ describe("Lazy image:", function() {
         scope.$digest();
 
         window.setTimeout(function() {
-            expect(el.html()).toBe('<img alt="" class="afkl-lazy-image" src="img/foo.png">');
+            expect(el.html()).toBe('<img src="img/foo.png">');
         }, 300);
     });
 
@@ -95,11 +95,11 @@ describe("Lazy image:", function() {
         $compile(el)(scope);
         scope.$digest();
 
-        expect(el.html()).toBe('<img alt="" class="afkl-lazy-image" src="img/foo.png">');
+        expect(el.html()).toBe('<img src="img/foo.png">');
         scope.url = "img/bar.png 960w";
         scope.$digest();
 
-        expect(el.html()).toBe('<img alt="" class="afkl-lazy-image" src="img/bar.png">');
+        expect(el.html()).toBe('<img src="img/bar.png">');
     });
 
     it('Should remove image when scope is destroyed', function() {
@@ -319,7 +319,7 @@ describe("Image container and window scroll:", function() {
         scrollEvent(el[0]);
         scope.$digest();
 
-        expect(div.html()).toBe('<img alt="" class="afkl-lazy-image" src="img/foo.png">');
+        expect(div.html()).toBe('<img src="img/foo.png">');
         el.remove();
     });
 
@@ -372,7 +372,7 @@ describe("Image container and window scroll:", function() {
         scrollEvent($window);
         scope.$digest();
 
-        expect(el.html()).toBe('<img alt="" class="afkl-lazy-image" src="img/foo.png">');
+        expect(el.html()).toBe('<img src="img/foo.png">');
     });
 });
 

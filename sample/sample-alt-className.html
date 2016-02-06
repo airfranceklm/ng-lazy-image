@@ -15,11 +15,11 @@
 <div class="demo-wrapper">
 
     <h1>Angular lazy image directive</h1>
-    <h2>Using image alt and className</h2>
+    <h2>Set image attributes like alt and className</h2>
 	<!-- example how to use image set using srcset and ratio -->
 	<div ng-repeat="image in images">
 
-		<div afkl-lazy-image="//placehold.it/768x384/00a1de/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-2-1" afkl-lazy-image-options='{"alt": "blue bird", "className": "optional-image-class"}'></div>
+		<div afkl-lazy-image="//placehold.it/768x384/00a1de/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-2-1" afkl-lazy-image-options='{"alt": "foo", "imgAttrs": [{"title": "blueBird", "alt": "alternative image description", "class": "optional-image-class"}]}'></div>
 
 	</div>
 

@@ -5,7 +5,7 @@
 
 describe('Viewports:', function () {
 
-    var IMAGE = '.demo-e2e-image .afkl-lazy-image';
+    var IMAGE = '.demo-e2e-image img';
     var runOnce = true;
 
 
