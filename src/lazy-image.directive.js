@@ -54,7 +54,7 @@ angular.module('afkl.lazyImage')
                 var images = attrs.afklLazyImage; // srcset attributes
                 var options = attrs.afklLazyImageOptions ? $parse(attrs.afklLazyImageOptions)(scope) : {}; // options (background, offset)
 
-                var img; // Angular element to image which will be placed
+                var img = null; // Angular element to image which will be placed
                 var currentImage = null; // current image url
                 var offset = options.offset ? options.offset : 50; // default offset
                 var imgAttrs = _concatImgAttrs(options.imgAttrs); // all image attributes like class, title, onerror
@@ -139,9 +139,10 @@ angular.module('afkl.lazyImage')
                         if (!options.background) {
 
                             if (!img) {
-                                // element.addClass(LOADING);
+                                element.addClass(LOADING);
                                 img = angular.element('<img ' + imgAttrs + ' />');
-                                // img.one('load', _loaded);
+                                img.one('load', _loaded);
+                                img.one('error', _error);
                                 // remove loading class when image is acually loaded
                                 element.append(img);
                             }
@@ -161,15 +162,12 @@ angular.module('afkl.lazyImage')
                 var _checkIfNewImage = function () {
                     if (loaded) {
                         var newImage = bestImage(images);
+                        
                         if (newImage !== currentImage) {
                             // update current url
                             currentImage = newImage;
 
-                            if (!options.background && !!img) {
-                                element.addClass(LOADING);
-                                img.one('load', _loaded);
-                                img.one('error', _error);
-                            }
+                            // TODO: loading state...
 
                             // update image url
                             _setImage();
