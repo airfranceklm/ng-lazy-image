@@ -33,7 +33,7 @@ During loading a class 'afkl-lazy-image-loading' is set on the container so you 
    * '{"background": true}' this will set correct background image on container, false by default
    * '{"offset": 200}' this will influence when to start loading the image, 50px by default
    * '{"nolazy": true}' this will set the image at once and only change on resize
-   * '{"imgAttrs": [{"title": "your-title", "other": "add-anything"}]}' this will allow you to add other image attributes (i.e. "alt", "title", "onerror", "class") and custom angular directives
+   * '{"imgAttrs": [{"title": "your-title", "class": "foo"}]}' this will allow you to add other image attributes (i.e. "alt", "title", "onerror", "class") and custom angular directives
 - "class" : `afkl-lazy-wrapper` will use height 0 trick, `afkl-img-ratio-1-1` sets correct aspect ratio so container is 100% responsive as well (optional, include css)
 - Using directive `afkl-image-container` when you have a scrollable container, with afkl-lazy-image inside (see [example](http://afklm.github.io/ng-lazy-image/sample-scrollable.html))
 - Attribute `afklLazyImageLoaded` will be set ('done'/'fail') when image for the directive is really loaded. This can be used if you want to preload every image before showing your app, make sure to set nolazy to true.
@@ -69,8 +69,11 @@ Now we can simply run:
 
 ## History
 This module was made while working on our Travel Inspiration Finder at KLM.
-- version 0.3.0 06-02-2015 Depricated 'afkl-lazy-image-options' for alt and className is now removed, should be set as imgAttrs in these options 
-- version 0.2.4 07-01-2015 Fix for scrolling inside container bigger then window by Simon
+*Please do not use version 0.2.3 since it will generate an error when you change view. Try to upgrade to version 0.3.1 where the only change is that how you set a className and title on the image.*
+
+- version 0.3.1 06-02-2015 Depricated 'afkl-lazy-image-options' for alt and className is now removed, should be set as imgAttrs in these options 
+
+- version 0.2.4 07-01-2015 Fix for scrolling inside container bigger then window by Simon (not released)
 - ~~version 0.2.3 07-11-2015 Fix by Awalker to be able to use the plugin inside a repeat where we 'misuse' rootScope~~ do not use!
 - version 0.1.5 21-08-2015 Image 'src' is not always known yet, prevent having src in our html and only set when url is given
 - version 0.1.4 10-06-2015 Image loaded succes and error state, so it is possible to know when images are really loaded
