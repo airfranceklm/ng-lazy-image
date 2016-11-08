@@ -283,23 +283,21 @@ angular.module('afkl.lazyImage')
 
         };
 
-        // debouncer function to be used in directive
-        function debounce(call, delay) {
-          var preventCalls = false;
+        // throttle function to be used in directive
+        function throttle(callback, delay) {
+            var wait = false;
 
-          return function() {
-            if (!preventCalls) {
-              call();
+            return function () {
+                if (!wait) {
+                    callback.call();
+                    wait = true;
 
-              preventCalls = true;
-
-              $timeout(function() {
-                preventCalls = false;
-              }, delay);
+                    setTimeout(function () {
+                        wait = false;
+                    }, delay);
+                }
             }
-          };
-        }
-
+        };
 
         /**
          * PUBLIC API
@@ -307,7 +305,7 @@ angular.module('afkl.lazyImage')
         return {
             get: getSrcset,        // RETURNS BEST IMAGE AND IMAGE CANDIDATES
             image: getBestImage,   // RETURNS BEST IMAGE WITH GIVEN CANDIDATES
-            debounce: debounce     // RETURNS A DEBOUNCER FUNCTION
+            throttle: throttle     // RETURNS A THROTTLER FUNCTION
         };
 
 
