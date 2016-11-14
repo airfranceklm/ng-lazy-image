@@ -6,8 +6,8 @@ module.exports = function (config) {
         files : [
             //'bower_components/angular/angular.js',
             //'bower_components/angular-mocks/angular-mocks.js',
-            'sample/vendor/angular.min.js',
-            'sample/vendor/angular-mocks.js',
+            'sample/lib/angular.min.js',
+            'sample/lib/angular-mocks.js',
             //'release/lazy-image.js',
             'src/lazy-image.module.js',
             'src/lazy-image.service.js',
