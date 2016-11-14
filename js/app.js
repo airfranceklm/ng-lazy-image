@@ -18,7 +18,8 @@
         $scope.images = [
             {
                 srcset: '//placehold.it/480x240/00a1de/ffffff 480w, //placehold.it/768x384/00a1de/ffffff 768w',
-                ratio: '2-1'
+                ratio: '2-1',
+                title: 'foo'
             }
         ];
 
