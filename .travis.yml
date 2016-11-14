@@ -12,6 +12,8 @@ install:
 - webdriver-manager update
 
 script:
+- node -v
+- npm -v
 - npm run travis
 
 branches:
