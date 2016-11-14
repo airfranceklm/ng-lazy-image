@@ -1,6 +1,6 @@
 /* global angular */
 angular.module('afkl.lazyImage')
-    .service('afklSrcSetService', ['$window', '$timeout', function($window, $timeout) {
+    .service('afklSrcSetService', ['$window', function($window) {
         'use strict';
 
         /**
@@ -296,8 +296,9 @@ angular.module('afkl.lazyImage')
                         wait = false;
                     }, delay);
                 }
-            }
-        };
+            };
+
+        }
 
         /**
          * PUBLIC API

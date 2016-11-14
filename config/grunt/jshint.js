@@ -1,9 +1,9 @@
 module.exports = {
     files : ['src/*.js'],
     options : {
-        jshintrc : '.jshintrc',
+        jshintrc : true,
         jshintignore : '.jshintignore',
-        reporter : require('jshint-junit-reporter'),
-        reporterOutput : 'target/reports/jshint-result.xml'
+        reporter : require('jshint-stylish') // require('jshint-junit-reporter'),
+        // reporterOutput : 'target/reports/jshint-result.xml'
     }
 };

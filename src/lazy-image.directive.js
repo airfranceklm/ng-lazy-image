@@ -29,16 +29,32 @@ angular.module('afkl.lazyImage')
             link: function (scope, element, attrs) {
 
                 var _concatImgAttrs = function (imgAttrs) {
+
                     var result = [];
+                    var CLASSNAME = 'afkl-lazy-image';
+                    var setClass = false;
+
                     if (!!options.imgAttrs) {
                         result = Array.prototype.map.call(imgAttrs, function(item) {
                             for (var key in item) {
                                 if (item.hasOwnProperty(key)) {
-                                    return String.prototype.concat.call(key, '="', item[key], '"');
+
+                                    // TODO: TITLE CAN COME LATER (FROM DATA MODEL)
+                                    var value = item[key];
+                                    if (key === 'class') {
+                                        setClass = true;
+                                        value = value + ' ' + CLASSNAME;
+                                    }
+                                    return String.prototype.concat.call(key, '="', value, '"');
                                 }
                             }
                         });
                     }
+
+                    if (!setClass) {
+                        result.push('class="' + CLASSNAME + '"');
+                    }
+
                     return result.join(' ');
                 };
 
@@ -60,8 +76,6 @@ angular.module('afkl.lazyImage')
                 var imgAttrs = _concatImgAttrs(options.imgAttrs); // all image attributes like class, title, onerror
 
                 var LOADING = 'afkl-lazy-image-loading';
-
-
 
                 attrs.afklLazyImageLoaded = false;
 
