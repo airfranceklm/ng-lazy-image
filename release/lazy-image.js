@@ -348,6 +348,7 @@ angular.module('afkl.lazyImage')
 
                     var result = [];
                     var CLASSNAME = 'afkl-lazy-image';
+                    var setClass = false;
 
                     if (!!options.imgAttrs) {
                         result = Array.prototype.map.call(imgAttrs, function(item) {
@@ -357,14 +358,17 @@ angular.module('afkl.lazyImage')
                                     // TODO: TITLE CAN COME LATER (FROM DATA MODEL)
                                     var value = item[key];
                                     if (key === 'class') {
+                                        setClass = true;
                                         value = value + ' ' + CLASSNAME;
                                     }
                                     return String.prototype.concat.call(key, '="', value, '"');
                                 }
                             }
                         });
-                    } else {
-                        result = ['class="' + CLASSNAME + '"'];
+                    }
+
+                    if (!setClass) {
+                        result.push('class="' + CLASSNAME + '"');
                     }
 
                     return result.join(' ');
