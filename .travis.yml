@@ -1,17 +1,18 @@
 sudo: false
 
+language: node_js
 node_js:
 - 5
 
 before_install:
 - npm install -g grunt-cli
+- npm install -d -q
 
 install:
-- npm install -d -q
 - webdriver-manager update
 
 script:
-- grunt travis
+- npm run travis
 
 branches:
   except:

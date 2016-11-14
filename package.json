@@ -69,6 +69,7 @@
   "scripts": {
     "test": "karma start config/karma.conf.js",
     "update-webdriver": "webdriver-manager update",
-    "selenium": "node_modules/protractor/bin/webdriver-manager"
+    "selenium": "node_modules/protractor/bin/webdriver-manager",
+    "travis": "grunt travis"
   }
 }
