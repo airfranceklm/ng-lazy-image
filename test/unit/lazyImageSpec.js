@@ -242,30 +242,31 @@ describe("srcset Service:", function() {
         expect(image).toBe(undefined);
     });
 
-    it('Debouncer should be called once in 3 seconds', function() {
-        var stub = jasmine.createSpy('debounced');
-        var debounced = SrcSetService.debounce(stub, 3000);
+    it('Throttler should be called once in 3 seconds', function() {
+        var stub = jasmine.createSpy('throttled');
+        var throttled = SrcSetService.throttle(stub, 3000);
 
         expect(stub).not.toHaveBeenCalled();
 
-        debounced();
-        debounced();
-        debounced();
+        throttled();
+        throttled();
+        throttled();
 
         expect(stub).toHaveBeenCalled();
         expect(stub.calls.count()).toBe(1);
 
         $timeout.flush(1500);
 
-        debounced();
+        throttled();
 
         expect(stub.calls.count()).toBe(1);
 
         $timeout.flush(3500);
 
-        debounced();
+        throttled();
+        throttled();
 
-        expect(stub.calls.count()).toBe(2);
+        expect(stub.calls.count()).toBe(1);
     });
 });
 

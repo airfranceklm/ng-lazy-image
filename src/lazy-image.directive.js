@@ -224,7 +224,7 @@ angular.module('afkl.lazyImage')
 
                 };
 
-                var _onViewChangeDebounced = srcSetService.debounce(_onViewChange, 300);
+                var _onViewChangeThrottled = srcSetService.throttle(_onViewChange, 300);
 
                 // EVENT: RESIZE THROTTLED
                 var _onResize = function () {
@@ -242,11 +242,11 @@ angular.module('afkl.lazyImage')
                     $timeout.cancel(timeout);
 
                     angular.element($window).off('resize', _onResize);
-                    angular.element($window).off('scroll', _onViewChangeDebounced);
+                    angular.element($window).off('scroll', _onViewChangeThrottled);
 
                     if ($container[0] !== $window) {
                         $container.off('resize', _onResize);
-                        $container.off('scroll', _onViewChangeDebounced);
+                        $container.off('scroll', _onViewChangeThrottled);
                     }
 
                     // remove image being placed
@@ -263,12 +263,12 @@ angular.module('afkl.lazyImage')
                 //  - when container size is bigger than window's size
                 //  - when container's side is out of initial window border
                 angular.element($window).on('resize', _onResize);
-                angular.element($window).on('scroll', _onViewChangeDebounced);
+                angular.element($window).on('scroll', _onViewChangeThrottled);
 
                 // if container is not window, set events for container as well
                 if ($container[0] !== $window) {
                     $container.on('resize', _onResize);
-                    $container.on('scroll', _onViewChangeDebounced);
+                    $container.on('scroll', _onViewChangeThrottled);
                 }
 
                 // events for image change
