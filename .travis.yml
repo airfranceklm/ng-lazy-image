@@ -1,10 +1,15 @@
 sudo: false
 
+node_js:
+- 5
+
 before_install:
 - npm install -g grunt-cli
+
 install:
 - npm install -d -q
 - webdriver-manager update
+
 script:
 - grunt travis
 

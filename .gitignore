@@ -4,4 +4,4 @@
 bower_components
 node_modules
 target
-*.xml
+npm-debug.log
