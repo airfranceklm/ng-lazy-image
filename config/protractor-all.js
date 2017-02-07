@@ -7,14 +7,14 @@ exports.config = {
         '../test/e2e/*.js'
     ],
 
-    multiCapabilities: [{
+    multiCapabilities: [/*{
         'browserName': 'chrome',
         'chromeOptions': {
             'args': ['show-fps-counter=true', 'test-type']
         }
-    }/*, {
+    },*/ {
         'browserName': 'firefox'
-    }, {
+    }/*, {
         'browserName': 'internet explorer'
     }*/],
 

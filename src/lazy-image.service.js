@@ -286,8 +286,8 @@ angular.module('afkl.lazyImage')
         // throttle function to be used in directive
         function throttle(callback, delay) {
             var last, deferTimer;
-            return function () {
-                var now = +new Date;
+            return function() {
+                var now = +new Date();
                 if (last && now < last + delay) {
                     clearTimeout(deferTimer);
                     deferTimer = setTimeout(function () {

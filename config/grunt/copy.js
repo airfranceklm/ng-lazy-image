@@ -7,6 +7,14 @@ module.exports = {
         flatten: true,
         filter: 'isFile'
     },
+    'dist': {
+        cwd: './release',
+        src: '*',
+        dest: './dist/',
+        expand: true,
+        flatten: true,
+        filter: 'isFile'
+    },
     'pages1': {
         cwd: './sample',
         src: ['**/*'],

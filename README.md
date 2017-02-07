@@ -71,6 +71,7 @@ Now we can simply run:
 This module was made while working on our Travel Inspiration Finder at KLM.
 *Please do not use version 0.2.3 since it will generate an error when you change view. Try to upgrade to version 0.3.1 where the only change is that how you set a className and title on the image.*
 
+- version 0.3.3 adjusted throttle function
 - version 0.3.1 06-02-2015 Depricated 'afkl-lazy-image-options' for alt and className is now removed, should be set as imgAttrs in these options 
 
 - version 0.2.4 07-01-2015 Fix for scrolling inside container bigger then window by Simon (not released)
@@ -88,4 +89,4 @@ This module was made while working on our Travel Inspiration Finder at KLM.
 As AngularJS itself, this module is released under the permissive [MIT license](LICENSE.md).
 
 Your contributions are always welcome. Feel free to ask for new features.
-Contributions by: SquadraCorse, ledzep2, TimonVS, manifestinteractive, awalker, MichaelTSS, smnbbrv.
+Contributions by: SquadraCorse, ledzep2, TimonVS, manifestinteractive, awalker, MichaelTSS, smnbbrv, burakkirkil.

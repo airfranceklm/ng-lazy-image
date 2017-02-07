@@ -2,7 +2,7 @@ default:
   - 'clean'
   - 'js'
   - 'cssmin'
-  - 'copy:build'
+  - 'copy:build' # current old location
 
 # FOR NOW EXACTLY SAME AS DEFAULT
 production:
@@ -44,6 +44,7 @@ travis:
 package:
  - 'production'
  - 'e2e'
+ - 'copy:dist' # new location
 
 install:
   - 'shell'

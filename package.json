@@ -1,7 +1,7 @@
 {
   "name": "angular-lazy-image",
-  "main": "./release/lazy-image.js",
-  "version": "0.3.2",
+  "main": "./dist/lazy-image.js",
+  "version": "0.3.3",
   "homepage": "http://afklm.github.io/ng-lazy-image/",
   "keywords": [
     "angular",
@@ -64,6 +64,7 @@
     "README.md",
     "LICENSE.md",
     "release/",
+    "dist/",
     "src/"
   ],
   "scripts": {
