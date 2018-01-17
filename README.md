@@ -13,7 +13,7 @@
 
 ## Usage
 1. `npm install angular-lazy-image` or `bower install afkl-lazy-image -p` and set this script as a dependency
-2. Add a dependency on `afkl.lazyImage` in your app module.
+2. Add a dependency on `afkl.lazyImage` in your app module and include the distribution file with your other libs.
 3. See the `style.css` for some classes you can use (they prevent reflow and are optional)
 
 
